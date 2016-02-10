@@ -1,0 +1,26 @@
+
+@import "../../../@common/common.less";
+
+.dateCustomColor() when (iscolor(@dateColor))		{ color: @dateColor; }
+.dateCustomBck() when (iscolor(@dateColor))			{ background-color: @dateColor; }
+.catCustomColor() when (iscolor(@categoryColor))	{ color: @categoryColor; }
+.catCustomBck() when (iscolor(@categoryColor))		{ background-color: @categoryColor; }
+
+#@{el}{
+
+	.layout-box .item-title	h3				{ .ltoCustomColor(); }
+	.layout-box .item-text					{ .ltoCustomColor(); }
+
+	.layout-list .item-date					{ .dateCustomBck(); }
+	.layout-box .item-thumbnail .item-date	{ .dateCustomBck(); }
+	.layout-box .item-text .item-date		{ .titCustomColor(); }
+	.layout-box .item-text .item-date		{ .dateCustomColor(); }
+	.layout-list .item-categories:before 	{ .catCustomColor(); }
+	.layout-box .item-categories			{ .catCustomBck(); }
+
+}
+
+
+.@{el}{
+	clear:both;
+}

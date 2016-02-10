@@ -1,0 +1,55 @@
+title:
+	label: Title
+	type: text
+	default: ''
+	help: "Text displayed as title in header of table"
+
+subtitle:
+	label: Subtitle
+	type: text
+	default: ""
+	help: "Text displayed as subtitle in header of table"
+
+description:
+	label: Description
+	type: textarea
+	default: ''
+	help: "Text displayed below title in header of table"
+
+price:
+	label: Price
+	type: text
+	default: ''
+	help: "Text displayed as price in header of table"
+
+rows:
+	label: Table Rows
+	type: clone
+	max: 0
+	help: 'Add new Row by click on "+ Add New Item" link, or remove existing Row by click on red cross. Click on "Remove All Items" link to remove all existing Rows.'
+	items:
+		description:
+			label: Row Text
+			type: text
+			help: "Text displayed in row"
+	default:
+		0:
+			description: ""
+
+buttonText:
+	label: Button Text
+	type: text
+	default: ''
+	help: "Title of button in footer of table"
+
+buttonLink:
+	label: Button Link
+	type: text
+	default: ''
+	help: "Link used for button, use valid URL format with http://"
+
+featured:
+	label: Featured
+	type: on-off
+	default: 'on'
+	help: "Highlight table as featured"

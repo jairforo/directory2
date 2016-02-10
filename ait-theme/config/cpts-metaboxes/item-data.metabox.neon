@@ -1,0 +1,251 @@
+subtitle:
+	label: Subtitle
+	type: text
+	default: ""
+
+featuredItem:
+	label: Item Featured
+	type: on-off
+	default: true
+	capabilities: true
+
+headerType:
+	label: Item Header
+	type: select
+	selected: map
+	default:
+		none: No header
+		map: Map
+		image: Image
+	capabilities: true
+	help: "Select type of header on page"
+
+- section(id: 'headerType-image', title: 'Image Options', capabilities: true)
+
+headerImage:
+	label: Header Image
+	type: image
+	default: ""
+	help: "Image displayed in header"
+
+headerHeight:
+	label: Header Height
+	type: number
+	default: ""
+	unit: px
+
+#headerImageAlign:
+#	label: Header Image Align
+#	type: select
+#	selected: left
+#	default:
+#		image-left: Left
+#		image-center: Center
+#		image-right: Right
+#	help: "Align of image in header"
+
+- section(title: 'General')
+
+map:
+	label: Address
+	type: map
+	default:
+		address: ""
+		latitude: "1"
+		longitude: "1"
+		streetview: off
+	capabilities: true
+	help: "Specify address and position of item"
+
+telephone:
+	label: Telephone
+	type: string
+	capabilities: true
+	help: "Telephone number related to item"
+
+telephoneAdditional:
+	label: Additional telephone numbers
+	type: clone
+	max: 5
+	items:
+		number:
+			label: Number
+			type: string
+	default: []
+	help: "Additional telephone numbers related to item"
+	capabilities: true
+
+email:
+	label: Email
+	type: string
+	default: ""
+	capabilities: true
+	help: "Email address related to item"
+
+showEmail:
+	label: Show Email
+	type: on-off
+	default: on
+	capabilities: true
+	help: "Display or hide email address on page"
+
+contactOwnerBtn:
+	label: Contact owner button
+	type: on-off
+	default: off
+	capabilities: true
+	help: "Create contact form on page"
+
+web:
+	label: Web
+	type: url
+	default: ""
+	capabilities: true
+	help: "Web address, use valid URL format with http://"
+
+webLinkLabel:
+	label: Web Link Label
+	type: string
+	default: ""
+	capabilities: true
+	help: "Text displayed instead of full web address"
+
+- section(id: 'itemOpeningHours', title: 'Opening Hours', capabilities: true)
+
+displayOpeningHours:
+	label: Show
+	type: on-off
+	default: on
+	basic: true
+	help: "Display or hide Opening Hours section"
+
+openingHoursMonday:
+	label: Monday
+	type: text
+	basic: true
+
+openingHoursTuesday:
+	label: Tuesday
+	type: text
+	basic: true
+
+openingHoursWednesday:
+	label: Wednesday
+	type: text
+	basic: true
+
+openingHoursThursday:
+	label: Thursday
+	type: text
+	basic: true
+
+openingHoursFriday:
+	label: Friday
+	type: text
+	basic: true
+
+openingHoursSaturday:
+	label: Saturday
+	type: text
+	basic: true
+
+openingHoursSunday:
+	label: Sunday
+	type: text
+	basic: true
+
+openingHoursNote:
+	label: Note
+	type: textarea
+	basic: true
+
+- section(id: 'itemSocialIcons', title: 'Social', capabilities: true)
+
+displaySocialIcons:
+	label: Show
+	type: on-off
+	default: off
+	help: "Display or hide Social Icons section"
+
+socialIconsOpenInNewWindow:
+	label: Open links in new window
+	type: on-off
+	default: on
+
+socialIcons:
+	type: clone
+	max: 20
+	items:
+		icon:
+			label: Icon
+			type: font-awesome-select
+			category: social
+			help: "Select predefined social icon, Image will be ignored"
+		link:
+			label: Link
+			type: url
+	default: []
+
+- section(id: 'itemGallery', title: 'Gallery', capabilities: true)
+
+displayGallery:
+	label: Show
+	type: on-off
+	default: off
+
+gallery:
+	type: clone
+	max: 20
+	items:
+		title:
+			label: Title
+			type: text
+		image:
+			label: Image
+			type: image
+	default: []
+	help: "Display or hide Gallery section"
+
+- section(id: 'itemFeatures', title: 'Features', capabilities: true)
+
+displayFeatures:
+	label: Show
+	type: on-off
+	default: off
+	help: "Display or hide Features section"
+
+features:
+	type: clone
+	max: 20
+	items:
+		icon:
+			label: Icon
+			type: font-awesome-select
+			help: "Icon image displayed with feature"
+		iconColor:
+			label: Icon Color
+			type: color
+		text:
+			label: Title
+			type: string
+			help: "Feature main text"
+		desc:
+			label: Description
+			type: string
+			help: "Feature descriptive text"
+	default: []
+
+- section(id: 'itemCustomFields', title: 'Custom Fields', capabilities: true)
+
+customFields:
+	type: clone
+	max: 99
+	items:
+		name:
+			label: Name
+			type: string
+			help: "Do not use system reserved names (post_id, rating_count, rating_max, rating_mean, rating_mean_rounded), they will be ignored"
+		value:
+			label: Value
+			type: multiline-string
+	default: []

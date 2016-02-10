@@ -1,0 +1,30 @@
+
+@import "../../../@common/common.less";
+
+.ltoDarkenColor() when (iscolor(@lightAltColor))	{ background-color: darken(@lightAltColor, 10%); }
+.ltoDarkenBorder() when (iscolor(@lightAltColor))	{ border-bottom-color: darken(@lightAltColor, 10%); }
+
+.catCustomColor() when (iscolor(@categoryColor))		{ color: @categoryColor; }
+.catCustomBck() when (iscolor(@categoryColor))			{ background-color: @categoryColor; }
+.categoryLnkColor() when (iscolor(@categoryLnkColor))	{ color: @categoryLnkColor; }
+
+#@{el}{
+
+	.layout-box .item .item-box-content-wrap		{ .ltoCustomColor(); }
+	.layout-box .item-social-icons .content,
+	.layout-box .item-social-icons .content:after	{ .ltoDarkenColor(); }				
+	.layout-box .item.icons-disabled				{ .ltoDarkenBorder(); }
+	
+	.layout-list .item .item-title .subtitle	{ .titCustomColor(); }
+
+	.layout-list .item-categories:before 	{ .catCustomColor(); }	
+	.layout-box .item-categories			{ .catCustomBck(); }
+	.layout-list .item-categories a,
+	.layout-box .item-categories a			{ .categoryLnkColor(); }	
+
+}
+
+
+.@{el}{
+	clear:both;
+}

@@ -1,0 +1,9 @@
+icon:
+	label: Tab icon
+	type: font-awesome-select
+	default: ''
+
+image:
+	label: Image
+	type: image
+	default: ""

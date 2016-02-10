@@ -1,0 +1,22 @@
+
+@import "../../../@common/common.less";
+
+.lightBorder() when (iscolor(@bg-color))				{ border-color: lighten(@bg-color, 10%); }
+
+#@{el}{
+
+}
+
+#@{el}-main
+{
+
+	&.elm-has-bg .elm-opening-hours .day-title:before,
+	&.elm-has-bg .elm-opening-hours .day-wrapper div,
+	&.elm-has-bg .elm-opening-hours .hours-note			{ .lightBorder(); }
+
+
+}
+
+.@{el}{
+	clear:both;
+}

@@ -1,0 +1,53 @@
+@include: 'common.neon#exclude: headAlign, customWidth, lightAltColor, margin-top, margin-bottom, padding-top, padding-bottom'
+
+type:
+	label: Type
+	type: select
+	default:
+		1: "Search Form"
+		2: "Search Sentence"
+		3: "Search Buttons"
+	basic: true
+	help: "Select type of Search Form"
+
+radiusUnits:
+	label: Radius units
+	type: select
+	selected: km
+	default:
+		km: Kilometers
+		mi: Miles
+	basic: true
+	help: "Select units for radius"
+
+radiusHelp:
+	label: Radius Help
+	type: text
+	default: "Set radius for geolocation"
+	basic: true
+
+- section(id: type-2, title: '')
+
+sentence:
+	label: Search Sentence
+	type: text
+	default: "I would like to find {search-keyword} at {search-category} in {search-location} or {search-radius} around me"
+	help: "Write sentence represented the search form"
+
+- section(id: type-3, title: '')
+
+
+buttonColor:
+	label: Buttons Color
+	type: color
+	opacity: 100%
+	default: ''
+	help: "Custom color of filter buttons"
+	basic: true
+
+responsiveBck:
+	label: Background on Responsive
+	type: color
+	default: ''
+	help: "Background color when search box is collapsed under header in responsive version"
+	basic: true

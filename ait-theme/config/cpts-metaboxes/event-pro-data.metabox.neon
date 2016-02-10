@@ -1,0 +1,127 @@
+headerType:
+	label: Event Header
+	type: select
+	selected: image
+	default:
+		none: No header
+		map: Map
+		image: Image
+	help: "Select type of header on page"
+
+- section(id: 'headerType-image', title: 'Image Options')
+
+headerImage:
+	label: Header Image
+	type: image
+	default: ""
+	help: "Image displayed in header"
+
+- section(title: 'General')
+
+dates:
+	label: Dates
+	type: clone
+	items:
+		dateFrom:
+			label: Date From
+			type: date
+			format: 'D, d M yy'
+			default: 'none'
+			picker: 'datetime'
+			help: 'Starting date of event'
+		dateTo:
+			label: Date To
+			type: date
+			format: 'D, d M yy'
+			default: 'none'
+			picker: 'datetime'
+			help: 'Ending date of event'
+	default: []
+	help: 'Create more inputs if event is recurring'
+
+fee:
+	label: Fee
+	type: clone
+	items:
+		name:
+			label: Label
+			type: text
+			default: ''
+			help: "Optional"
+		price:
+			label: Price
+			type: number
+			step: any
+			default: '0'
+			help: "Set 0 or leave empty for free"
+		url:
+			label: Ticket Url
+			type: url
+			default: ''
+			help: "Optional external link for ticket's shop. Use valid url with http://."
+		desc:
+			label: Description
+			type: text
+			default: ''
+			help: "Optional"
+	default: []
+	help: "Leave empty for free"
+
+currency:
+	label: Currency
+	type: select
+	selected: USD
+	default:
+		AUD: 'Australian Dollar (AUD)'
+		BRL: 'Brazilian Real (BRL)'
+		CAD: 'Canadian Dollar (CAD)'
+		CZK: 'Czech Koruna (CZK)'
+		DKK: 'Danish Krone (DKK)'
+		EUR: 'Euro (EUR)'
+		HKD: 'Hong Kong Dollar (HKD)'
+		HUF: 'Hungarian Forint (HUF)'
+		ILS: 'Israeli New Sheqel (ILS)'
+		JPY: 'Japanese Yen (JPY)'
+		MYR: 'Malaysian Ringgit (MYR)'
+		MXN: 'Mexican Peso (MXN)'
+		NOK: 'Norwegian Krone (NOK)'
+		NZD: 'New Zealand Dollar (NZD)'
+		PHP: 'Philippine Peso (PHP)'
+		PLN: 'Polish Zloty (PLN)'
+		GBP: 'Pound Sterling (GBP)'
+		RUB: 'Russian Ruble (RUB)'
+		SGD: 'Singapore Dollar (SGD)'
+		SEK: 'Swedish Krona (SEK)'
+		CHF: 'Swiss Franc (CHF)'
+		TWD: 'Taiwan New Dollar (TWD)'
+		THB: 'Thai Baht (THB)'
+		TRY: 'Turkish Lira (TRY)'
+		USD: 'U.S. Dollar (USD)'
+
+item:
+	label: Item
+	type: posts
+	cpt: ait-item
+	translatable: true
+	default: ''
+	help: 'Related Item'
+
+useItemLocation:
+	label: Use Item's Location
+	type: select
+	selected: 'no'
+	default:
+		'yes': "yes"
+		'no': "no"
+	help: 'Event and related item will have the same address'
+
+- section(id: 'useItemLocation-no')
+
+map:
+	label: Address
+	type: map
+	default:
+		address: ""
+		latitude: "0"
+		longitude: "0"
+		streetview: off

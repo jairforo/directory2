@@ -1,0 +1,63 @@
+
+@import "../../../@common/common.less";
+
+.box-shadow(@args) 		{ -moz-box-shadow: @args; -webkit-box-shadow: @args; box-shadow: @args; }
+
+.contentBackground() when (iscolor(@toggleBackgroundColor))		{ background: @toggleBackgroundColor; }
+.darkenBackground() when (iscolor(@toggleBackgroundColor))		{ background: darken(@toggleBackgroundColor, 10%); }
+.lightenBackground() when (iscolor(@toggleBackgroundColor))		{ background: lighten(@toggleBackgroundColor, 10%); }
+
+.bottomShadow() when (iscolor(@toggleBackgroundColor))			{ .box-shadow(0 1px 0 @toggleBackgroundColor); }
+.borderColor() when (iscolor(@toggleBackgroundColor))			{ border-color: @toggleBackgroundColor; }
+.lightenborderColor() when (iscolor(@toggleBackgroundColor))	{ border-color: lighten(@toggleBackgroundColor, 20%); }
+
+.iconColor() when (iscolor(@toggleIconColor))					{ color: @toggleIconColor; }
+
+
+
+#@{el}-main
+{
+
+	/* Horizontal tabs */
+
+	.ait-tabs .ait-widget-content { .contentBackground(); }
+	.ait-tabs-horizontal ul.ait-tabs-nav li.ui-state-hover a,
+	.ait-tabs-horizontal ul.ait-tabs-nav li.ui-state-active a { .contentBackground(); }
+	.ait-tabs ul.ait-tabs-nav li.ui-state-active a { .borderColor(); }
+	.ait-tabs-horizontal ul.ait-tabs-nav li { .bottomShadow(); }
+	.ait-tabs-horizontal ul.ait-tabs-nav li a { .darkenBackground(); .borderColor(); border-width: 3px 3px 0; }
+	.ait-tabs-horizontal .tabs-wrapper ul.ait-tabs-nav li a span { .iconColor(); }
+
+	/* Toggle & Accordion */
+
+	.type-toggle .toggle-container, 
+	.type-accordion .toggle-container { .contentBackground(); }
+	.toggle-active .toggle-title, 
+	.ui-state-active .toggle-title { .contentBackground(); }
+	.toggle-header .toggle-title { .lightenBackground(); .lightenborderColor(); border-width: 3px; }
+
+	.toggle-header { .borderColor(); }
+
+	/* Vertical tabs */
+
+	&.elm-toggles-main .ait-tabs ul.ait-tabs-nav li.ui-state-active a { .contentBackground(); }
+	&.elm-toggles-main .ait-tabs-vertical li .ait-tab-hover { .contentBackground(); color: @titlesAltColor; .lightenborderColor(); }
+
+	&.elm-toggles-main .ait-tabs ul.ait-tabs-nav li a 	{ .lightenBackground(); .lightenborderColor(); }
+	&.elm-toggles-main .ait-tabs ul.ait-tabs-nav li 	{ .borderColor(); }
+
+	.ui-state-default, 
+	.ui-widget-content .ui-state-default, 
+	.ui-widget-header .ui-state-default { .lightenBackground(); }
+
+	&.elm-toggles-main .ait-tabs .tabs-wrapper .selected { .contentBackground(); color: @titlesAltColor; .lightenborderColor(); }
+	&.elm-toggles-main .ait-tabs .tabs-wrapper.responsive-tabs { .borderColor(); }
+
+
+}
+
+
+
+.@{el}{
+	clear:both;
+}

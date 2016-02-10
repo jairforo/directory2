@@ -1,0 +1,214 @@
+v1.30, 26.01.2016
+-----------------
+- Added: Added captcha validation for registration widget
+- Tweak: Implemented small performance tweaks
+- Fix: Compatibility of comment form fields with WP 4.4 (Reverts the "comment" field position to below the other form fields.)
+- Tweak: Minor internal tweaks of the framework
+
+v1.29, 15.01.2016
+-----------------
+- Fix: Undefined variable wp_version
+
+v1.28, 22.12.2015
+-----------------
+- Fix: Widget Login Style fix
+
+v1.27, 15.12.2015
+-----------------
+- Fix: Prevent css import missing file error
+- Added: Compatibility with Ecwid Shopping Cart plugin
+
+v1.26, 09.12.2015
+-----------------
+- Fix: (Critical) Theme Options couldn't save changed values, there were still default values after page refresh
+- Fix: Reset button on Default Layout admin page works correctly now
+
+v1.25, 08.12.2015
+-----------------
+- Fix: Blog page menu item highlighting, if blog is currently opened page
+- Added: Styles for Ecwid store
+- Fix: Advanced search on directory themes when polylang is enabled
+- Fix: PHP Notices in Shortcode Generator Modal Window
+- Fix: Amongst some categories (e.g. Portfolios) there was incorectly listed language name from AIT Languages
+
+
+v1.24, 01.12.2015
+-----------------
+- Added: Contact owner form options to define the sender of email
+- Fixed: Package item count when item trashed
+- Fixed: Package event count when event trashed
+- Fix: Corrected behaviour of WP custom queries (mostly in Elements) when some CPT is set as non translatable in AIT Languages settings
+- Update: Font Awesome v4.5.0
+
+v1.23, 25.11.2015
+-----------------
+- Fixed: Register Widget Style Fix
+- Fixed: Woocommerce Detail Item Page Style Changes
+- Fixed: Embed URLs for YouTube and Vimeo videos were generated incorrectly resulting in not loading the videos
+- Fixed: Fixed all dates where they were displaying current date and time
+- Fixed: Issue with missing texts in widgets after updating to AIT Languages 2.0 is now fixed
+- Fixed: Fullscreen option for youtube video element
+
+v1.22, 18.11.2015
+-----------------
+- Fixed: Package upgrade process failed to change package
+- Fixed: Re-enable map drag when geolocation is enabled
+- Fixed: Weblink Labels on taxonomy and search pages
+
+v1.21, 10.11.2015
+-----------------
+- New: Google Street View in Google Map Element
+- Update: Various updates for upcomming new AIT Languages 2.0 plugin
+- Fix: Improved compatibility of Advertising Spaces Element vs. Ad blockers
+
+v1.20, 03.11.2015
+-----------------
+- Update: Updated author metabox display
+- Fixed: Stripe gateway user upgrade
+
+v1.19, 27.10.2015
+-----------------
+- Fix: Removed http protocol from embed code in header video element
+
+v1.18, 20.10.2015
+-----------------
+- Fix: Condition when question is not in use, matching empty review rating will not be displayed
+- Fix: Responsive Category Filters Style
+- Fix: Get Directions Button Style Fix
+- Fix: Review Stars Style Fix
+- Fix: When adblocker extension in a browser blocked Advertising Spaces Element whole web page was broken
+- Added: Added streetview functionality to google maps element
+
+
+v1.17, 13.10.2015
+-----------------
+- Fix: Item Gallery Style Fix
+- Fix: Archive Page Style Fix
+- Update: Contact form element form submit button disabled while form submitting
+- Fix: No more huge amount of old cache files (mainly old .css) in uploads/cache/ folder
+- Fix: Some forgotten text are now included in POT file
+- Update: demo content - fix with missing images in Media Library
+
+
+v1.16, 06.10.2015
+-----------------
+- Added: Header map dragging disabled while page loading
+- Fixed: Changed zoom and street view map controls position, weren't clickable on touch devices
+- Fix: Widget Login Style Fix
+
+
+v1.15, 02.10.2015
+-----------------
+- Added: Package feature to enable / disable Yoast seo plugin metabox on item detail
+- Update: Yoast seo compatibility with AIT Easyadmin plugin
+- Fix: Removed "Login failed" notification on successful login
+- Fix: Updated metabox save callback preventing infinite looping
+
+
+v1.14, 29.09.2015
+-----------------
+- Added: Lost Password feature in Login Widget
+- Updated: Updated new demo content
+- Fix: Header Resources style
+- Updated: Admin author change feature
+
+v1.13, 24.09.2015
+-----------------
+- Fixed: Register compatibility with wordpress 4.3.1
+
+v1.12, 22.09.2015
+-----------------
+- Updated: Register compatibility with wordpress 4.3.1
+- Added: Frontend notification on login fail
+- Added: Item author change functionality
+- Fixed: Map input verification
+- Updated: Ajax emails formatting
+
+v1.11, 16.09.2015
+-----------------
+- Fixed: Duplicate featured image for pages in page title
+- Fixed: AIT Claim Listing plugin claim conditions
+- Updated: Category / Locations header image responsive display
+- Fixed: Single item contact owner mail form
+- Update: Updated facebook element
+- Update: Font Awesome v4.4.0
+- Update: Framework compatibility with upcoming improved AIT Languages plugin
+
+v1.10, 08.09.2015
+-----------------
+- Updated: Package on/off option for comments
+- Fix: Typo in variable name in jquery.portfolio.js
+- Tweak: Theme Admin: if switched section contains map preview trigger resize to re-render map
+- Update: Font Awesome icons v4.4.0
+- Update: Updated condition to show / hide item description in services element
+- Update: Updated google map element
+- Update: Updated capabilities for ait-item cpt
+
+v1.9, 03.09.2015
+----------------
+- Fix: Header map default position on location pages
+- Fix: Translatable Label in Item Image
+- Added: Preparation for stripe payments plugin
+- Fix: Overleaping Title/Subtitle in Item List Pages
+- Fix: Footer Login Widget Title displaying fix
+
+v1.8, 28.08.2015
+----------------
+- Fixed: escaping of special characters in Item gallery titles
+- New: Active/Deactive button now works with streetview
+- New: Added Active/Deactive button for small item map
+- New: You can set custom link for Header Resources Button for non-registered users
+- Fixed: Removed header menu
+- Added: Support for updated ait claim listing plugin
+- Fix: When Visual Editor is disabled in user settings, Text Element in Page Builder doesn't work.
+
+v1.7, 20.8.2015
+---------------
+- Update: Fixed version of Revolution Slider v5.0.4.1 compatible with WordPress 4.3
+
+
+v1.6, 18.8.2015
+---------------
+- Fix: Breadcrumbs Visual changes in Responsive
+- Fix: Demo Content - broken map on Search Page
+- Fix: Social Icons (PHP Warning: Invalid argument supplied for foreach())
+- Fix: Allow special characters in Member custom post type Title
+- Fix: Video element - fixed some PHP errors
+- Fix: Posts element - fixed some PHP errors
+- Fix: Added Sender parameter in Contact Form - some hostings didn't send emails from Contact Form
+
+
+v1.5, 11.08.2015
+----------------
+- Added: Close button for streetview on header map
+- Updated: Header map element not showing item on default 1:1 coordinates
+- Fix: 'Notice:  Array to string conversion'
+- Fix: Missing some text elements on non-english WP installs after demo content import
+- Fix: PHP notice on 404 page
+- Fix: One letter of text string displayed in metabox text fields
+- Update: Removed "Dev mode:" menu in Admin Bar and dev mode is disabled
+- Update: Updated javascript for content element on woocommerce pages
+
+v1.4, 04.08.2015
+----------------
+- Fix: Fixed typos in English language
+
+
+v1.3, 28.7.2015
+---------------
+- Fix: Compatibility of demo content with non English WordPress install
+
+
+v1.2, 27.7.2015
+---------------
+- Fix: Demo content updated
+
+
+v1.1, 27.7.2015
+----------------
+- Fix: Theme incorrectly required AIT Languages plugin. The plugin is optional.
+
+
+v1.0, 26.7.2015
+----------------
+- Public release

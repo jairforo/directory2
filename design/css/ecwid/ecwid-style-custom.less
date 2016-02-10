@@ -1,0 +1,70 @@
+/*
+ * AIT WordPress Theme
+ *
+ * Copyright (c) 2015, Affinity Information Technology, s.r.o. (http://ait-themes.club)
+ */
+
+
+/**************************************************/
+/*** && CUSTOM STYLES                           ***/
+/**************************************************/
+
+html#ecwid_html body#ecwid_body.page,
+html#ecwid_html body#ecwid_body.chameleon.page {
+
+	/**************************************************/
+	/*** HORIZONTAL WIDGET (categories menu)        ***/
+	/**************************************************/
+
+	#horizontal-menu.horizontal-desktop {
+
+		.horizontal-menu							{ padding: 15px 15px 0; background: darken(@theme-general-pageBgColor, 4%); }
+		.horizontal-menu-parent > li				{ margin-right: -1px; margin-bottom: -1px; padding: 3px 3px 0 3px; background: @theme-general-pageBgColor;
+													  border: 1px solid @theme-general-linesColor; border-bottom: none; }
+		.horizontal-menu-parent > li:first-child	{ .border-radius(3px 0 0 0); }
+		.horizontal-menu-parent > li:last-child		{ .border-radius(0 3px 0 0); }
+		.horizontal-menu-parent > li:hover			{  }
+
+		.horizontal-menu-item > a					{ margin: 0; padding: 12px 20px; background: darken(@theme-general-pageBgColor, 4%); border: none; .border-radius(3px 3px 0 0); }
+
+		.horizontal-menu-item--active > a			{ background: @theme-general-pageBgColor; }
+		.horizontal-menu-item--hover > a,
+		.horizontal-menu-item > a:hover				{ background: @theme-general-pageBgColor; }
+
+	}
+
+	/**************************************************/
+	/*** PRODUCTS BROWSER                           ***/
+	/**************************************************/
+
+	div.ecwid-productBrowser-categoryPath					{ margin: 15px 0; padding: 0; border-top: 1px solid @theme-general-linesColor; border-bottom: none; .box-shadow(none); }
+	div.ecwid-productBrowser-categoryPath > *				{ display: inline-block !important; margin: 0 1px 1px 0; padding: 4px 15px; background: darken(@theme-general-pageBgColor, 4%); vertical-align: top; }
+	div.ecwid-productBrowser-categoryPath a					{ text-decoration: none; }
+	div.ecwid-productBrowser-categoryPath a:hover			{ text-decoration: underline; }
+
+	span.ecwid-productBrowser-categoryPath-separator		{ display: none !important; }
+
+	.ecwid-productBrowser-categoryPath-categoryLabel		{ color: @theme-general-titColor; }
+	.ecwid-productBrowser-categoryPath-categoryLabel:before	{ content: "\f07b"; font-family: "FontAwesome"; font-weight: normal; margin-right: 10px; color: @theme-general-decColor; line-height: normal; }
+
+	/**************************************************/
+	/*** RESULTS TOP PANEL                          ***/
+	/**************************************************/
+
+	div.ecwid-results-topPanel div.ecwid-results-topPanel-itemsCountLabel-cell		{ padding: 0; }
+	div.ecwid-results-topPanel div.ecwid-results-topPanel-controlsPanel				{ padding: 0; background: none; border-bottom: none; }
+	div.ecwid-results-topPanel div.ecwid-results-topPanel-controlsPanel > div		{ margin-bottom: 5px; }
+
+	/**************************************************/
+	/*** PAGINATION                                 ***/
+	/**************************************************/
+
+	div.ecwid-pager {
+
+		span.ecwid-pager-link-disabled		{ background: @button-bg-active; .textContrast(@button-bg-active); }
+
+	}
+
+}
+
+/* && end of CUSTOM STYLES */

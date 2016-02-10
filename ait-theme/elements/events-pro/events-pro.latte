@@ -1,0 +1,283 @@
+{include $el->common('header')}
+
+<div id="{$htmlId}" class="elm-item-organizer {$htmlClass}">
+	{var $enableCarousel = false}
+
+	{var $selectedOrder   = $el->option(order)}
+	{var $selectedOrderBy = $el->option(orderby)}
+	{var $selectedCount   = $el->option(count)}
+
+
+	{var $postType = 'ait-event-pro'}
+	{var $lang = AitLangs::getCurrentLanguageCode()}
+	{var $orderBy = array()}
+	{var $metaQuery = array('relation' => 'AND')}
+	{var $taxQuery = array()}
+
+	{if $el->option(category) != 0}
+		{? array_push($taxQuery, array(
+			'taxonomy' 	=> 'ait-events-pro',
+			'field'		=> 'term_id',
+			'terms'		=> $el->option(category)
+		))}
+	{/if}
+
+	{if $el->option(location) != 0}
+		{? array_push($taxQuery, array(
+			'taxonomy' 	=> 'ait-locations',
+			'field'		=> 'term_id',
+			'terms'		=> $el->option(location)
+		))}
+	{/if}
+
+
+	{var $metaQuery = array(
+		'dates_clause' => array(
+			'key' => 'ait-event-recurring-date',
+			'value' => date('Y-m-d'),
+			'compare' => '>',
+			'type' => 'date,'
+		)
+	)}
+
+	{if $selectedOrderBy == 'eventDate'}
+		{var $orderBy['dates_clause'] = $selectedOrder}
+	{else}
+		{var $orderBy[$selectedOrderBy] = $selectedOrder}
+	{/if}
+
+
+	{var $args = array(
+		'lang'           => $lang,
+		'post_type'      => $postType,
+		'posts_per_page' => $selectedCount,
+		'meta_query'     => $metaQuery,
+		'tax_query'      => $taxQuery,
+		'orderby'        => $orderBy,
+	)}
+
+
+	{var $query = aitGetItems($args)}
+
+
+
+	{if $query->havePosts}
+		{var $layout = $el->option->layout}
+		{var $textRows = $el->option->textRows}
+		{*var $addInfo = $el->option->addInfo*}
+		{var $itemCategories = $el->option->itemCategories}
+		{var $itemExcerpt = $el->option->itemExcerpt}
+		{var $itemLocation = $el->option->itemLocation}
+		{var $noFeatured = $eventsProOptions['noFeatured']}
+		{* Unified variables and data *}
+		{if $layout == box}
+			{var $enableCarousel  = $el->option->boxEnableCarousel}
+			{var $boxAlign 		  = $el->option->boxAlign}
+			{var $numOfRows       = $el->option->boxRows}
+			{var $numOfColumns    = $el->option->boxColumns}
+			{var $imageHeight     = $el->option->boxImageHeight}
+			{var $imgWidth = 768}
+		{else}
+			{var $enableCarousel  = $el->option->listEnableCarousel}
+			{var $numOfRows       = $el->option->listRows}
+			{var $numOfColumns    = $el->option->listColumns}
+			{var $imageHeight     = $el->option->listImageHeight}
+			{var $imgWidth = 80}
+		{/if}
+
+
+		{if $enableCarousel}
+			<div class="loading"><span class="ait-preloader">{!__ 'Loading&hellip;'}</span></div>
+		{/if}
+
+		{if $layout == box}
+
+			<div n:class='elm-item-organizer-container, "column-{$numOfColumns}", "layout-{$layout}", $enableCarousel ? carousel-container : carousel-disabled,' data-cols="{$numOfColumns}" data-first="1" data-last="{= ceil($query->postCount / $numOfRows)}">
+			{customLoop from $query as $item}
+				{if $iterator->counter <= $el->option(count)}
+					{var $meta = $item->meta('event-pro-data')}
+
+					{*var $dbFeatured = get_post_meta($item->id, '_ait-item_item-featured', true)*}
+					{*var $isFeatured = $dbFeatured != "" ? (bool)$dbFeatured : false *}
+					{var $isFeatured = false }
+
+					{if $enableCarousel and $iterator->isFirst($numOfRows)}
+						<div n:class="item-box, $enableCarousel ? carousel-item">
+					{/if}
+
+					<div n:class='item, "item{$iterator->counter}", $enableCarousel ? carousel-item, $iterator->isFirst($numOfColumns) ? item-first, $iterator->isLast($numOfColumns) ? item-last, image-present, $boxAlign ? $boxAlign, $isFeatured ? item-featured, defined("AIT_REVIEWS_ENABLED") ? reviews-enabled' data-id="{$iterator->counter}">
+
+						<a href="{$item->permalink}">
+							{var $imgHeight = ($imgWidth / 4) * 3}
+							<div class="item-thumbnail">
+								{if $item->hasImage}
+								<div class="item-thumbnail-wrap" style="background-image: url('{imageUrl $item->imageUrl, width => $imgWidth, height => $imgHeight, crop => 1}')"></div>
+								{else}
+								<div class="item-thumbnail-wrap" style="background-image: url('{imageUrl $noFeatured, width => $imgWidth, height => $imgHeight, crop => 1}')"></div>
+								{/if}
+								<div class="item-text-wrap">
+									<div class="item-more">{__ 'More info'}</div>
+								</div>
+							</div>
+
+
+
+
+
+							{var $nextDates = aitGetNextDate($meta->dates)}
+							{var $date_timestamp = strtotime($nextDates['dateFrom'])}
+							{var $day = date('d', $date_timestamp)}
+							{var $month = date('M', $date_timestamp)}
+							{var $year = date('Y', $date_timestamp)}
+							{var $moreDates = count(aitGetRecurringDates($item)) - 1}
+
+							<div class="entry-date">
+								<div class="day">{$day}</div>
+								<span class="month">{$month}</span>
+								<span class="year">{$year}</span>
+							</div>
+
+							{if $moreDates > 0}<div class="more">+ {$moreDates}</div>{/if}
+						</a>
+						<div class="item-text{if !$itemExcerpt and !$itemLocation} categories-only{/if}">
+
+							<div class="item-title"><a href="{$item->permalink}"><h3>{!$item->title}</h3></a></div>
+							{if $itemExcerpt}
+								<div class="item-excerpt txtrows-{$textRows}"><p>{!$item->excerpt(200)|striptags}</p></div>
+							{/if}
+
+							{if $itemLocation or $itemCategories}
+							<div class="item-taxonomy">
+
+								{if $itemCategories}
+									<div class="item-categories">{includePart "portal/parts/event-taxonomy", itemID => $item->id, taxonomy => 'ait-events-pro', onlyParent => true, count => 3}</div>
+								{/if}
+
+								{if $itemLocation}
+								<div class="item-location">
+									{foreach $item->categories('ait-locations') as $loc}
+										<a href="{$loc->url()}" class="location">{!$loc->title}</a>
+									{/foreach}
+								</div>
+								{/if}
+
+							</div>
+							{/if}
+						</div>
+						
+
+					</div>
+
+					{if $enableCarousel and $iterator->isLast($numOfRows)}
+						</div>
+					{/if}
+				{/if}
+			{/customLoop}
+			</div>
+
+		{else}
+
+			<div n:class='elm-item-organizer-container, "column-{$numOfColumns}", "layout-{$layout}", $enableCarousel ? carousel-container : carousel-disabled,' data-cols="{$numOfColumns}" data-first="1" data-last="{= ceil($query->postCount / $numOfRows)}">
+			{customLoop from $query as $item}
+				{var $meta = $item->meta('event-pro-data')}
+
+				{var $isFeatured = false}
+
+				{if $enableCarousel and $iterator->isFirst($numOfRows)}
+					<div n:class="item-box, $enableCarousel ? carousel-item">
+				{/if}
+
+				<div n:class='item, "item{$iterator->counter}", $enableCarousel ? carousel-item, $iterator->isFirst($numOfColumns) ? item-first, $iterator->isLast($numOfColumns) ? item-last, image-present, $isFeatured ? item-featured, defined("AIT_REVIEWS_ENABLED") ? reviews-enabled'	data-id="{$iterator->counter}">
+
+
+					<a href="{$item->permalink}">
+						<div class="item-thumbnail">
+
+							{var $date_timestamp = strtotime($meta->dateFrom)}
+							{var $day = date('d', $date_timestamp)}
+							{var $month = date('M', $date_timestamp)}
+							{var $moreDates = count(aitGetRecurringDates($item)) - 1}
+
+							<div class="entry-date">
+								<div class="day">{$day}</div>
+								<div class="month">{$month}</div>
+							</div>
+
+							{if $item->hasImage}
+								{var $ratio = explode(":", $imageHeight)}
+								{var $imgHeight = ($imgWidth / $ratio[0]) * $ratio[1]}
+
+							<div class="item-thumbnail-wrap">
+
+								<img src="{imageUrl $item->imageUrl, width => $imgWidth, height => $imgHeight, crop => 1}" alt="{!$item->title}">
+							</div>
+							{else}
+							<div class="item-thumbnail-wrap">
+								<img src="{imageUrl $noFeatured, width => $imgWidth, height => $imgHeight, crop => 1}" alt="{!$item->title}">
+							</div>
+							{/if}
+
+
+						</div>
+					</a>
+
+					<div class="item-text">
+
+						<div class="item-title"><a href="{$item->permalink}"><h3>{!$item->title}</h3></a></div>
+
+						{if $itemExcerpt}
+						<div class="item-excerpt txtrows-{$textRows}"><p>{!$item->excerpt(200)|striptags}</p></div>
+						{/if}
+
+						{if $moreDates > 0 or $itemLocation or $itemCategories}
+							<div class="list-footer">
+								{if $moreDates > 0}
+									<div class="more">+{$moreDates}</div>
+								{/if}
+
+								{if $itemLocation}
+								<div class="item-location">
+									{foreach $item->categories('ait-locations') as $loc}
+									<a href="{$loc->url()}" class="location">{!$loc->title}</a>
+									{/foreach}
+								</div>
+								{/if}
+
+								{if $itemCategories}
+								<div class="item-categories">{includePart "portal/parts/event-taxonomy", itemID => $item->id, taxonomy => 'ait-events-pro', onlyParent => true, count => 5}</div>
+								{/if}
+							</div>
+						{/if}
+
+					</div>
+
+				</div>
+
+				{if $enableCarousel and $iterator->isLast($numOfRows)}
+					</div>
+				{/if}
+			{/customLoop}
+			</div>
+		{/if}
+	{else}
+		<div class="elm-item-organizer-container">
+			<div class="alert alert-info">
+				{_x 'Events Pro', 'name of element'}&nbsp;&nbsp;|&nbsp;&nbsp;{__ 'Info: There are no events created, add some please.'}
+			</div>
+		</div>
+	{/if}
+</div>
+
+{if $enableCarousel}
+	<div class="carousel-standard-arrows">
+		<div class="carousel-arrow-left standard-arrow standard-arrow-left" style="cursor: pointer;">&lt;</div>
+		<div class="carousel-arrow-right standard-arrow standard-arrow-right" style="cursor: pointer;">&gt;</div>
+	</div>
+	<div class="carousel-bottom-arrows">
+		<div class="carousel-nav-text">{__ 'Navigation'}</div>
+		<div class="carousel-arrow-left bottom-arrow bottom-arrow-left" style="cursor: pointer;">&lt;</div>
+		<div class="carousel-arrow-right bottom-arrow bottom-arrow-right" style="cursor: pointer;">&gt;</div>
+	</div>
+{/if}
+
+{includePart "ait-theme/elements/events-pro/javascript", enableCarousel => $enableCarousel}

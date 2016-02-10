@@ -1,0 +1,356 @@
+{include $el->common('header')}
+
+<div id="{$htmlId}" class="elm-item-organizer {$htmlClass}">
+	{var $enableCarousel = false}
+	{var $taxQuery = array()}
+	{if $el->option(category) != 0}
+		{? array_push($taxQuery, array(
+			'taxonomy' 	=> 'ait-items',
+			'field'		=> 'term_id',
+			'terms'		=> $el->option(category)
+		))}
+	{/if}
+	{if $el->option(location) != 0}
+		{? array_push($taxQuery, array(
+			'taxonomy' 	=> 'ait-locations',
+			'field'		=> 'term_id',
+			'terms'		=> $el->option(location)
+		))}
+	{/if}
+
+	{var $itemsCount = $el->option(count)}
+
+
+	{if count($taxQuery) > 0}
+		{var $queryParams = array(
+			'nopaging'			=> true,
+			'post_type' 		=> 'ait-item',
+			'posts_per_page' 	=> $el->option(count),
+			'order'				=> $el->option(order),
+			'orderby'			=> $el->option(orderby),
+			'tax_query'			=> $taxQuery,
+			'posts_per_page'	=> $itemsCount,
+		)}
+	{else}
+		{var $queryParams = array(
+			'post_type' 		=> 'ait-item',
+			'order'				=> $el->option(order),
+			'orderby'			=> $el->option(orderby),
+			'posts_per_page'	=> $itemsCount,
+		)}
+	{/if}
+
+	{var $allItems = array()}
+
+	{var $queryParams['meta_query'] = array(
+	array(
+			'key'     => '_ait-item_item-featured',
+			'value'   => array('1', 'true'),
+			'compare' => 'IN',
+	)
+	)}
+
+	{if defined('AIT_REVIEWS_ENABLED')}
+		{* query firstly ONLY featured items with rating *}
+		{if $el->option(orderby) == 'none'}
+			{var $queryParams['meta_key'] = 'rating_mean'}
+			{var $queryParams['orderby'] = 'meta_value'}
+			{customQuery as $query, $queryParams}
+			{foreach $query->posts as $post}
+				{? array_push($allItems, $post)}
+			{/foreach}
+			{var $itemsCount = $itemsCount - count($query->posts)}
+		{/if}
+
+		{* query the rest of featured items without rating *}
+		{? unset($queryParams['meta_key'])}
+		{var $queryParams['posts_per_page'] = $itemsCount}
+		{customQuery as $query, $queryParams}
+		{foreach $query->posts as $post}
+			{? array_push($allItems, $post)}
+		{/foreach}
+		{var $itemsCount = $itemsCount - count($query->posts)}
+	{else}
+		{customQuery as $query, $queryParams}
+
+		{foreach $query->posts as $post}
+			{? array_push($allItems, $post)}
+		{/foreach}
+		{var $itemsCount = $itemsCount - count($query->posts)}
+	{/if}
+
+
+	{if $el->option('onlyFeatured') == false}
+
+		{if defined('AIT_REVIEWS_ENABLED') and $el->option(orderby) == 'none'}
+			{var $queryParams['meta_key'] = 'rating_mean'}
+			{var $queryParams['orderby'] = 'meta_value'}
+
+			{* query the rest of non-featured items with rating *}
+			{var $queryParams['meta_query'] = array(
+				array(
+					'key'     => '_ait-item_item-featured',
+					'compare' => 'NOT EXISTS',
+				)
+			)}
+			{var $queryParams['posts_per_page'] = $itemsCount}
+
+			{customQuery as $query, $queryParams}
+			{foreach $query->posts as $post}
+				{? array_push($allItems, $post)}
+			{/foreach}
+			{var $itemsCount = $itemsCount - count($query->posts)}
+
+			{* exclude items with rating - already queried *}
+			{var $queryParams['meta_query'] = array(
+			array(
+				'key'     => 'rating_mean',
+				'compare' => 'NOT EXISTS',
+			),
+			array(
+				'key'     => '_ait-item_item-featured',
+				'compare' => 'NOT EXISTS',
+			)
+		)}
+		{else}
+
+			{var $queryParams['meta_query'] = array(
+			array(
+				'key'     => '_ait-item_item-featured',
+				'compare' => 'NOT EXISTS',
+			)
+		)}
+		{/if}
+
+
+
+		{* query the rest of non-featured items without rating *}
+
+		{? unset($queryParams['meta_key'])}
+		{var $queryParams['orderby'] = $el->option(orderby)}
+		{var $queryParams['posts_per_page'] = $itemsCount}
+		{customQuery as $query, $queryParams}
+		{foreach $query->posts as $post}
+			{? array_push($allItems, $post)}
+		{/foreach}
+	{/if}
+
+	{* update query posts count *}
+	{var $query->posts = $allItems}
+	{var $query->post_count = count($allItems)}
+  	{var $query->found_posts = count($allItems)}
+
+
+	{if $query->havePosts}
+		{var $layout = $el->option->layout}
+		{var $textRows = $el->option->textRows}
+		{var $addInfo = $el->option->addInfo}
+		{var $noFeatured = $options->theme->item->noFeatured}
+		{* Unified variables and data *}
+		{if $layout == box}
+			{var $enableCarousel  = $el->option->boxEnableCarousel}
+			{var $boxAlign 		  = $el->option->boxAlign}
+			{var $numOfRows       = $el->option->boxRows}
+			{var $numOfColumns    = $el->option->boxColumns}
+			{var $imageHeight     = $el->option->boxImageHeight}
+			{var $imgWidth = 640}
+		{else}
+			{var $enableCarousel  = $el->option->listEnableCarousel}
+			{var $numOfRows       = $el->option->listRows}
+			{var $numOfColumns    = $el->option->listColumns}
+			{var $imageHeight     = $el->option->listImageHeight}
+			{var $imgWidth = 80}
+		{/if}
+
+
+		{if $enableCarousel}
+			<div class="loading"><span class="ait-preloader">{!__ 'Loading&hellip;'}</span></div>
+		{/if}
+
+		{if $layout == box}
+
+			<div n:class='elm-item-organizer-container, "column-{$numOfColumns}", "layout-{$layout}", $enableCarousel ? carousel-container : carousel-disabled,' data-cols="{$numOfColumns}" data-first="1" data-last="{= ceil($query->postCount / $numOfRows)}">
+			{customLoop from $query as $item}
+				{if $iterator->counter <= $el->option(count)}
+					{var $meta = $item->meta('item-data')}
+
+					{var $dbFeatured = get_post_meta($item->id, '_ait-item_item-featured', true)}
+					{var $isFeatured = $dbFeatured != "" ? (bool)$dbFeatured : false }
+
+					{if $enableCarousel and $iterator->isFirst($numOfRows)}
+						<div n:class="item-box, $enableCarousel ? carousel-item">
+					{/if}
+
+					<div n:class='item, "item{$iterator->counter}", $enableCarousel ? carousel-item, $iterator->isFirst($numOfColumns) ? item-first, $iterator->isLast($numOfColumns) ? item-last, image-present, $boxAlign ? $boxAlign, $isFeatured ? item-featured, defined("AIT_REVIEWS_ENABLED") ? reviews-enabled, !$addInfo ? noinfo, !$meta->displaySocialIcons ? icons-disabled' data-id="{$iterator->counter}">
+
+							{var $ratio = explode(":", $imageHeight)}
+							{var $imgHeight = ($imgWidth / $ratio[0]) * $ratio[1]}
+							<div class="item-thumbnail">
+								<a href="{$item->permalink}">
+									<div class="item-thumbnail-wrap">
+										{if $item->hasImage}
+										<img src="{imageUrl $item->imageUrl, width => $imgWidth, height => $imgHeight, crop => 1}" alt="{!$item->title}">
+										{else}
+										<img src="{imageUrl $noFeatured, width => $imgWidth, height => $imgHeight, crop => 1}" alt="{!$item->title}">
+										{/if}
+									</div>
+									<div class="item-text-wrap">
+										<div class="item-text">
+											<div class="item-excerpt txtrows-{$textRows}"><p>{!$item->excerpt(200)|striptags}</p></div>
+										</div>
+									</div>
+								</a>
+							</div>
+
+							{if $addInfo}
+								<div class="item-categories">
+									{foreach $item->categories('ait-items') as $cat}
+										{*var $catLink = get_term_link($cat)*}
+										{var $catLink = $cat->url()}
+										<a href="{$catLink}"><span class="item-category">{!$cat->title}</span></a>
+									{/foreach}
+								</div>
+							{/if}
+
+							<div class="item-box-content-wrap">
+								<div class="item-title"><a href="{$item->permalink}"><h3>{!$item->title}</h3></a></div>
+								<span class="subtitle">{AitLangs::getCurrentLocaleText($meta->subtitle)}</span>
+
+								{if $addInfo}
+									{if defined('AIT_REVIEWS_ENABLED')}
+										{includePart "portal/parts/carousel-reviews-stars", item => $item, showCount => false}
+									{/if}
+								{/if}
+							</div>
+
+							{var $target = $meta->socialIconsOpenInNewWindow ? 'target="_blank"' : ""}
+							{if $meta->displaySocialIcons}
+								<div class="item-social-icons-wrap">
+									<div class="item-social-icons">
+										<div class="content">
+											{if count($meta->socialIcons) > 0}
+												<ul><!--
+												{foreach $meta->socialIcons as $icon}
+												--><li>
+														<a href="{!$icon['link']}" {!$target}>
+															{if isset($icon['icon']) && $icon['icon'] != "" }
+															<i class="fa {$icon['icon']}"></i>
+															{else}
+															<img src="{$icon['image']}" alt="icon">
+															{/if}
+														</a>
+													</li><!--
+												{/foreach}
+												--></ul>
+											{/if}
+										</div>
+									</div>
+								</div>
+							{/if}
+
+
+					</div>
+
+					{if $enableCarousel and $iterator->isLast($numOfRows)}
+						</div>
+					{/if}
+				{/if}
+			{/customLoop}
+			</div>
+
+		{else}
+
+			<div n:class='elm-item-organizer-container, "column-{$numOfColumns}", "layout-{$layout}", $enableCarousel ? carousel-container : carousel-disabled,' data-cols="{$numOfColumns}" data-first="1" data-last="{= ceil($query->postCount / $numOfRows)}">
+			{customLoop from $query as $item}
+				{var $meta = $item->meta('item-data')}
+
+				{var $dbFeatured = get_post_meta($item->id, '_ait-item_item-featured', true)}
+				{var $isFeatured = $dbFeatured != "" ? (bool)$dbFeatured : false }
+
+				{if $enableCarousel and $iterator->isFirst($numOfRows)}
+					<div n:class="item-box, $enableCarousel ? carousel-item">
+				{/if}
+
+				<div n:class='item, "item{$iterator->counter}", $enableCarousel ? carousel-item, $iterator->isFirst($numOfColumns) ? item-first, $iterator->isLast($numOfColumns) ? item-last, image-present, $isFeatured ? item-featured, defined("AIT_REVIEWS_ENABLED") ? reviews-enabled'	data-id="{$iterator->counter}">
+
+						{var $ratio = explode(":", $imageHeight)}
+						{var $imgHeight = ($imgWidth / $ratio[0]) * $ratio[1]}
+						<div class="item-thumbnail">
+							<a href="{$item->permalink}">
+								<div class="item-thumbnail-wrap">
+									{if $item->hasImage}
+									<img src="{imageUrl $item->imageUrl, width => $imgWidth, height => $imgHeight, crop => 1}" alt="{!$item->title}">
+									{else}
+									<img src="{imageUrl $noFeatured, width => $imgWidth, height => $imgHeight, crop => 1}" alt="{!$item->title}">
+									{/if}
+								</div>
+							</a>
+
+							{if $addInfo}
+								{if defined('AIT_REVIEWS_ENABLED')}
+									{includePart "portal/parts/carousel-reviews-stars", item => $item, showCount => false}
+								{/if}
+							{/if}
+
+						</div>
+
+						<div class="item-title">
+							<a href="{$item->permalink}"><h3>{!$item->title}</h3></a>
+							<span class="subtitle">{AitLangs::getCurrentLocaleText($meta->subtitle)}</span>
+						</div>
+
+
+						<div class="item-text">
+							<div class="item-excerpt txtrows-{$textRows}"><p>{!$item->excerpt(200)|striptags}</p></div>
+						</div>
+
+						{if $addInfo}
+						<div class="item-categories">
+							{foreach $item->categories('ait-items') as $cat}
+								{*var $catLink = get_term_link($cat)*}
+								{var $catLink = $cat->url()}
+								<a href="{$catLink}"><span class="item-category">{!$cat->title}</span></a>
+							{/foreach}
+						</div>
+						{/if}
+
+				</div>
+
+				{if $enableCarousel and $iterator->isLast($numOfRows)}
+					</div>
+				{/if}
+			{/customLoop}
+			</div>
+		{/if}
+	{else}
+		<div class="elm-item-organizer-container">
+			<div class="alert alert-info">
+				{_x 'Posts', 'name of element'}&nbsp;&nbsp;|&nbsp;&nbsp;{__ 'Info: There are no items created, add some please.'}
+			</div>
+		</div>
+	{/if}
+</div>
+
+{includePart "ait-theme/elements/items/javascript", enableCarousel => $enableCarousel}
+
+{if $el->option->layout == 'icon' && $enableCarousel}
+<div class="carousel-icon-arrows">
+	<div class="carousel-arrow-left icon-arrow icon-arrow-left" style="cursor: pointer;">&lt;</div>
+	<div class="carousel-arrow-right icon-arrow icon-arrow-right" style="cursor: pointer;">&gt;</div>
+</div>
+
+</div> <!-- icon-container-content -->
+{/if}
+
+
+{if $el->option->layout != 'icon' && $enableCarousel}
+<div class="carousel-standard-arrows">
+	<div class="carousel-arrow-left standard-arrow standard-arrow-left" style="cursor: pointer;">&lt;</div>
+	<div class="carousel-arrow-right standard-arrow standard-arrow-right" style="cursor: pointer;">&gt;</div>
+</div>
+<div class="carousel-bottom-arrows">
+	<div class="carousel-nav-text">{__ 'Navigation'}</div>
+	<div class="carousel-arrow-left bottom-arrow bottom-arrow-left" style="cursor: pointer;">&lt;</div>
+	<div class="carousel-arrow-right bottom-arrow bottom-arrow-right" style="cursor: pointer;">&gt;</div>
+</div>
+{/if}

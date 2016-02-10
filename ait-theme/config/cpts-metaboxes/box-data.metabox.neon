@@ -1,0 +1,41 @@
+subtitle:
+	label: Subtitle
+	type: text
+	default:
+	help: "Text displayed with main title of service box"
+
+iconFont:
+	label: Icon Font
+	type: font-awesome-select
+	default:
+	help: "Class of icon from FontAwesome"
+	
+image:
+	label: Image
+	type: image
+	default:
+	help: "URL of image displayed in service box"
+
+hoverImage:
+	label: Hover Image
+	type: image
+	default:
+	help: "URL of image displayed in service box on hover event"
+
+description:
+	label: Description
+	type: textarea
+	rows: 6
+	help: "Main text displayed in service box"
+
+readMoreText:
+	label: '"Read more" text'
+	type: text
+	default:
+	help: 'Text for "Read more" link'
+
+link:
+	label: 'Link'
+	type: url
+	default:
+	help: 'URL of "Read more" link, use valid URL format with http://'

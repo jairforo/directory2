@@ -1,0 +1,52 @@
+position:
+	label: _x(Position, job position)
+	type: text
+	help: 'Position of member in the company, community, etc'
+
+about:
+	label: About member
+	type: textarea
+	rows: 8
+	help: Information about member
+
+aboutShort:
+	label: Short Description
+	type: text
+	help: 'Short information about member - used in Members Element or short description in Member Element'
+
+contacts:
+	label: Contact Data
+	type: clone
+	max: 10
+	help: 'Add new Contact Data by click on "+ Add New Item" link, or remove existing Contact Data by click on red cross. Click on "Remove All Items" link to remove all existing Contact Data.'
+	items:
+		title:
+			label: Title
+			type: text
+			help: "Text of contact"
+		url:
+			label: Link
+			type: url
+			help: "Contact link, use valid URL format with http://"
+	default: []
+
+icons:
+	label: Social Icons
+	type: clone
+	max: 10
+	help: 'Add new Social Icon by click on "+ Add New Item" link, or remove existing Social Icon by click on red cross. Click on "Remove All Items" link to remove all existing Social Icons.'
+	items:
+		title:
+			label: Title
+			type: text
+			help: "Social icon title"
+		icon:
+			label: Icon
+			type: font-awesome-select
+			category: social
+			help: "Social icon"
+		url:
+			label: Link
+			type: url
+			help: "Social icon link, use valid URL format with http://"
+	default: []
