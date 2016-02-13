@@ -16,14 +16,12 @@
  http://javascript.crockford.com/remedial.html
 */
 String.prototype.supplant = function(o){
-	if(typeof this === "string"){
-		return this.replace(/{([^{}]*)}/g,
-			function(a, b){
-				var r = o[b];
-				return typeof r === 'string' || typeof r === 'number' ? r : a;
-			}
-		);
-	}
+	return this.replace(/{([^{}]*)}/g,
+		function(a, b){
+			var r = o[b];
+			return (typeof r === 'string' || typeof r === 'number') ? r : a;
+		}
+	);
 };
 
 

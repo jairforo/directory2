@@ -1,8 +1,8 @@
 <?php
 
 
-/* stable@r7016 */
-define('AIT_SKELETON_VERSION', '2.8.16');
+/* stable@r7046 */
+define('AIT_SKELETON_VERSION', '2.8.17');
 
 @include_once dirname(__FILE__) . '/../@theme.php'; // @ - intentionaly, may do not exists
 

@@ -18,7 +18,7 @@ $rating = esc_attr( get_comment_meta( $GLOBALS['comment']->comment_ID, 'rating',
 	<div id="comment-<?php comment_ID(); ?>" class="comment_container">
 
 		<div class="avatar-wrap">
-			
+
 			<?php echo get_avatar( $GLOBALS['comment'], $size='60' ); ?>
 
 			<?php if ( get_option('woocommerce_enable_review_rating') == 'yes' ) : ?>
@@ -28,7 +28,7 @@ $rating = esc_attr( get_comment_meta( $GLOBALS['comment']->comment_ID, 'rating',
 				</div>
 
 			<?php endif; ?>
-			
+
 		</div>
 
 
@@ -46,7 +46,7 @@ $rating = esc_attr( get_comment_meta( $GLOBALS['comment']->comment_ID, 'rating',
 							if ( woocommerce_customer_bought_product( $GLOBALS['comment']->comment_author_email, $GLOBALS['comment']->user_id, $post->ID ) )
 								echo '<em class="verified">(' . __( 'verified owner', 'woocommerce' ) . ')</em> ';
 
-					?><time itemprop="datePublished" datetime="<?php echo get_comment_date('c'); ?>"><?php echo get_comment_date(__( get_option('date_format'), 'woocommerce' )); ?></time>
+					?><time itemprop="datePublished" datetime="<?php echo get_comment_date('c'); ?>"><?php echo get_comment_date( wc_date_format() ); ?></time>
 
 
 				</div>

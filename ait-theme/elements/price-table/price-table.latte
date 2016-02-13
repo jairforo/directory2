@@ -44,11 +44,9 @@
 							<div class="table-row empty-row">&nbsp;</div>
 						{/for}
 						</div>
-                                                {if !empty($meta->buttonText)}
-                                                    <div class="table-footer">
-                                                    {if !empty($meta->buttonText) && !empty($meta->buttonLink)}<div class="table-button"><div class="table-button-wrap"><a href="{$meta->buttonLink}">{$meta->buttonText}</a></div></div>{/if}
-                                                    </div>
-                                                {/if}
+						<div class="table-footer">
+						{if !empty($meta->buttonText) && !empty($meta->buttonLink)}<div class="table-button"><div class="table-button-wrap"><a href="{$meta->buttonLink}">{$meta->buttonText}</a></div></div>{/if}
+						</div>
 					</div>
 				</div>
 			{/customLoop}

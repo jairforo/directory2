@@ -231,6 +231,9 @@
 								{var $itemMeta->map[address] = str_replace("\xe2\x80\xa9", '', $itemMeta->map[address])}
 								{var $itemTitle = str_replace("\xe2\x80\xa8", '', $item->title)}
 								{var $itemTitle = str_replace("\xe2\x80\xa9", '', $itemTitle)}
+
+								{var $itemMeta->map[address] = trim(preg_replace('/\s+/', ' ', $itemMeta->map[address]))}
+								{var $itemMeta->map[address] = str_replace(array('"',"'"), "", $itemMeta->map[address])}
 								{* JAVASCRIPT DATA VALIDATION *}
 
 								{if $el->option('infoboxEnableTelephoneNumbers') && $itemMeta->telephone }

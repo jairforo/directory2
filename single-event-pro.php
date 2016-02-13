@@ -45,6 +45,15 @@
 				{* GALLERY SECTION *}
 				{includePart portal/parts/single-event-thumbnail}
 				{* GALLERY SECTION *}
+
+				{* DATE SECTION *}
+				{includePart portal/parts/single-event-date}
+				{* DATE SECTION *}
+
+				{* ADDRESS SECTION *}
+				{includePart portal/parts/single-event-address}
+				{* ADDRESS SECTION *}
+
 				</div>
 
 				<div class="column column-span-2 column-narrow column-last">
@@ -55,6 +64,14 @@
 							{!$post->excerpt}
 						{/if}
 					</div>
+
+				{* FEE SECTION *}
+				{includePart portal/parts/single-event-fee}
+				{* FEE SECTION *}
+
+				{includePart "portal/parts/event-taxonomy", itemID => $post->id, taxonomy => 'ait-events-pro', onlyParent => true, count => 5, wrapper => true}
+
+
 				</div>
 			</div>
 			{/if}
@@ -62,25 +79,7 @@
 		{* CONTENT SECTION *}
 
 
-		<div class="column-grid column-grid-3">
-			<div class="column column-span-1 column-narrow column-first">
-				{* DATE SECTION *}
-				{includePart portal/parts/single-event-date}
-				{* DATE SECTION *}
 
-				{* ADDRESS SECTION *}
-				{includePart portal/parts/single-event-address}
-				{* ADDRESS SECTION *}
-			</div>
-
-			<div class="column column-span-2 column-narrow column-last">
-				{* FEE SECTION *}
-				{includePart portal/parts/single-event-fee}
-				{* FEE SECTION *}
-
-				{includePart "portal/parts/event-taxonomy", itemID => $post->id, taxonomy => 'ait-events-pro', onlyParent => true, count => 5, wrapper => true}
-			</div>
-		</div>
 
 		{* SOCIAL SECTION *}
 		{includePart portal/parts/single-item-social}

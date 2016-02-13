@@ -79,10 +79,10 @@ function
 savePagesOptions(){$oid=aitOptions()->getRequestedOid();$nonceKey=implode(',',aitOptions()->getOptionsKeys(array('layout','elements'),$oid));AitUtils::checkAjaxNonce($nonceKey,true);self::saveOptions(!empty($oid),$oid);}private
 static
 function
-saveOptions($noAutoload=false,$oid=''){$options=explode(',',stripslashes(isset($_POST['options-keys'])?$_POST['options-keys']:''));$a=false;$noAutoload=$noAutoload||$a;if($options){foreach($options
-as$option){$value=array();if(isset($_POST[$option]))$value=$_POST[$option];$value=stripslashes_deep($value);if($noAutoload){delete_option($option);$r=add_option($option,$value,'','no');$result=array('added'=>$r);}else{$r=update_option($option,$value);$result=array('updated'=>$r);}}}if(isset($_POST['specific-post'])and
+saveOptions($noAutoload=false,$oid=''){$optionsKeys=explode(',',stripslashes(isset($_POST['options-keys'])?$_POST['options-keys']:''));$a=false;$noAutoload=$noAutoload||$a;if($optionsKeys){foreach($optionsKeys
+as$optionKey){$value=array();if(isset($_POST[$optionKey])){$value=$_POST[$optionKey];}$value=stripslashes_deep($value);if($noAutoload){delete_option($optionKey);$r=add_option($optionKey,$value,'','no');$result=array('added'=>$r);}else{$r=update_option($optionKey,$value);$result=array('updated'=>$r);}}}if(isset($_POST['specific-post'])and
 isset($_POST['specific-post']['id'])){$p=(object)$_POST['specific-post'];if(isset($p->template)){clean_post_cache($p->id);update_post_meta($p->id,'_wp_page_template',$p->template);}$post=array();$post['ID']=$p->id;if(isset($p->comments)){$post['comment_status']=$p->comments;}if(isset($p->title)){$post['post_title']=$p->title;}if(isset($p->content)){$post['post_content']=$p->content;}wp_update_post($post);}elseif($oid==''and
-isset($_POST['specific-post']['comments'])){update_option('default_comment_status',$_POST['specific-post']['comments']);}if($oid==''){$register=aitOptions()->getLocalOptionsRegister();$tags=array_merge(array('global'),$register['special'],$register['pages']);}else{$tags=array($oid);}if(isset($result['added'])and!$result['added']){self::sendErrorJson($result);}else{AitCache::clean(array('tags'=>$tags,'less'=>true));self::sendJson($result);}}/**
+isset($_POST['specific-post']['comments'])){update_option('default_comment_status',$_POST['specific-post']['comments']);}if($oid==''){$register=aitOptions()->getLocalOptionsRegister();$tags=array_merge(array('global'),$register['special'],$register['pages']);}else{$tags=array($oid);}do_action('ait-save-options',$_POST,$optionsKeys,$oid);if(isset($result['added'])and!$result['added']){self::sendErrorJson($result);}else{AitCache::clean(array('tags'=>$tags,'less'=>true));self::sendJson($result);}}/**
 	 * Resets all options to default values
 	 * Includes theme, layout and elements
 	 * @WpAjax
@@ -120,7 +120,7 @@ deleteLocalOptions(){check_ajax_referer('ait-delete-local-options');$oid=aitOpti
 	 * @WpAjax
 	 */static
 function
-uploadAndImport(){$whatToImport=isset($_POST['what-to-import'])?$_POST['what-to-import']:false;$importAttachments=isset($_POST['import-attachments']);if(!$whatToImport){self::sendErrorJson(array('whatToImport'=>'','msg'=>__('Something is wrong with import form','ait-admin')));}$sendResults=array();$sendResults['whatToImport']=$whatToImport;$content=array();if(isset($_FILES['import-file'])and$_FILES['import-file']['error']==UPLOAD_ERR_OK){$gzFile=$_FILES['import-file']['tmp_name'];$content=file_get_contents($gzFile);}else{if($whatToImport=='demo-content'){$p=str_replace(aitPath('theme'),'',aitPath('includes'));$gzFile=aitPath('includes')."/demo-content.ait-backup";$importAttachments=true;if(file_exists($gzFile)){$content=file_get_contents($gzFile);}else{self::sendErrorJson(array('whatToImport'=>$whatToImport,'msg'=>sprintf(__("File with demo content '%s' doesn't exists.",'ait-admin'),$p."/demo-content.ait-backup")));}}else{$messages=array(false,__("The uploaded file exceeds the upload_max_filesize directive in php.ini."),__("The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form."),__("The uploaded file was only partially uploaded."),__("No file was uploaded."),'',__("Missing a temporary folder."),__("Failed to write file to disk."),__("File upload stopped by extension."));self::sendErrorJson(array('whatToImport'=>$whatToImport,'msg'=>$messages[$_FILES['import-file']['error']]));}}$u=parse_url(get_option('siteurl'));$siteUrl=$u['host'];$siteUrl.=empty($u['path'])?'':str_replace(array('/','\\'),'-',$u['path']);$bck=aitPaths()->dir->uploads.'/backups/'.sprintf(".ht-backup-%s-%s-%s.ait-backup",$siteUrl,'all',date('Y-m-d-H.i.s'));try{AitBackup::exportToFile('all',$bck);}catch(Exception$e){}try{do_action('ait-before-import',$whatToImport);$sendResults=AitBackup::import($whatToImport,$content,$importAttachments);$sendResults['whatToImport']=$whatToImport;if(isset($sendResults['corrupted'])){self::sendErrorJson(array('whatToImport'=>$whatToImport,'msg'=>$sendResults['corrupted']));}else{AitCache::clean();do_action('ait-after-import',$whatToImport,$sendResults);flush_rewrite_rules();self::sendJson($sendResults);}}catch(Exception$e){self::sendErrorJson(array('whatToImport'=>$whatToImport,'msg'=>$e->getMessage()));}}/**
+uploadAndImport(){$whatToImport=isset($_POST['what-to-import'])?$_POST['what-to-import']:false;$importAttachments=isset($_POST['import-attachments']);if(!$whatToImport){self::sendErrorJson(array('whatToImport'=>'','msg'=>__('Something is wrong with import form','ait-admin')));}$sendResults=array();$sendResults['whatToImport']=$whatToImport;$content=array();if(isset($_FILES['import-file'])and$_FILES['import-file']['error']==UPLOAD_ERR_OK){$gzFile=$_FILES['import-file']['tmp_name'];$content=file_get_contents($gzFile);}else{if($whatToImport=='demo-content'){$p=str_replace(aitPath('theme'),'',aitPath('includes'));$gzFile=aitPath('includes')."/demo-content.ait-backup";$importAttachments=true;if(file_exists($gzFile)){$content=file_get_contents($gzFile);}else{self::sendErrorJson(array('whatToImport'=>$whatToImport,'msg'=>sprintf(__("File with demo content '%s' doesn't exists.",'ait-admin'),$p."/demo-content.ait-backup")));}}else{$messages=array(false,__("The uploaded file exceeds the upload_max_filesize directive in php.ini.",'default'),__("The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.",'default'),__("The uploaded file was only partially uploaded.",'default'),__("No file was uploaded.",'default'),'',__("Missing a temporary folder.",'default'),__("Failed to write file to disk.",'default'),__("File upload stopped by extension.",'default'));self::sendErrorJson(array('whatToImport'=>$whatToImport,'msg'=>$messages[$_FILES['import-file']['error']]));}}$u=parse_url(get_option('siteurl'));$siteUrl=$u['host'];$siteUrl.=empty($u['path'])?'':str_replace(array('/','\\'),'-',$u['path']);$bck=aitPaths()->dir->uploads.'/backups/'.sprintf(".ht-backup-%s-%s-%s.ait-backup",$siteUrl,'all',date('Y-m-d-H.i.s'));try{AitBackup::exportToFile('all',$bck);}catch(Exception$e){}try{do_action('ait-before-import',$whatToImport);$sendResults=AitBackup::import($whatToImport,$content,$importAttachments);$sendResults['whatToImport']=$whatToImport;if(isset($sendResults['corrupted'])){self::sendErrorJson(array('whatToImport'=>$whatToImport,'msg'=>$sendResults['corrupted']));}else{AitCache::clean();do_action('ait-after-import',$whatToImport,$sendResults);flush_rewrite_rules();self::sendJson($sendResults);}}catch(Exception$e){self::sendErrorJson(array('whatToImport'=>$whatToImport,'msg'=>$e->getMessage()));}}/**
 	 * Generates ZIP file with exported options and content and downloads file
 	 * It depends on jQuery File Download Plugin
 	 * @WpAjax
@@ -363,12 +363,12 @@ renderAdvancedControls(AitOptionsControlsGroup$group,$advanced){if(empty($advanc
 
 return
 ob_get_clean();}function
-renderSectionBegin(AitOptionsControlsSection$section,$basic=true){ob_start();$b=$basic?"-basic":'-advanced';$sId=$section->getId()?" id='{$section->getId()}{$b}'":'';$class=$section->getId()?" section-{$section->getId()}":'';$class.=$section->getTitle()?' ait-sec-title':'';$hidden=$section->isHidden()?' style="display:none;" ':'';?>
+renderSectionBegin(AitOptionsControlsSection$section,$basic=true){ob_start();$b=$basic?"-basic":'-advanced';$sId=$section->getId()?" id='{$section->getId()}{$b}'":'';$class=$section->getId()?" section-{$section->getId()}":'';$class.=$section->getTitle()?' ait-sec-title':'';$hidden=$section->isHidden()?' style="display:none;" ':'';$_translate='_e';?>
 		<div class="ait-options-section <?php echo$class?>" <?php echo$sId,$hidden?>>
 		<?php if($section->getTitle()){?>
-			<h2 class="ait-options-section-title"><?php _e($section->getTitle(),'ait-admin')?></h2>
+			<h2 class="ait-options-section-title"><?php $_translate($section->getTitle(),'ait-admin')?></h2>
 		<?php }if($section->getHelp()){?>
-			<div class="ait-options-section-help"><?php _e($section->getHelp(),'ait-admin')?></div>
+			<div class="ait-options-section-help"><?php $_translate($section->getHelp(),'ait-admin')?></div>
 		<?php }return
 ob_get_clean();}function
 renderSectionEnd($section,$basic=true){return"\n</div>\n";}function
@@ -385,7 +385,7 @@ function
 getBAHtmlId(AitOptionsControlsGroup$optionsControlsGroup,$type){return
 sanitize_key("ait-options-{$type}-{$optionsControlsGroup->getId()}").(!is_null($optionsControlsGroup->getIndex())?"-__{$optionsControlsGroup->getIndex()}__":'');}function
 renderUtilsBar(AitOptionsControlsGroup$optionsControlsGroup,$tabs=''){$import='';$reset='';$tpl='<li><a href="#" class="%s" %s>%s%s</a></li>';if(!$this->isRenderingDefaultLayout
-and$this->configType=='elements'):$import=sprintf($tpl,'ait-import-global-options',aitDataAttr('import-global-options',array('confirm'=>__('Are you sure you want to import options from Global Options to this element?','ait-admin'),'configType'=>$this->configType,'nonce'=>AitUtils::nonce("import-{$this->configType}-{$optionsControlsGroup->getId()}-options"),'what'=>'group','group'=>$optionsControlsGroup->getId(),'oid'=>$this->oid)),'<span class="action-indicator action-import-global-options"></span>',__('Import'));endif;if(($optionsControlsGroup->getReset()and
+and$this->configType=='elements'):$import=sprintf($tpl,'ait-import-global-options',aitDataAttr('import-global-options',array('confirm'=>__('Are you sure you want to import options from Global Options to this element?','ait-admin'),'configType'=>$this->configType,'nonce'=>AitUtils::nonce("import-{$this->configType}-{$optionsControlsGroup->getId()}-options"),'what'=>'group','group'=>$optionsControlsGroup->getId(),'oid'=>$this->oid)),'<span class="action-indicator action-import-global-options"></span>',__('Import','default'));endif;if(($optionsControlsGroup->getReset()and
 AitConfig::isMainConfigType($this->configType))or$this->configType=='elements'):$confirm=$this->configType=='elements'?__('Are you sure you want to reset options from this element to default values?','ait-admin'):__('Are you sure you want to reset options from this group to default values?','ait-admin');$reset=sprintf($tpl,"ait-reset-group-options",aitDataAttr('reset-options',array('confirm'=>$confirm,'configType'=>$this->configType,'nonce'=>AitUtils::nonce("reset-{$this->configType}-{$optionsControlsGroup->getId()}-options"),'what'=>'group','group'=>$optionsControlsGroup->getId(),'oid'=>$this->oid)),'<span class="action-indicator action-reset-group"></span>',__('Reset','ait-admin'));endif;$r='';if($tabs
 or$import
 or$reset):ob_start();?>
@@ -461,7 +461,7 @@ aitDataAttr('columns-element-column-index',$element->option('@columns-element-co
 
 if($element->hasOption('@element-user-description')&&$element->option('@element-user-description')!=''){$elementUserDescription=$element->option('@element-user-description');$elementUserDescriptionCssClass=' element-has-user-description';}else{$elementUserDescription='';$elementUserDescriptionCssClass='';}?>
 				<div class="ait-element-title">
-                    <h4><?php esc_html_e($element->getTitle(),'ait-admin');?></h4>
+                    <h4><?php $eschtmle='esc_html_e';$eschtmle($element->getTitle(),'ait-admin');?></h4>
 					<span class="ait-element-user-description<?php echo$elementUserDescriptionCssClass;?>" title="<?php _e('Edit element description','ait-admin');?>"><?php echo$elementUserDescription?></span>
 				</div>
 			</div>
@@ -501,7 +501,7 @@ aitDataAttr('columns-element-column-index',$el->option('@columns-element-column-
 						<a class="ait-element-remove" href="#">&#10006;</a>
 					<?php endif;?>
 				</div>
-				<div class="ait-element-title"><h4><?php esc_html_e($el->getTitle(),'ait-admin');?></h4></div>
+				<div class="ait-element-title"><h4><?php $eschtmle='esc_html_e';$eschtmle($el->getTitle(),'ait-admin');?></h4></div>
 			</div>
 
 			<div id="<?php echo$params->htmlId;?>-content" class="ait-element-content" <?php echo
@@ -1040,7 +1040,7 @@ admin_url('post-new.php?post_type=page')?>" title="<?php _e('Add New Page','ait-
 function
 getPostTitle(){global$post;if(isset($post))return$post->post_title;return'';}protected
 function
-getTitle(){$title='';if(aitOptions()->isNormalPageOptions($this->oid)){$title=esc_html($this->getPostTitle());}else{$specialPages=aitOptions()->getSpecialCustomPages();if(isset($specialPages[$this->oid])){$title=esc_html__($specialPages[$this->oid]['label'],'ait-admin');if(isset($specialPages[$this->oid]['sub-label'])and!empty($specialPages[$this->oid]['sub-label']))$title.=" <small>(".esc_html__($specialPages[$this->oid]['sub-label'],'ait-admin').")</small>";}}return$title;}protected
+getTitle(){$title='';if(aitOptions()->isNormalPageOptions($this->oid)){$title=esc_html($this->getPostTitle());}else{$specialPages=aitOptions()->getSpecialCustomPages();$esc_html__='esc_html__';if(isset($specialPages[$this->oid])){$title=$esc_html__($specialPages[$this->oid]['label'],'ait-admin');if(isset($specialPages[$this->oid]['sub-label'])and!empty($specialPages[$this->oid]['sub-label']))$title.=" <small>(".$esc_html__($specialPages[$this->oid]['sub-label'],'ait-admin').")</small>";}}return$title;}protected
 function
 renderTitle(){if(!$this->isIntroPage()){printf(__('<strong>%s</strong> Local Options','ait-admin'),$this->getTitle());}}protected
 function
@@ -1192,7 +1192,7 @@ AitOptionsControlsRenderer::create(array('configType'=>'theme','adminPageSlug'=>
 }protected
 function
 renderTabs(){$tabs='';$t=aitConfig()->getFullConfig('theme');foreach($t
-as$groupKey=>$groupData){$panelId=sanitize_key(sprintf("ait-%s-%s-panel",$this->pageSlug,$groupKey));$title=(!empty($groupData['@title']))?$groupData['@title']:$groupKey;$title=__($title,'ait-admin');$tabs.="<li id='{$panelId}-tab'><a href='#{$panelId}'>$title</a></li>";}echo$tabs;}}class
+as$groupKey=>$groupData){$panelId=sanitize_key(sprintf("ait-%s-%s-panel",$this->pageSlug,$groupKey));$title=(!empty($groupData['@title']))?$groupData['@title']:$groupKey;$_translate='__';$title=$_translate($title,'ait-admin');$tabs.="<li id='{$panelId}-tab'><a href='#{$panelId}'>$title</a></li>";}echo$tabs;}}class
 AitCategoryDropdownWalker
 extends
 Walker_CategoryDropdown{function

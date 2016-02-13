@@ -53,44 +53,19 @@
 									{if $moreDates > 0}<div class="more">+ {$moreDates}</div>{/if}
 								</a>
 
-
-
-
-
-
-								<div class="item-text{if !$itemExcerpt and !$itemLocation} categories-only{/if}">
-
+								<div class="item-text">
 									<div class="item-title"><a href="{$item->permalink}"><h3>{!$post->title}</h3></a></div>
-									{if $itemExcerpt}
-										<div class="item-excerpt txtrows-{$textRows}"><p>{!$post->excerpt(200)|striptags}</p></div>
-									{/if}
-
-									{if $itemLocation or $itemCategories}
+									<div class="item-excerpt"><p>{!$post->excerpt(9)|striptags}</p></div>
 									<div class="item-taxonomy">
-
-										{if $itemCategories}
-											<div class="item-categories">
-												{foreach $post->categories('ait-events-pro') as $cat}
-													<span class="item-category">{!$cat->title}</span>
-												{/foreach}</div>
-										{/if}
-
-										{if $itemLocation}
-										<div class="item-location">
-											{foreach $post->categories('ait-locations') as $loc}
-												<a href="{$loc->url()}" class="location">{!$loc->title}</a>
-											{/foreach}
-										</div>
-										{/if}
-
+										<div class="item-categories">{includePart "portal/parts/event-taxonomy", itemID => $post->id, taxonomy => 'ait-events-pro', onlyParent => true, count => 3}</div>
 									</div>
-									{/if}
 								</div>
 
-
-
-
-
+								<div class="item-location">
+									{foreach $post->categories('ait-locations') as $loc}
+										<a href="{$loc->url()}" class="location">{!$loc->title}</a>
+									{/foreach}
+								</div>
 
 							</div>
 
@@ -102,11 +77,6 @@
 
 			</div>
 		</div>
-
-
-
-
-
 
 
 

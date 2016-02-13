@@ -31,8 +31,8 @@ AitTheme::getOptions();}function
 aitIsPluginActive($plugin){switch($plugin){case'shortcodes':return(defined('AIT_SHORTCODES_ENABLED')and
 AIT_SHORTCODES_ENABLED);case'toolkit':return(defined('AIT_TOOLKIT_ENABLED')and
 AIT_TOOLKIT_ENABLED);case'languages':return(defined('AIT_LANGUAGES_ENABLED')and
-AIT_LANGUAGES_ENABLED);case'revslider':return(defined('AIT_REVSLIDER_ENABLED')and
-AIT_REVSLIDER_ENABLED);case'woocommerce':return
+AIT_LANGUAGES_ENABLED);case'revslider':return
+defined('REVSLIDER_TEXTDOMAIN');case'woocommerce':return
 defined('WOOCOMMERCE_VERSION');case'jetpack':return
 defined('JETPACK__VERSION');default:return
 false;}}function
@@ -75,19 +75,23 @@ aitExtractVideoIdFromVideoUrl($videoUrl){$videoId='';if(preg_match('%(?:youtube(
 array_replace_recursive(){$arrays=func_get_args();$original=array_shift($arrays);foreach($arrays
 as$array){foreach($array
 as$key=>$value){if(is_array($value)and
-isset($original[$key])){$original[$key]=array_replace_recursive($original[$key],$array[$key]);}else{$original[$key]=$value;}}}return$original;}}class
+isset($original[$key])){$original[$key]=array_replace_recursive($original[$key],$array[$key]);}else{$original[$key]=$value;}}}return$original;}}add_action('themecheck_checks_loaded','ait_disable_checks');function
+ait_disable_checks(){global$themechecks;$checks_to_disable=array('IncludeCheck','I18NCheck','AdminMenu','Bad_Checks','MalwareCheck','Theme_Support','CustomCheck','EditorStyleCheck','IframeCheck');foreach($themechecks
+as$keyindex=>$check){if($check
+instanceof
+themecheck){$check_class=get_class($check);if(in_array($check_class,$checks_to_disable)){unset($themechecks[$keyindex]);}}}}class
 AitAdminBar{static
 function
 register(){add_action("wp_ajax_toggleDevMode",array(__CLASS__,"ajaxToggleDevMode"));add_action("wp_ajax_emptyThemeCacheDir",array(__CLASS__,"ajaxEmptyThemeCacheDir"));add_action("wp_ajax_emptyWPThumbCacheDir",array(__CLASS__,"ajaxEmptyWPThumbCacheDir"));add_action('admin_bar_menu',array(__CLASS__,'generateThemeAdminMenu'),31);add_action('admin_bar_menu',array(__CLASS__,'generateDevMenu'),1999);add_action('admin_bar_menu',array(__CLASS__,'addPageBuilderLink'),100);add_action('admin_head',array(__CLASS__,'cssAndJs'));add_action('wp_head',array(__CLASS__,'cssAndJs'));}static
 function
 generateThemeAdminMenu($wp_admin_bar){$adminMenuItems=aitConfig()->getAdminConfig('pages');if(!current_user_can(apply_filters('ait-admin-bar-permission','manage_options')))return;if(!empty($adminMenuItems)){$wp_admin_bar->add_node(array('id'=>'ait-admin-menu','title'=>'<span class="ab-icon"></span><span class="ab-label">'.__('Theme Admin','ait-admin').'</span>','href'=>'#','meta'=>array('class'=>'ait-admin-menu')));$t=aitConfig()->getFullConfig('theme');foreach($adminMenuItems
 as$i=>$item){if($item['slug']!='admin'){$wp_admin_bar->add_node(array('id'=>'ait-'.$item['slug'],'title'=>$item['menu-title'],'href'=>AitUtils::adminPageUrl(array('page'=>$item['slug'])),'parent'=>'ait-admin-menu'));if($item['slug']=='theme-options'){foreach($t
-as$groupKey=>$groupData){$title=(!empty($groupData['@title']))?$groupData['@title']:$groupKey;$id=sanitize_key(sprintf("ait-%s-%s-panel",$item['slug'],$groupKey));$wp_admin_bar->add_node(array('id'=>$id,'title'=>__($title,'ait-admin'),'href'=>AitUtils::adminPageUrl(array('page'=>$item['slug'])).'#'.$id,'parent'=>'ait-'.$item['slug']));}}if(isset($item['sub'])){foreach($item['sub']as$j=>$subItem){$wp_admin_bar->add_node(array('id'=>'ait-'.$subItem['slug'],'title'=>$subItem['menu-title'],'href'=>AitUtils::adminPageUrl(array('page'=>$subItem['slug'])),'parent'=>'ait-admin-menu'));}}}}}}static
+as$groupKey=>$groupData){$title=(!empty($groupData['@title']))?$groupData['@title']:$groupKey;$id=sanitize_key(sprintf("ait-%s-%s-panel",$item['slug'],$groupKey));$_translate='__';$wp_admin_bar->add_node(array('id'=>$id,'title'=>$_translate($title,'ait-admin'),'href'=>AitUtils::adminPageUrl(array('page'=>$item['slug'])).'#'.$id,'parent'=>'ait-'.$item['slug']));}}if(isset($item['sub'])){foreach($item['sub']as$j=>$subItem){$wp_admin_bar->add_node(array('id'=>'ait-'.$subItem['slug'],'title'=>$subItem['menu-title'],'href'=>AitUtils::adminPageUrl(array('page'=>$subItem['slug'])),'parent'=>'ait-admin-menu'));}}}}}}static
 function
 generateDevMenu($wp_admin_bar){if(!defined('AIT_SERVER')){return;}$title=__('Dev mode: ','ait-admin');if(AIT_DEV){$l='on';$s='state-on';}else{$l='off';$s='';}$title.=sprintf("<strong class='ait-dev-mode-state %s'>%s</strong>",$s,$l);$wp_admin_bar->add_node(array('id'=>'ait-dev-mode','title'=>$title,'parent'=>'top-secondary','href'=>'#','meta'=>array('class'=>'ait-dev-mode')));$wp_admin_bar->add_node(array('id'=>'ait-empty-theme-cache','title'=>__('Empty theme cache','ait-admin'),'parent'=>'ait-dev-mode','href'=>'#'));$wp_admin_bar->add_node(array('id'=>'ait-empty-wpthumb-cache','title'=>__('Empty image (WPThumb) cache','ait-admin'),'parent'=>'ait-dev-mode','href'=>'#'));}static
 function
-enhanceDefaultBar($wp_admin_bar){if(is_multisite()){$wp_admin_bar->add_menu(array('parent'=>'network-admin','id'=>'network-admin-p','title'=>__('Plugins'),'href'=>network_admin_url('plugins.php')));$wp_admin_bar->add_menu(array('parent'=>'network-admin','id'=>'network-admin-t','title'=>__('Themes'),'href'=>network_admin_url('themes.php')));$adminMenuItems=aitConfig()->getAdminConfig('pages');foreach((array)$wp_admin_bar->user->blogs
-as$blog){switch_to_blog($blog->userblog_id);$menuId='blog-'.$blog->userblog_id;if(current_user_can('switch_themes')){$wp_admin_bar->add_menu(array('parent'=>$menuId,'id'=>$menuId.'-t','title'=>__('Themes'),'href'=>admin_url('themes.php')));}if(current_user_can('activate_plugins')){$wp_admin_bar->add_menu(array('parent'=>$menuId,'id'=>$menuId.'-p','title'=>__('Plugins'),'href'=>admin_url('plugins.php')));}foreach($adminMenuItems
+enhanceDefaultBar($wp_admin_bar){if(is_multisite()){$wp_admin_bar->add_menu(array('parent'=>'network-admin','id'=>'network-admin-p','title'=>__('Plugins','default'),'href'=>network_admin_url('plugins.php')));$wp_admin_bar->add_menu(array('parent'=>'network-admin','id'=>'network-admin-t','title'=>__('Themes','default'),'href'=>network_admin_url('themes.php')));$adminMenuItems=aitConfig()->getAdminConfig('pages');foreach((array)$wp_admin_bar->user->blogs
+as$blog){switch_to_blog($blog->userblog_id);$menuId='blog-'.$blog->userblog_id;if(current_user_can('switch_themes')){$wp_admin_bar->add_menu(array('parent'=>$menuId,'id'=>$menuId.'-t','title'=>__('Themes','default'),'href'=>admin_url('themes.php')));}if(current_user_can('activate_plugins')){$wp_admin_bar->add_menu(array('parent'=>$menuId,'id'=>$menuId.'-p','title'=>__('Plugins','default'),'href'=>admin_url('plugins.php')));}foreach($adminMenuItems
 as$i=>$item){if($item['slug']!='admin'){$wp_admin_bar->add_node(array('id'=>'ait-'.$item['slug']."-{$menuId}",'title'=>$item['menu-title'],'href'=>AitUtils::adminPageUrl(array('page'=>$item['slug'])),'parent'=>$menuId));}}restore_current_blog();}}}static
 function
 addPageBuilderLink($wp_admin_bar){global$typenow;global$pagenow;global$post;$oid=aitOptions()->getOid();$args=array('page'=>'pages-options','oid'=>$oid,'oidnonce'=>AitUtils::nonce('oidnonce'));if(isset($post)and$pagenow=='post.php'){$args['oid']='_page_'.$post->ID;$b=aitOptions()->getFrontpage();if($b->customFrontpage
@@ -259,9 +263,9 @@ stdClass;$return->file=$statement;$return->options=array();$return->excludeOptio
 convertGroupForFullConfig($groupKey,$groupData,$isElement=false){$return=array();$hasReset=(!isset($groupData['reset'])or(isset($groupData['reset'])and$groupData['reset']!==false));$hasImport=(isset($groupData['import'])and$groupData['import']===true);$hasUsed=(!isset($groupData['used'])or(isset($groupData['used'])and$groupData['used']!==false));$hasDisabled=(isset($groupData['disabled'])and$groupData['disabled']===true);if($isElement
 and
 isset($groupData['package'])and
-isset($groupData['package'][AIT_THEME_PACKAGE])and$groupData['package'][AIT_THEME_PACKAGE]==false){$hasDisabled=true;}$title=isset($groupData['title'])?$groupData['title']:false;if($title){if(is_string($title)){$title=__($title,'ait-admin');}elseif($title
+isset($groupData['package'][AIT_THEME_PACKAGE])and$groupData['package'][AIT_THEME_PACKAGE]==false){$hasDisabled=true;}$title=isset($groupData['title'])?$groupData['title']:false;if($title){if(is_string($title)){$_translate='__';$title=$_translate($title,'ait-admin');}elseif($title
 instanceof
-NNeonEntity){if($title->value=='_x'and!empty($title->attributes)){$text=$title->attributes[0];$context=$title->attributes[1];$title=_x($text,$context,'ait-admin');}}$return['@title']=$title;}$return['@reset']=$hasReset;$return['@import']=$hasImport;$return['@disabled']=$hasDisabled;$return['@configuration']=isset($groupData['configuration'])?$groupData['configuration']:array();if($isElement){$return['@used']=$hasUsed;}return$return;}function
+NNeonEntity){if($title->value=='_x'and!empty($title->attributes)){$text=$title->attributes[0];$context=$title->attributes[1];$_translate='_x';$title=$_translate($text,$context,'ait-admin');}}$return['@title']=$title;}$return['@reset']=$hasReset;$return['@import']=$hasImport;$return['@disabled']=$hasDisabled;$return['@configuration']=isset($groupData['configuration'])?$groupData['configuration']:array();if($isElement){$return['@used']=$hasUsed;}return$return;}function
 isOptionsSection($value){if(is_string($value)and$value==='section'){return
 true;}if($value
 instanceof
@@ -533,7 +537,7 @@ lessFnAssetsUrl($arg){list($type,$delim,$values)=$arg;$values[0]=trim($values[0]
 array($type,$delim,$values);}}class
 AitMetaBox{protected$internalId;protected$id;protected$params;protected$metaKey;protected$controls;protected$metaboxControlKey='';protected$metaboxControlSubKey='';protected$storage=array();function
 __construct($id,$internalId,$params){if(is_numeric($internalId))wp_die('ID of metabox is not set or is numeric - must be alpha numeric string.');$this->id=$id;$this->internalId=$internalId;$defaultParams=array('id'=>'','title'=>__('Custom Meta Box','ait-admin'),'metaKey'=>'','template'=>'','renderCallback'=>'','saveCallback'=>'','config'=>'','js'=>'','css'=>'','types'=>array('page'),'context'=>'advanced','priority'=>'default','args'=>array());$this->params=(object)array_merge($defaultParams,$params);$this->metaKey=!empty($this->params->metaKey)?$this->params->metaKey:"_{$this->internalId}";if(in_array('user',$params['types'])){add_action('show_user_profile',array($this,'renderControlsContent'));add_action('edit_user_profile',array($this,'renderControlsContent'));add_action('profile_update',array($this,'saveUser'));}else{add_action('add_meta_boxes',array($this,'init'));add_action('save_post',array($this,'save'),10,3);}}function
-init(){foreach($this->params->types
+init(){$config=$this->getRawConfig();if(empty($config)){return;}foreach($this->params->types
 as$type){add_meta_box($this->internalId.'-metabox',$this->params->title,array($this,'render'),$type,$this->params->context,$this->params->priority,$this->params->args);}}function
 render($post,$metabox){if(!empty($this->params->css)and
 file_exists($this->params->css)){?>
@@ -553,9 +557,9 @@ file_get_contents($this->params->js);?>
 file_exists($this->params->template)){$this->renderTemplateContent($post,$metabox);}elseif(!empty($this->params->renderCallback)and
 is_callable($this->params->renderCallback)){call_user_func_array($this->params->renderCallback,array($post,$metabox,$this));}else{$this->renderControlsContent();}$this->nonceField();}function
 renderTemplateContent($post,$metabox){require$this->params->template;$this->params->config='';}function
-renderControlsContent(){try{if(!file_exists($this->params->config)){throw
+renderControlsContent(){try{if(!file_exists($this->params->config)){$f=str_replace(array('.php','.neon'),'.[php|neon]',$this->params->config);throw
 new
-Exception("File {$this->params->config} doesn't exist.");}$enabledLang=($this->id=='user-metabox'?'__return_true':'__return_false');echo'<div data-ait-metabox='.$this->metaKey.'>';add_filter('ait-langs-enabled',$enabledLang);AitOptionsControlsRenderer::create(array('configType'=>($this->id=='user-metabox'?'user-metabox':'metabox'),'adminPageSlug'=>$this->internalId,'fullConfig'=>$this->getFullConfig(),'defaults'=>$this->getConfigDefaults(),'options'=>$this->getOptions()))->render();remove_filter('ait-langs-enabled',$enabledLang);echo"</div>";}catch(Exception$e){echo"<strong style='color:red;'>[error]</strong> {$e->getMessage()}";}}function
+Exception("File {$f} doesn't exist.");}$enabledLang=($this->id=='user-metabox'?'__return_true':'__return_false');echo'<div data-ait-metabox='.$this->metaKey.'>';add_filter('ait-langs-enabled',$enabledLang);AitOptionsControlsRenderer::create(array('configType'=>($this->id=='user-metabox'?'user-metabox':'metabox'),'adminPageSlug'=>$this->internalId,'fullConfig'=>$this->getFullConfig(),'defaults'=>$this->getConfigDefaults(),'options'=>$this->getOptions()))->render();remove_filter('ait-langs-enabled',$enabledLang);echo"</div>";}catch(Exception$e){echo"<strong style='color:red;'>[error]</strong> {$e->getMessage()}";}}function
 getId(){return$this->id;}function
 getInternalId(){return$this->internalId;}function
 getPostMetaKey(){return$this->metaKey;}function
@@ -1120,7 +1124,8 @@ AitLangs::getCurrentLocaleText($branding["loginScreenLogoTooltip"],$input);}retu
 AitWpLatte{protected
 static$storage;static
 function
-init(){$minified=__DIR__.'/libs/wplatte/wplatte.min.php';if(file_exists($minified)){require$minified;}add_filter('wp_title',array(__CLASS__,'wpTitle'),10,2);add_filter('body_class',array(__CLASS__,'bodyHtmlClass'),10,2);add_action('wplatte-macros','AitWpLatteMacros::install',10,2);add_filter('wplatte-cache-constants',array(__CLASS__,'cacheConstants'));add_filter('wplatte-layout-params',array(__CLASS__,'layoutParams'));add_filter('wplatte-lang-domain',array(__CLASS__,'langDomain'));add_filter('wplatte-cpt-prefixes',array(__CLASS__,'addCptPrefixes'));add_filter('wplatte-post-meta',array(__CLASS__,'postMeta'),10,6);add_filter('wplatte-menu-args',array(__CLASS__,'menuArgs'),10,2);add_filter('wplatte-cpts',array(__CLASS__,'addAitCpts'));add_filter('wplatte-taxs',array(__CLASS__,'addAitTaxs'));add_filter('wplatte-custom-wpquery-args',array(__CLASS__,'addLangToCustomWpQuery'),10,2);WpLatte::init(array('config'=>array('cacheDir'=>aitPaths()->dir->cache,'langDomain'=>'ait'),'params'=>array('homeUrl'=>home_url('/'))));WpLatteWpEntity::extensionMethod('WpLatteWpEntity::hasSidebar',array(__CLASS__,'hasSidebar'));WpLatteWpEntity::extensionMethod('WpLatteWpEntity::sidebar',array(__CLASS__,'getSidebar'));WpLatteWpEntity::extensionMethod('WpLatteWpEntity::widgetAreas',array(__CLASS__,'getWidgetAreas'));WpLatteWpEntity::extensionMethod('WpLatteWpEntity::isWoocommerce',array(__CLASS__,'isWoocommerce'));}static
+init(){$minified=__DIR__.'/libs/wplatte/wplatte.min.php';if(!class_exists('WpLatte')and
+file_exists($minified)){require$minified;}add_filter('wp_title',array(__CLASS__,'wpTitle'),10,2);add_filter('body_class',array(__CLASS__,'bodyHtmlClass'),10,2);add_action('wplatte-macros','AitWpLatteMacros::install',10,2);add_filter('wplatte-cache-constants',array(__CLASS__,'cacheConstants'));add_filter('wplatte-layout-params',array(__CLASS__,'layoutParams'));add_filter('wplatte-lang-domain',array(__CLASS__,'langDomain'));add_filter('wplatte-cpt-prefixes',array(__CLASS__,'addCptPrefixes'));add_filter('wplatte-post-meta',array(__CLASS__,'postMeta'),10,6);add_filter('wplatte-menu-args',array(__CLASS__,'menuArgs'),10,2);add_filter('wplatte-cpts',array(__CLASS__,'addAitCpts'));add_filter('wplatte-taxs',array(__CLASS__,'addAitTaxs'));add_filter('wplatte-custom-wpquery-args',array(__CLASS__,'addLangToCustomWpQuery'),10,2);WpLatte::init(array('config'=>array('cacheDir'=>aitPaths()->dir->cache,'langDomain'=>'ait'),'params'=>array('homeUrl'=>home_url('/'))));WpLatteWpEntity::extensionMethod('WpLatteWpEntity::hasSidebar',array(__CLASS__,'hasSidebar'));WpLatteWpEntity::extensionMethod('WpLatteWpEntity::sidebar',array(__CLASS__,'getSidebar'));WpLatteWpEntity::extensionMethod('WpLatteWpEntity::widgetAreas',array(__CLASS__,'getWidgetAreas'));WpLatteWpEntity::extensionMethod('WpLatteWpEntity::isWoocommerce',array(__CLASS__,'isWoocommerce'));}static
 function
 cacheConstants($constants){$constants[]='AIT_THEME_VERSION';return$constants;}static
 function
@@ -1198,7 +1203,7 @@ function
 menuArgs($location,$args){$args['show_home']=true;$args['container_class']='nav-menu-container';if($args['theme_location'])$args['container_class'].=' nav-menu-'.$args['theme_location'];$args['menu_class']='nav-menu clear';$args['fallback_cb']=array(__CLASS__,'menuFallback');return$args;}static
 function
 menuFallback($args){$defaults=array('sort_column'=>'menu_order, post_title','menu_class'=>'menu');$args=wp_parse_args($args,$defaults);$menu='';unset($args['walker']);$list_args=$args;if(!empty($args['show_home'])){if($args['show_home']===true
-or$args['show_home']==='1'or$args['show_home']===1)$text=__('Home');else$text=$args['show_home'];$class='';if(is_front_page()&&!is_paged())$class='class="current_page_item"';$menu.=sprintf('<li %s><a href="%s" title="%s">%s</a></li>',$class,home_url('/'),esc_attr($text),$text);if(get_option('show_on_front')=='page'){if(!empty($list_args['exclude'])){$list_args['exclude'].=',';}else{$list_args['exclude']='';}$list_args['exclude'].=get_option('page_on_front');}}$list_args['echo']=false;$list_args['title_li']='';$menu.=str_replace(array("\r","\n","\t"),'',wp_list_pages($list_args));if($menu)$menu='<ul class="'.esc_attr($args['menu_class']).'">'.$menu.'</ul>';$containerClass=esc_attr($args['container_class']);$menu='<div class="'.$containerClass.'">'.$menu."</div>\n";$menu=apply_filters('wp_page_menu',$menu,$args);echo$menu;}static
+or$args['show_home']==='1'or$args['show_home']===1)$text=__('Home','default');else$text=$args['show_home'];$class='';if(is_front_page()&&!is_paged())$class='class="current_page_item"';$menu.=sprintf('<li %s><a href="%s" title="%s">%s</a></li>',$class,home_url('/'),esc_attr($text),$text);if(get_option('show_on_front')=='page'){if(!empty($list_args['exclude'])){$list_args['exclude'].=',';}else{$list_args['exclude']='';}$list_args['exclude'].=get_option('page_on_front');}}$list_args['echo']=false;$list_args['title_li']='';$menu.=str_replace(array("\r","\n","\t"),'',wp_list_pages($list_args));if($menu)$menu='<ul class="'.esc_attr($args['menu_class']).'">'.$menu.'</ul>';$containerClass=esc_attr($args['container_class']);$menu='<div class="'.$containerClass.'">'.$menu."</div>\n";$menu=apply_filters('wp_page_menu',$menu,$args);echo$menu;}static
 function
 addAitCpts($cpts){return
 get_post_types(array('ait-cpt'=>true));}static
@@ -1339,9 +1344,9 @@ label($subKey=''){$labelText=$this->getLabelText();if($labelText){if(isset($this
 				<?php
 }}}protected
 function
-getLabelText(){$labelText='';if(isset($this->config->label)and!empty($this->config->label)){$l=$this->config->label;$labelText='';if(is_string($l)){$labelText=esc_html__($l,$this->textDomain);}elseif($l
+getLabelText(){$labelText='';if(isset($this->config->label)and!empty($this->config->label)){$l=$this->config->label;$labelText='';$esc_html__='esc_html__';$esc_html_x='esc_html_x';if(is_string($l)){$labelText=$esc_html__($l,$this->textDomain);}elseif($l
 instanceof
-NNeonEntity){if($l->value=='_x'and!empty($l->attributes)){$text=$l->attributes[0];$context=$l->attributes[1];$labelText=esc_html_x($text,$context,$this->textDomain);}}}return$labelText;}function
+NNeonEntity){if($l->value=='_x'and!empty($l->attributes)){$text=$l->attributes[0];$context=$l->attributes[1];$labelText=$esc_html_x($text,$context,$this->textDomain);}}}return$labelText;}function
 labelWrapper($subKey=''){?>
 		<div class="ait-label-wrapper">
 			<?php $this->lessVarHelp()?>
@@ -1363,7 +1368,7 @@ as$var){echo"<code>@$var</code><br>";}?>
 function
 help(){$configName=$this->parentSection->getParentGroup()->getConfigName();$groupId=$this->parentSection->getParentGroup()->getId();if(!self::$helpTexts){$helpTextsFile=aitPath('config','/help-texts.php');if($helpTextsFile)self::$helpTexts=require$helpTextsFile;}if(isset($this->config->help)and!empty($this->config->help)):?>
 			<div class="ait-help">
-			<?php _e($this->config->help,$this->textDomain);?>
+			<?php $_translate='_e';$_translate($this->config->help,$this->textDomain);?>
 			</div>
 			<?php
 
@@ -1868,7 +1873,7 @@ as$input=>$label){$value=isset($values[$input])?$values[$input]:false;?>
 
 					<label for="<?php echo$this->getIdAttr($input)?>">
 						<input type="checkbox" id="<?php echo$this->getIdAttr($input)?>" name="<?php echo$this->getNameAttr($input);?>" <?php checked($value,$input);?>  value="<?php echo$input?>">
-						 <?php _e($label,'ait-admin')?>
+						 <?php $_translate='_e';$_translate($label,'ait-admin')?>
 					</label>
 
 				<?php }?>
@@ -2414,7 +2419,7 @@ as$type=>$params):?>
 							<label for="<?php echo$this->getLocalisedIdAttr($type,$lang->locale)?>">
 								<input type="radio" id="<?php echo$this->getLocalisedIdAttr($type,$lang->locale);?>" name="<?php echo$this->getLocalisedNameAttr('',$lang->locale);?>" <?php checked($fontType,$type);?>  value="<?php echo
 esc_attr($type)?>">
-								<?php _e($params['label'],'ait-admin')?>
+								<?php $_translate='_e';$_translate($params['label'],'ait-admin')?>
 								&nbsp;
 								<small>(<?php echo
 esc_html($params['font-family'])?>)</small>
@@ -2442,9 +2447,9 @@ extends
 AitOptionControl{protected
 function
 init(){$this->isCloneable=true;}function
-getHtml(){ob_start();?>
+getHtml(){$generateUUID=false;if(isset($this->config->uuid)){$generateUUID=$this->config->uuid;}ob_start();?>
         <input type="hidden" name="<?php echo$this->getNameAttr()?>" value="<?php echo
-esc_attr($this->getValue());?>">
+esc_attr($this->getValue());?>" data-uuid="<?php echo$generateUUID;?>">
 		<?php
 
 return
@@ -2480,8 +2485,8 @@ $checked=checked($val,$input,false);$image=array('path'=>aitPath('img','/admin/'
 esc_attr($input)?>">
 					<?php
 
-if($image['path']){echo'<img src="'.$image['url'].'" alt="'.__($label,'ait-admin').'">';}?>
-					<span class="input-title"><?php _e($label,'ait-admin')?></span>
+if($image['path']){$_translate='__';echo'<img src="'.$image['url'].'" alt="'.$_translate($label,'ait-admin').'">';}?>
+					<span class="input-title"><?php $_translate='_e';$_translate($label,'ait-admin')?></span>
 				</label>
 
 			<?php endforeach;?>
@@ -2528,8 +2533,8 @@ $checked=checked($val,$input,false);$image=array('path'=>aitPath('img','/admin/'
 esc_attr($input)?>">
 					<?php
 
-if($image['path']){echo'<img src="'.$image['url'].'" alt="'.esc_attr(__($label,'ait-admin')).'">';}?>
-					<span class="input-title"><?php _e($label,'ait-admin')?></span>
+if($image['path']){$_translate='__';echo'<img src="'.$image['url'].'" alt="'.esc_attr($_translate($label,'ait-admin')).'">';}?>
+					<span class="input-title"><?php $_translate='_e';$_translate($label,'ait-admin')?></span>
 				</label>
 
 			<?php endforeach;?>
@@ -2956,7 +2961,7 @@ control(){$d=(object)$this->config->default;$related='';if(isset($this->config->
 htmlspecialchars(($val))?>">
 									<div id="info-window-data" style="display: none;">
 										<h3></h3>
-										<input id="info-window-remove" type="button" value="<?php _e('Remove')?>">
+										<input id="info-window-remove" type="button" value="<?php _e('Remove','ait-admin')?>">
 									</div>
 								</div>
 							</div>
@@ -3102,7 +3107,7 @@ foreach((array)$this->config->default
 as$input=>$label):if(is_numeric($input)and
 is_numeric($label)){$input=$label;}if(is_array($val)){if($this->isMulti()){$value=in_array($input,$val)?$input:false;}else{$value='';}}else{$value=$val;}?>
 						<option value="<?php echo
-esc_attr($input)?>" <?php selected($value,$input)?>><?php esc_html_e($label,'ait-admin')?></option>
+esc_attr($input)?>" <?php selected($value,$input)?>><?php $eschtmle='esc_html_e';$eschtmle($label,'ait-admin')?></option>
 						<?php
 
 endforeach;?>
@@ -3147,7 +3152,7 @@ foreach((array)$this->config->default
 as$input=>$label):if(is_numeric($input)and
 is_numeric($label)){$input=$label;}if(is_array($val)){if($this->isMulti()){$value=in_array($input,$val)?$input:false;}else{$value='';}}else{$value=$val;}?>
 						<option value="<?php echo
-esc_attr($input)?>" <?php selected($value,$input)?>><?php esc_html_e($label,'ait-admin')?></option>
+esc_attr($input)?>" <?php selected($value,$input)?>><?php $eschtmle='esc_html_e';$eschtmle($label,'ait-admin')?></option>
 					<?php
 
 endforeach;?>
@@ -3166,7 +3171,7 @@ AitOptionControl{protected
 function
 init(){$this->isCloneable=true;}protected
 function
-control(){$val=$this->getValue();if(isset($this->config->cpt)and$this->config->cpt){$cptName=AitUtils::addPrefix($this->config->cpt,'post');}else{$cptName='post';}if(post_type_exists($cptName)){$cpt=get_post_type_object($cptName);$args=array('post_type'=>$cptName,'selected'=>$val,'show_option_none'=>__('&mdash; Select &mdash;'),'option_none_value'=>'0','posts_per_page'=>-1,'post_status'=>array('publish','draft'));if(!$cpt->hierarchical){$args['hierarchical']=false;}if(isset($this->config->showCurrentUserPosts)){if($this->config->showCurrentUserPosts=true){global$current_user;if($current_user->ID!=1){$excluded=array();$posts=new
+control(){$val=$this->getValue();if(isset($this->config->cpt)and$this->config->cpt){$cptName=AitUtils::addPrefix($this->config->cpt,'post');}else{$cptName='post';}if(post_type_exists($cptName)){$cpt=get_post_type_object($cptName);$args=array('post_type'=>$cptName,'selected'=>$val,'show_option_none'=>__('&mdash; Select &mdash;','default'),'option_none_value'=>'0','posts_per_page'=>-1,'post_status'=>array('publish','draft'));if(!$cpt->hierarchical){$args['hierarchical']=false;}if(isset($this->config->showCurrentUserPosts)){if($this->config->showCurrentUserPosts=true){global$current_user;if($current_user->ID!=1){$excluded=array();$posts=new
 WP_Query(array('post_type'=>$cptName,'posts_per_page'=>-1,'author__not_in'=>array($current_user->ID)));foreach($posts->posts
 as$post){array_push($excluded,$post->ID);}$args['exclude']=join(',',$excluded);}}}$argsFromConfig=(isset($this->config->args)and!empty($this->config->args))?$this->config->args:array();$args=array_merge($args,$argsFromConfig,array('echo'=>false,'name'=>$this->getNameAttr(),'id'=>$this->getIdAttr(),'class'=>$this->id.' chosen'));$dropdown='';$emptySelect=create_function('$output',sprintf("return empty(\$output) ? \"<select data-placeholder='%s' name='%s' id='%s' class='%s'></select>\" : \$output;",esc_attr(sprintf(__('No items. Add some items to "%s"','ait-admin'),$cpt->labels->menu_name)),$args['name'],$args['id'],$args['class']));add_filter('wp_dropdown_pages',$emptySelect);add_filter('ait-dropdown-posts',$emptySelect);if($cpt->hierarchical){$dropdown=wp_dropdown_pages($args);$dropdown=str_replace('<select',"<select class='{$args['class']}'",$dropdown);}else{$dropdown=aitDropdownPosts($args);}remove_filter('wp_dropdown_pages',$emptySelect);remove_filter('ait-dropdown-posts',$emptySelect);if($this->config->label=='@native')$this->config->label=$cpt->labels->singular_name;?>
 
@@ -3212,7 +3217,7 @@ as$input=>$label):?>
 					<label for="<?php echo$this->getIdAttr($input)?>">
 						<input type="radio" id="<?php echo$this->getIdAttr($input);?>" name="<?php echo$this->getNameAttr();?>" <?php checked($defaultChecked,$input);?>  value="<?php echo
 esc_attr($input)?>">
-						<?php _e($label,'ait-admin')?>
+						<?php $_translate='_e';$_translate($label,'ait-admin')?>
 					</label>
 
 				<?php endforeach;?>
@@ -3225,7 +3230,7 @@ as$input=>$label):?>
 				<label for="<?php echo$this->getIdAttr($input)?>">
 					<input type="radio" id="<?php echo$this->getIdAttr($input);?>" name="<?php echo$this->getNameAttr();?>" <?php checked($val,$input);?>  value="<?php echo
 esc_attr($input)?>">
-					<?php _e($label,'ait-admin')?>
+					<?php $_translate='_e';$_translate($label,'ait-admin')?>
 				</label>
 
 			<?php endforeach;?>
@@ -3305,7 +3310,7 @@ foreach($options
 as$input=>$label):if(is_numeric($input)and
 is_numeric($label)){$input=$label;}if(is_array($val)){if($this->isMulti()){$value=in_array($input,$val)?$input:false;}else{$value='';}}else{$value=$val;}?>
 						<option value="<?php echo
-esc_attr($input)?>" <?php selected($value,$input)?>><?php esc_html_e($label,'ait-admin')?></option>
+esc_attr($input)?>" <?php selected($value,$input)?>><?php $eschtmle='esc_html_e';$eschtmle($label,'ait-admin')?></option>
 						<?php
 
 endforeach;?>
@@ -3578,7 +3583,7 @@ implode(' ',$classes);?>">
 esc_html($title);?></span> <?php if(!$isColumn):?><span class="is-submenu" <?php echo$submenu_text;?>><?php _e('sub item','ait-admin');?></span><?php endif;?></span>
 					<span class="item-controls">
 						<span class="item-type"><?php echo$isColumn?__('Column','ait-admin'):esc_html($item->type_label);?></span>
-						<a class="item-edit" id="edit-<?php echo$item_id;?>" title="<?php esc_attr_e('Edit Menu Item');?>" href="<?php
+						<a class="item-edit" id="edit-<?php echo$item_id;?>" title="<?php esc_attr_e('Edit Menu Item','default');?>" href="<?php
 
 echo(isset($_GET['edit-menu-item'])&&$item_id==$_GET['edit-menu-item'])?esc_url(admin_url('nav-menus.php')):esc_url(add_query_arg('edit-menu-item',$item_id,remove_query_arg($removed_args,admin_url('nav-menus.php#menu-item-settings-'.$item_id))));?>"><?php _e('Edit Menu Item','ait-admin');?></a>
 					</span>

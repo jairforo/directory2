@@ -37,7 +37,7 @@ class AitLoginWidget extends WP_Widget
 
 			// display info
 			$result .= '<div class="userlogin-container user-logged-in">';
-				$result .= $instance['description_logout'] != '' ? '<p>'.$instance['description_logout'].'</p>' : '';
+				$result .= !empty($instance['description_logout']) ? '<p>'.$instance['description_logout'].'</p>' : '';
 				$result .= '<div class="profile">';
 					$result .= '<div class="profile-avatar">'.get_avatar($currentUser->ID).'</div>';
 					$result .= '<div class="profile-name"><span>'.__('Username', 'ait').':</span><span>'.$currentUser->user_nicename.'</span></div>';

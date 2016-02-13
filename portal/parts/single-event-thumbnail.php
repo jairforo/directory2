@@ -22,7 +22,7 @@
 			--><li>
 					<a href="{imageUrl $item['image'], width => 1000, crop => 1}" target="_blank" rel="item-gallery">
 						<span class="easy-thumbnail">
-							<img src="{imageUrl $item['image'], width => 768, crop => 1}" alt="{$title}" />
+							<img src="{imageUrl $item['image'], width => 590, height => 600, crop => 1}" alt="{$title}" />
 						</span>
 					</a>
 				</li><!--

@@ -651,6 +651,7 @@ ait.admin.options = ait.admin.options || {};
 			ui.background($currentContext);
 			ui.map($currentContext);
 			ui.multimarkerMap($currentContext);
+			ui.hidden($currentContext);
 		},
 
 
@@ -740,6 +741,28 @@ ait.admin.options = ait.admin.options || {};
 							$el.removeClass('ait-element-off');
 						}
 					});
+				}
+			});
+		},
+
+
+
+		hidden: function($currentContext)
+		{
+			function getUniqueId() {
+				function s4() {
+					return Math.floor((1 + Math.random()) * 0x10000)
+						.toString(16)
+						.substring(1);
+				}
+				return s4() + s4();
+			}
+			$currentContext.find("input[type=hidden][data-uuid=1]").each(function(i)
+			{
+				var $this = jQuery(this);
+				if ($this.val() === "") {
+					var uuid = getUniqueId();
+					$this.val(uuid);
 				}
 			});
 		},
@@ -1451,8 +1474,11 @@ ait.admin.options = ait.admin.options || {};
 
 		removeSpacesFromPageSelect: function($container)
 		{
-			var currentPageSelectHtml = $container.find(".chosen-single");
-			currentPageSelectHtml.html(currentPageSelectHtml.html().replace(/&nbsp;/g, ''));
+			var $currentPageSelect = $container.find(".chosen-single");
+			var html = $currentPageSelect.html();
+			if(html){
+				$currentPageSelect.html(html.replace(/&nbsp;/g, ''));
+			}
 		},
 
 

@@ -19,9 +19,15 @@
 	{var $titleDesc = $el->option(description)}
 	{var $pageShare = $el->option(pageShare)}
 	{var $showPager = ''}
+	{var $titleExcerpt = ''}
+	{var $categoryColor = ''}
 
 	{var $subtitle = ""}
 	{var $subtext = ""}
+
+	{if defined('AIT_EVENTS_PRO_ENABLED')}
+		{var $eventOptions = get_option('ait_events_pro_options', array())}
+	{/if}
 
 
 {* ********************************************************* *}
@@ -173,6 +179,10 @@
 							{var $subtitle = AitLangs::getCurrentLocaleText($itemMeta->subtitle)}
 						  {/if}
 
+	{* TITLE EXCERPT ****** *}	{if $wp->isSingular(event-pro)}
+									{var $titleExcerpt = $post->excerpt(16)|striptags}
+							  	{/if}
+
 {/loop}
 
 {* ********************************************************* *}
@@ -201,7 +211,7 @@
 																	{!__ 'Category Archives: %s'|printf: $categoryTitle}
 																{/capture}
 
-	{* TITLE ********** *} {elseif $wp->isTax(items) or $wp->isTax(locations) or $wp->isTax(events-pro)}
+	{* TITLE ********** *} {elseif $wp->isTax(items) or $wp->isTax(locations) or $wp->isTax(ait-events-pro)}
 								{var $category = get_queried_object()}
 								{capture $titleName}
 									{capture $categoryTitle}<span class="title-data">{!$category->name}</span>{/capture}
@@ -244,6 +254,7 @@
 						   {/if}
 
 	{* CATEGORY ICON ** *} {if isset($category) && isset($category->taxonomy) && isset($category->term_id)}
+
 								{var $icons = get_option($category->taxonomy . "_category_" . $category->term_id)}
 								{if isset($icons['icon']) && $icons['icon'] != ""}
 									{capture $categoryIcon}
@@ -262,20 +273,42 @@
 										{else}
 											{capture $categoryIcon}
 												{if $category->taxonomy == "ait-items"}
-												{$options->theme->items->categoryDefaultIcon}
+													{$options->theme->items->categoryDefaultIcon}
+												{elseif $category->taxonomy == "ait-events-pro"}
+													{$eventOptions['categoryDefaultIcon']}
 												{else}
-												{$options->theme->items->locationDefaultIcon}
+													{$options->theme->items->locationDefaultIcon}
 												{/if}
 											{/capture}
 										{/if}
 									{else}
 										{capture $categoryIcon}
 											{if $category->taxonomy == "ait-items"}
-											{$options->theme->items->categoryDefaultIcon}
+												{$options->theme->items->categoryDefaultIcon}
+											{elseif $category->taxonomy == "ait-events-pro"}
+												{$eventOptions['categoryDefaultIcon']}
 											{else}
-											{$options->theme->items->locationDefaultIcon}
+												{$options->theme->items->locationDefaultIcon}
 											{/if}
 										{/capture}
+									{/if}
+								{/if}
+							{/if}
+
+	{* CATEGORY COLOR ** *} {if $wp->isTax(ait-events-pro)}
+
+								{var $icons = get_option($category->taxonomy . "_category_" . $category->term_id)}
+								{if isset($icons['icon_color']) && $icons['icon_color'] != ""}
+									{var $categoryColor = $icons['icon_color']}
+								{else}
+									{if $category->parent != 0}
+										{? global $wp_query}
+										{var $taxonomy = $wp_query->tax_query->queries[0]['taxonomy']}
+										{var $category = get_term($category->parent, $taxonomy)}
+										{var $icons = get_option($category->taxonomy . "_category_" . $category->term_id)}
+										{if isset($icons['icon_color']) && $icons['icon_color'] != ""}
+											{var $categoryColor = $icons['icon_color']}
+										{/if}
 									{/if}
 								{/if}
 							{/if}
@@ -290,7 +323,7 @@
 {* RESULTS               *}
 {* ********************* *}
 
-{if $subtitle == '' and $titleSubDesc == '' and $titleDesc == ''}{var $subtext = 'disabled'}{/if}
+{if $subtitle == '' and $titleSubDesc == '' and $titleDesc == '' and $titleExcerpt == ''}{var $subtext = 'disabled'}{/if}
 
 <div n:class="'page-title', $pageShare ? 'share-enabled', $subtext == 'disabled' ? 'subtitle-missing' ">
 
@@ -313,9 +346,10 @@
 				<div class="entry-title-wrap">
 
 					{if isset($categoryIcon)}
-						<div class="cat-icon"><img src="{$categoryIcon}" alt="{!titleName}"></div>
+						<div class="cat-icon"><span {if !empty($categoryColor)}style="background: {!$categoryColor};"{/if}><img src="{$categoryIcon}" alt="{!titleName}"></span></div>
+
 					{/if}
-					
+
 					<h1>{!$titleName}</h1>
 					{if $subtitle}<span class="subtitle">{$subtitle}</span>{/if}
 
@@ -343,7 +377,9 @@
 						<div class="page-description">{!$titleDesc}</div>
 					{/if}
 
-
+					{if $titleExcerpt}
+						<div class="page-description">{!$titleExcerpt}</div>
+					{/if}
 
 					{if $editButton}
 						<div class="entry-meta">

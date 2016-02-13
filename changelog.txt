@@ -1,3 +1,20 @@
+v1.32, 09.02.2016
+-----------------
+- Fix: Breadcrumbs style fix
+- Fix: Event in Item Detail Style Fix
+- Added: Style for featured Items
+
+v1.31, 04.02.2016
+-----------------
+- Update: All WooCommerce styles separated
+- Update: WooCommerce default cart layout
+- Added: Compatibility for Events Pro Plugin
+- Updated: Item address javascript fix
+- Fix: Official Revolution Slider, when you purchase it by yourself, not our custom bundled version, is supported by our theme framework (Page Builder)
+- Fix: PHP error - redeclared class in WpLatte (occurred in Event Guide theme)
+- Tweak: Compatibility tweaks for upcoming more performant AIT Toolkit plugin
+
+
 v1.30, 26.01.2016
 -----------------
 - Added: Added captcha validation for registration widget

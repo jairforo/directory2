@@ -442,9 +442,11 @@ typography:
 breadcrumbs:
 	title: Breadcrumbs
 	options:
+		# changed separator type to variable because in the directory2 theme it is not changable
 		separator:
 			label: Separator
-			type: code
+			#type: code
+			type: variable
 			default: ''
 
 		before:
