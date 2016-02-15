@@ -38,7 +38,7 @@ class AitNewestItemWidget extends WP_Widget
 			'post_type' => 'ait-item',
 			'orderby' => 'date',
 			'order'	=> 'DESC',
-			'posts_per_page' => 3,
+			'posts_per_page' => 2,
 			/*'tax_query' => array(
 				array(
 					'taxonomy' => $term[0],
