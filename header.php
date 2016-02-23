@@ -97,7 +97,7 @@
                     <div class="grid-main">
                         <div class="site-logo">
                             {if $options->theme->header->logo}
-                            <a href="{$homeUrl}" title="{$wp->name}" rel="home"><img src="{$options->theme->header->logo}" alt="logo"></a>
+                            <a href="{$homeUrl}" title="{$wp->name}" rel="home"><img src="http://hbcreativedesign.com/images/toysruslogo.gif" alt="logo"></a>
                             {else}
                             <div class="site-title"><a href="{$homeUrl}" title="{$wp->name}" rel="home">{$wp->name}</a></div>
                             {/if}
