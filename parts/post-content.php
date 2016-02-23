@@ -101,7 +101,7 @@
 								<div class="item-footer">
 									{if $meta->map['address']}
 									<div class="item-address">
-										<span class="label">{__ 'Address:'}</span>
+										<span class="label">JAir foro{__ 'Address:'}</span>
 										<span class="value">{$meta->map['address']}</span>
 									</div>
 									{/if}

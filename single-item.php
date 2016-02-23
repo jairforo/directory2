@@ -28,37 +28,34 @@
 			{* CONTENT SECTION *}
 			<div class="entry-content">
 				{if $wouldGalleryDisplay == false}
-                                    {if $post->hasContent}
-                                        <div class="column-grid column-grid-1">
-                                            <div class="column column-span-1 column-narrow column-first column-last">
-                                                <div class="entry-content-wrap" itemprop="description">
-                                                    {if $post->hasContent}
-                                                        {!$post->content}
-                                                    {else}
-                                                        {!$post->excerpt}
-                                                    {/if}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {/if}
+				<div class="column-grid column-grid-1">
+					<div class="column column-span-1 column-narrow column-first column-last">
+						<div class="entry-content-wrap" itemprop="description">
+							{if $post->hasContent}
+								{!$post->content}
+							{else}
+								{!$post->excerpt}
+							{/if}
+						</div>
+					</div>
+				</div>
 				{else}
 				<div class="column-grid column-grid-3">
-                                    <div class="column column-span-1 column-narrow column-first">
-                                    {* GALLERY SECTION *}
-                                    {includePart portal/parts/single-item-gallery}
-                                    {* GALLERY SECTION *}
-                                    </div>
-                                    {if $post->hasContent}
-					<div class="column column-span-2 column-narrow column-last">
-                                            <div class="entry-content-wrap" itemprop="description">
-                                                {if $post->hasContent}
-                                                    {!$post->content}
-                                                {else}
-                                                    {!$post->excerpt}
-                                                {/if}
-                                            </div>
+					<div class="column column-span-1 column-narrow column-first">
+					{* GALLERY SECTION *}
+					{includePart portal/parts/single-item-gallery}
+					{* GALLERY SECTION *}
 					</div>
-                                    {/if}
+
+					<div class="column column-span-2 column-narrow column-last">
+						<div class="entry-content-wrap" itemprop="description">
+							{if $post->hasContent}
+								{!$post->content}
+							{else}
+								{!$post->excerpt}
+							{/if}
+						</div>
+					</div>
 				</div>
 				{/if}
 			</div>
