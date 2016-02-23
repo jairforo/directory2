@@ -96,7 +96,7 @@
             {if $post->content}
                 <div class="item-body">
                     <div class="entry-content">
-                        <p class="txtrows-4">{if $post->hasExcerpt}{!$post->excerpt|striptags|trim|truncate: 400}{else}{!$post->content|striptags|trim|truncate: 400}{/if}</p>
+                        <p class="txtrows-4">{if $post->hasExcerpt}{!$post->excerpt|striptags|trim|truncate: 300}{else}{!$post->content|striptags|trim|truncate: 400}{/if}</p>
                     </div>
                 </div>
             {/if}
