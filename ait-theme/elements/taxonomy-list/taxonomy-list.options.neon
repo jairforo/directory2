@@ -46,6 +46,7 @@ layout:
 		box: Box
 		list: List
 		icon: Icon
+                grid: Grid
 	help: 'Select layout type of displayed items'
 
 - section(id: layout-box, title: 'Box Layout settings')
