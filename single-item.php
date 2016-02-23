@@ -31,6 +31,7 @@
 				<div class="column-grid column-grid-1">
 					<div class="column column-span-1 column-narrow column-first column-last">
 						<div class="entry-content-wrap" itemprop="description">
+                                                     22222222222222222
 							{if $post->hasContent}
 								{!$post->content}
 							{else}
@@ -49,6 +50,7 @@
 
 					<div class="column column-span-2 column-narrow column-last">
 						<div class="entry-content-wrap" itemprop="description">
+                                                    22222222222222222
 							{if $post->hasContent}
 								{!$post->content}
 							{else}

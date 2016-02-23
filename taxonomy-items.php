@@ -237,7 +237,7 @@
 
 											{if $meta->web}
 											<div class="item-web">
-												<span class="label">KKKKKKKK {__ 'Web:'}</span>
+												<span class="label">111111111{__ 'Web:'}</span>
 												<span class="value"><a href="{!$meta->web}" target="_blank">{if $meta->webLinkLabel}{$meta->webLinkLabel}{else}{$meta->web}{/if}</a></span>
 											</div>
 											{/if}
