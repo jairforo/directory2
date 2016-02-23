@@ -38,7 +38,6 @@
 
 <div n:class='item-container, $isFeatured ? item-featured, defined("AIT_REVIEWS_ENABLED") ? reviews-enabled'>
     <div class="content">
-
         <div class="item-image">
             <a class="main-link" href="{$post->permalink}">
                 <span>{__ 'View Detail'}</span>
@@ -49,7 +48,7 @@
                 {/if}
             </a>
             {if defined('AIT_REVIEWS_ENABLED')}
-            {includePart "portal/parts/carousel-reviews-stars", item => $post, showCount => false}
+                {includePart "portal/parts/carousel-reviews-stars", item => $post, showCount => false}
             {/if}
         </div>
         <div class="item-data">
@@ -96,7 +95,7 @@
             {if $post->content}
                 <div class="item-body">
                     <div class="entry-content">
-                        <p class="txtrows-4">{if $post->hasExcerpt}{!$post->excerpt|striptags|trim|truncate: 300}{else}{!$post->content|striptags|trim|truncate: 400}{/if}</p>
+                        <p class="txtrows-4">{if $post->hasExcerpt}{!$post->excerpt|striptags|trim|truncate: 300}{else}{!$post->content|striptags|trim|truncate: 300}{/if}</p>
                     </div>
                 </div>
             {/if}
