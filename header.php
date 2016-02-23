@@ -39,7 +39,9 @@
                 js.id = id;
                 js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.5";
                 fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+        
         {* usefull for inline scripts like facebook social plugins scripts, etc... *}
         {doAction ait-html-body-begin}
 
