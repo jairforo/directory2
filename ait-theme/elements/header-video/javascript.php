@@ -80,7 +80,9 @@ function youtubePlayer(){
 	var player = new YT.Player('{!$htmlId}-youtube-player', {
 		events: {
 			'onReady': function(){
-				player.mute();
+				if(parseInt(jQuery('#{!$htmlId}-youtube-player').attr('data-sound')) == 0){
+					player.mute();
+				}				
 				player.playVideo();
 			}
 		}
@@ -93,6 +95,8 @@ function vimeoPlayer(){
 	/*player.addEvent('ready', function() {
 		player.api('setVolume', 0);
 	});*/
-	player.api('setVolume', 0);
+	if(parseInt(jQuery('#{!$htmlId}-vimeo-player').attr('data-sound')) == 0){
+		player.api('setVolume', 0);
+	}	
 }
 </script>

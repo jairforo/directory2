@@ -10,6 +10,7 @@
 
 // if(!defined('AIT_DISABLE_CACHE')) define('AIT_DISABLE_CACHE', true);
 // if(!defined('AIT_ENABLE_NDEBUGGER')) define('AIT_ENABLE_NDEBUGGER', true);
+define('AIT_THEME_TYPE', 'directory');
 
 
 // === Loads AIT WordPress Framework ================================
@@ -48,6 +49,36 @@ add_action('ait-theme-upgrade', function($upgrader){
 
 			return $errors;
 		});
+	}
+});
+
+add_action('ait-theme-upgrade', function($upgrader){
+	if(version_compare($upgrader->getThemeVersion(), '1.39', '<')){
+
+		$upgradeThemeFn = function(){
+			$errors = array();
+
+			// do the logic here
+			foreach(get_posts(array('post_type' => 'ait-item', 'posts_per_page' => -1, 'status' => 'publish')) as $post){
+				// save separated meta data for featured
+				$featuredPostMeta = get_post_meta( $post->ID, '_ait-item_item-featured', true );
+				if(!empty($featuredPostMeta)){
+					update_post_meta($post->ID, '_ait-item_item-featured', '1');
+				} else {
+					update_post_meta($post->ID, '_ait-item_item-featured', '0');
+				}
+
+				// if item hasn't been rated yet, create rating manually
+				if (get_post_meta( $post->ID, 'rating_mean', true ) == '') {
+					update_post_meta($post->ID, 'rating_mean', '0');
+				}
+			}
+			// do the logic here
+
+			return $errors;
+		};
+
+		$upgrader->addErrors($upgradeThemeFn());
 	}
 });
 /* THEME UPGRADE FUNCTIONS */
@@ -131,7 +162,6 @@ add_action( 'ait-theme-upgrade', 'updatePageBuilderOptions', 10, 0 );
 
 // === Portal settings =============================================
 define('AIT_CUSTOM_FIELDS', false);
-define('AIT_THEME_TYPE', 'directory');
 
 require_once aitPath('theme', '/portal/functions/portal.php');
 require_once aitPath('theme', '/portal/functions/packages.php');
@@ -259,6 +289,16 @@ function aitModifyCommentFormDefaultFields($fields){
 	$fields['email']  = '<p class="comment-form-email"><label for="email">' . __( 'Email' ) . ( $req ? ' <span class="required"><i class="fa fa-star"></i></span>' : '' ) . '</label> ' .
 			'<input id="email" name="email" ' . ( $html5 ? 'type="email"' : 'type="text"' ) . ' value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" aria-describedby="email-notes"' . $aria_req . $html_req  . ' /></p>';
 	return $fields;
+}
+
+add_filter( 'woocommerce_product_review_comment_form_args', 'aitModifyWooCommentFormDefaults', 20 );
+function aitModifyWooCommentFormDefaults($content){
+
+	foreach ($content['fields'] as $key => $value) {
+		$content['fields'][$key] = str_replace('*', '<i class="fa fa-star"></i>', $value);
+	}
+
+	return $content;
 }
 
 add_filter( 'wp_title', 'aitRemoveTagsFromTitle', 11, 3 );

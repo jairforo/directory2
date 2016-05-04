@@ -1,0 +1,102 @@
+{include $element->common('header')}
+
+{* VARIABLES *}
+{var $isAdvancedSearch = ''}
+{var $geoLat = ''}
+{var $geoLon = ''}
+
+{var $address = $el->option('address')}
+
+{var $clustering = $el->option('clusterEnable')}
+{var $geoLocation = $el->option('geoLocationEnable')}
+{var $scrollWheel = $el->option(mousewheelZoom) ? "true" : "false"}
+{var $autoZoomAndFit = $el->option('autoZoomAndFit') ? 'autofit' : ''}
+
+{var $markerQuery = array(
+	'post_type' => 'ait-item',
+	'posts_per_page' => -1,
+)}
+
+{var $enableFiltering = ''}
+{* VARIABLES *}
+
+{if $wp->isSingular(item) or $wp->isTax(items) or $wp->isTax(locations)}
+	{* USE THE SETTINGS DEFINED IN THE ITEM OR TAXONOMY *}
+
+	{if $wp->isSingular(item)}
+		{* ITEM DETAIL *}
+		{var $meta = $post->meta('item-data')}  {* $post is global entity available on singular pages *}
+
+		{var $address = $meta->map}
+
+		{var $markerQuery = array(
+			'post_type' => 'ait-item',
+			'posts_per_page' => -1,
+			'p' => $post->id
+		)}
+
+	{elseif $wp->isTax(items) or $wp->isTax(locations)}
+		{* ITEM CATEGORY && LOCATION *}
+		{var $markerQuery = array(
+			'post_type' => 'ait-item',
+			'posts_per_page' => -1,
+			'tax_query' => array(
+				array(
+					'taxonomy' => $taxonomyTerm->taxonomy,
+					'field' => 'slug',
+					'terms' => $taxonomyTerm->slug
+				)
+			)
+		)}
+	{/if}
+
+{else}
+
+	{var $isAdvancedSearch = isset($_REQUEST['a']) && $_REQUEST['a'] == "true" ? true : false}
+
+	{if $isAdvancedSearch}
+		{* SHOW THE RESULTS FROM ADVANCED SEARCH *}
+		{var $itemTaxQuery = array()}
+		{var $itemCategory = isset($_REQUEST['category']) && $_REQUEST['category'] != "" ? $_REQUEST['category'] : 0}
+		{var $itemLocation = isset($_REQUEST['location']) && $_REQUEST['location'] != "" ? $_REQUEST['location'] : 0}
+
+		{var $geoRadiusUnits = isset($_REQUEST['runits']) && $_REQUEST['runits'] != "" ? $_REQUEST['runits'] : km}	{* mi / km *}
+		{var $geoRadiusValue = isset($_REQUEST['rad']) && $_REQUEST['rad'] != "" ? $_REQUEST['rad'] * 1000 : 100 * 1000}
+		{var $geoRadiusValue = $geoRadiusUnits == 'mi' ? $geoRadiusValue * 1.609344 : $geoRadiusValue}
+
+		{var $geoLat = isset($_REQUEST['lat']) && $_REQUEST['lat'] != "" ? $_REQUEST['lat'] : ""}
+		{var $geoLon = isset($_REQUEST['lon']) && $_REQUEST['lon'] != "" ? $_REQUEST['lon'] : ""}
+
+		{if $itemCategory != 0}
+			{? array_push($itemTaxQuery, array('taxonomy' => 'ait-items', 'field' => 'term_id', 'terms' => $itemCategory))}
+		{/if}
+
+		{if $itemLocation != 0}
+			{? array_push($itemTaxQuery, array('taxonomy' => 'ait-locations', 'field' => 'term_id', 'terms' => $itemLocation))}
+		{/if}
+
+		{var $markerQuery = array(
+			'post_type' => 'ait-item',
+			'posts_per_page' => -1,
+			'tax_query' => $itemTaxQuery
+		)}
+		{if isset($_REQUEST['s']) && $_REQUEST['s'] != ""}
+			{var $markerQuery['s'] = $_REQUEST['s']}
+		{/if}
+
+		{if $geoRadiusValue && $geoLat && $geoLon}
+			{var $enableFiltering = true}
+		{/if}
+
+	{/if}
+{/if}
+
+<div id="{$htmlId}" class="{$htmlClass} deactivated">
+
+	<div id="{$htmlId}-container" class="google-map-container" style="height: {$el->option(height)}px;">
+
+	</div>
+
+	{includePart "ait-theme/elements/header-map/javascript"}
+
+</div>

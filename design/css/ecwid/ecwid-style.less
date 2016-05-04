@@ -1265,7 +1265,7 @@ html#ecwid_html body#ecwid_body.chameleon.page {
 	.widget_ecwid_search {
 
 		input.ecwid-SearchPanel-field			{ width: -webkit-calc(~"100% - 50px"); width: calc(~"100% - 50px"); height: 38px; }
-		button.ecwid-SearchPanel-button			{ .ecwidButton; width: 38px; height: 38px; padding: 0; text-align: center; font-size: 0; }
+		button.ecwid-SearchPanel-button			{ .ecwidButton; width: 38px; height: 38px; padding: 0 !important; text-align: center; font-size: 0; }
 		button.ecwid-SearchPanel-button:after	{ content: "\f002"; font-family: "FontAwesome"; font-weight: normal; font-size: 16px; line-height: 38px; }
 
 	}
@@ -1322,7 +1322,8 @@ html#ecwid_html body#ecwid_body.chameleon.page {
 		.ecwid-productsList ul li a > div							{ position: static; }
 		.ecwid-productsList ul li .ecwid-productsList-image			{ display: block; float: left; padding: 0; width: auto; height: auto; }
 		.ecwid-productsList ul li .ecwid-productsList-image	img		{ width: @ecwid-thumb-width; vertical-align: top; }
-		.ecwid-productsList ul li .ecwid-productsList-image ~ div	{ margin-left: @ecwid-thumb-width + 15px; text-align: left; }
+
+		.ecwid-productsList ul li .ecwid-productsList-image:not(.no-image) ~ div	{ margin-left: @ecwid-thumb-width + 15px; text-align: left; }
 
 		.ecwid-productsList ul li a:hover .ecwid-productsList-name	{ color: @theme-general-hvrColor; }
 

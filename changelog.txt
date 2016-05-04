@@ -1,3 +1,76 @@
+v1.42, 19.04.2016
+-----------------
+- Fix: Items with coordinates [1, 1] were displayed on header map
+- Added: Item Extension plugin style
+- Fix: datepicker time zones caused wrong time in admin inputs
+- Update: Updated POT files
+
+
+v1.41, 12.04.2016
+-----------------
+- Fix: Empty infowindow on geolocation pin
+- Fix: Default category pin didn't load from Theme Options
+- Fix: Map Infowindow phone number position
+- Added: Burger style menu wrapping
+- Updated: New theme implementation for Ait Get Directions plugin
+- Fix: Some compatibility fixes for AIT plugins
+
+
+v1.40, 01.04.2016
+-----------------
+- Fix: RSS widget does not display 'h3' tags anymore
+- Fix: jQuery Waypoint does not throw error anymore
+- Fix: On special pages some elements with categories (e.g. advertisements spaces) didn't work correctly with translations
+- Added: Possibility to enable/disable whether map items will be paginated or not (Theme options > Item Category > Sorting Options)
+- Added: Search Form Inputs On/Off Functionality
+
+v1.39, 22.03.2016
+-----------------
+- Fix: Events without Image not showing
+- Fix: Search pagination linked to 404 page in some cases
+- Tweak: Search optimization
+- Updated: Google Maps library
+
+
+v1.38, 16.03.2016
+-----------------
+- Fix: Quickfix for map input in the admin
+- Update: New version of Slider Revolution - v5.2.2
+
+v1.37, 15.03.2016
+-----------------
+- Fix: Carousel arrows in Job Offers Element
+- Fix: Items List Subtitle no-wrap fix
+- Fix: Map input crashing javascript when no location is found
+- Fix: Date input problem with different timezones
+
+v1.36, 08.03.2016
+-----------------
+- Update: Regenerated POT files
+- Fix: Reset Layout Options functionality works again
+- Tweak: CSS is now generating on "Theme/Page Builder Options" save instead on the frontend
+
+
+v1.35, 01.03.2016
+-----------------
+- Fix: Php notice on events pro archive page
+- Updatad: Escaping characters entered to the search preventing possible xss
+- Added: Dependencies for modernizr js lib
+
+v1.34, 23.02.2016
+-----------------
+- Added: Added "Expired" word to title on single job-offers page when item has expired
+- Updated: Page share conditions for items and locations pages
+- Fixed: Item couldnt be trashed by single user
+- Fixed: Items element item count condition when item reviews plugin is enabled
+- Fix: Deleted non-functional Features Icon Color Picker
+- Update: Reduced number of DB queries about 59%
+
+v1.33, 17.02.2016
+-----------------
+- Added: Color Picker for featured Items
+- Fixed: Nothing Found message on Item's detail page
+
 v1.32, 09.02.2016
 -----------------
 - Fix: Breadcrumbs style fix

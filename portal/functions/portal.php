@@ -22,17 +22,32 @@ function altered_search($query) {
 			$query->set('author', $wp_user->data->ID);
 		}
 	} else {
+
 		if($query->is_main_query()){
 			if (isset($_GET['s']) && empty($_GET['s'])){
 				$query->is_search = true;
 			}
 
+			// if(!empty($_GET['a'])){
+			// 	// advanced searching > on
+
+			// 	// > dev note > all search setup here instead of template
+			// 	if(!empty($_GET['count'])){
+			// 		$query->query_vars['posts_per_page'] = intval($_GET['count']);
+			// 	} else {
+			// 		// get number from settings
+			// 		$themeSettings = aitOptions()->getOptionsByType('theme');
+			// 		$query->query_vars['posts_per_page'] =  intval($themeSettings['items']['sortingDefaultCount']);
+			// 	}
+			// }
+
 			// is woocommerce search
 			if(isset($query->query_vars['post_type']) && $query->query_vars['post_type'] == 'product'){
 				return $query;
 			}
+			$query = apply_filters( 'ait_alter_search_query', $query );
 
-		}
+		} 
 	}
 	return $query;
 }
@@ -155,7 +170,7 @@ function register_portal_user() {
 								$headers = array(
 									'Content-Type: text/html; charset=UTF-8',
 								);
-								$message = sprintf(__("Username: %s \r\nUser ID: %d \r\nE-mail: %s \r\nPackage: %s \r\nPrice: %s \r\n","ait-admin"), $_POST['user_login'], $user_id, $_POST['user_email'], $package->getName(), $paymentPrice.' '.$currency);
+								$message = sprintf(str_replace('\n', '\r\n', __("Username: %s \nUser ID: %d \nE-mail: %s \nPackage: %s \nPrice: %s \n","ait-admin")), $_POST['user_login'], $user_id, $_POST['user_email'], $package->getName(), $paymentPrice.' '.$currency);
 								wp_mail( get_bloginfo('admin_email'), __('User payment information','ait-admin'), $message, $headers );
 
 								$redirect = $redirect.'/?ait-notification=user-registration-success';

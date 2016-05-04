@@ -813,7 +813,8 @@ ait.admin.options = ait.admin.options || {};
 					}
 					$this.datetimepicker(options);
 					if ($this.val() != '') {
-						$this.datetimepicker('setDate', new Date($this.val().replace(new RegExp('-', 'g'), '/')));
+						var currentDate = new Date($this.val().replace(new RegExp('-', 'g'), '/'));
+						$this.datetimepicker('setDate', currentDate);
 
 					}
 				}
@@ -838,7 +839,9 @@ ait.admin.options = ait.admin.options || {};
 					}
 					$this.datepicker(options);
 					if ($this.val() != '') {
-						$this.datepicker('setDate', new Date($this.val()));
+						var currentDate = new Date($this.val());
+						currentDate.setMinutes(currentDate.getMinutes() + currentDate.getTimezoneOffset());
+						$this.datepicker('setDate', currentDate);
 					}
 				}
 			});
@@ -937,6 +940,8 @@ ait.admin.options = ait.admin.options || {};
 				var $swHeadingControl = $thisContainer.find('.ait-opt-maps-swheading input[type="hidden"]');
 				var $swPitchControl = $thisContainer.find('.ait-opt-maps-swpitch input[type="hidden"]');
 				var $swZoomControl = $thisContainer.find('.ait-opt-maps-swzoom input[type="hidden"]');
+
+				var $messageContainer = $thisContainer.find('.ait-opt-maps-message');
 
 				var mapdata = {
 					address: $addressField.val(),
@@ -1054,6 +1059,7 @@ ait.admin.options = ait.admin.options || {};
 				// click action for find button
 				$addressSearchBtn.click(function(e){
 					e.preventDefault();
+					$messageContainer.hide('slow');
 					var addr = $addressField.val();
 					if ( !addr || !addr.length ) return;
 
@@ -1061,18 +1067,22 @@ ait.admin.options = ait.admin.options || {};
 						getlatlng:{
 							address:  addr,
 							callback: function(results){
-								marker.setPosition(results[0].geometry.location);
-								$map.gmap3({
-									map: {
-										options: {
-											zoom: 17,
-											center: results[0].geometry.location
+								if(typeof results !== "undefined" && results.length > 0){
+									marker.setPosition(results[0].geometry.location);
+									$map.gmap3({
+										map: {
+											options: {
+												zoom: 17,
+												center: results[0].geometry.location
+											}
 										}
-									}
-								})
-								$latitudeField.val(results[0].geometry.location.lat());
-								$longitudeField.val(results[0].geometry.location.lng());
-								streetviewObject.setPosition(new google.maps.LatLng(parseFloat($latitudeField.val()), parseFloat($longitudeField.val())));
+									})
+									$latitudeField.val(results[0].geometry.location.lat());
+									$longitudeField.val(results[0].geometry.location.lng());
+									streetviewObject.setPosition(new google.maps.LatLng(parseFloat($latitudeField.val()), parseFloat($longitudeField.val())));
+								} else {
+									$messageContainer.show();
+								}
 							}
 						}
 					});

@@ -5,7 +5,7 @@ return array(
 	
 	'ait-toolkit' => array(
 		'name'          => 'AIT Toolkit',
-		'version'       => '1.7.7',
+		'version'       => '1.8.2',
 		'required'      => true,
 		'ait-prepacked' => true,
 		'source'        => aitPath('plugins', '/ait-toolkit.zip'),

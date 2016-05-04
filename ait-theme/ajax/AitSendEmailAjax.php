@@ -18,7 +18,7 @@ class AitSendEmailAjax extends AitFrontendAjax
 		foreach($matches[1] as $i => $match){
 			$_POST['response-email-content'] = str_replace($matches[0][$i], $_POST[$match], $_POST['response-email-content']);
 		}
-
+		
 		$_POST['response-email-content'] = str_ireplace(array("\r\n", "\n"), "<br />", $_POST['response-email-content']);
 
 		// unescape all escaped quotes .. not safe .. probably remove

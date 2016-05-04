@@ -7,7 +7,7 @@
 {if $meta->displaySocialIcons}
 <div class="social-icons-container">
 	<div class="content">
-		{if count($meta->socialIcons) > 0}
+		{if is_array($meta->socialIcons) && count($meta->socialIcons) > 0}
 			<ul><!--
 			{foreach $meta->socialIcons as $icon}
 			--><li>

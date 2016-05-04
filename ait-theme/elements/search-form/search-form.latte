@@ -10,9 +10,9 @@
 
 {capture $searchKeyword}
 	{if $type == 2}
-	<input type="text" name="s" id="searchinput-text" placeholder="{__ 'Search keyword'}" class="searchinput" value="{$selectedKey}">
+	<span class="searchinput-wrap"><input type="text" name="s" id="searchinput-text" placeholder="{__ 'Search keyword'}" class="searchinput" value="{$selectedKey}"></span>
 	{else}
-	<input type="text" name="s" id="searchinput-text" placeholder="{__ 'Search keyword'}" class="searchinput" value="{$selectedKey}">
+	<span class="searchinput-wrap"><input type="text" name="s" id="searchinput-text" placeholder="{__ 'Search keyword'}" class="searchinput" value="{$selectedKey}"></span>
 	{/if}
 {/capture}
 
@@ -120,7 +120,12 @@
 							{var $sentence = str_replace('{', '</span>{', $sentence)}
 							{var $sentence = str_replace('}', '}<span class="label">', $sentence)}
 
-					 		{var $sentence = str_replace('{search-keyword}', $searchKeyword, $sentence)}
+					 		{if strpos($sentence, '{search-keyword}') !== false}
+					 			{var $sentence = str_replace('{search-keyword}', $searchKeyword, $sentence)}
+					 		{else}
+					 			<input type="hidden" name="s" value="">
+					 		{/if}
+
 					 		{var $sentence = str_replace('{search-category}', $searchCategory, $sentence)}
 					 		{var $sentence = str_replace('{search-location}', $searchLocation, $sentence)}
 
@@ -131,7 +136,11 @@
 					 	{elseif $type == 3}
 
 					 		<div class="search-inputs-wrap">
-					 			{!$searchKeyword}
+					 			{if $el->option('enableKeywordSearch')}
+					 				{!$searchKeyword}
+					 			{else}
+									<input type="hidden" name="s" value="">
+								{/if}
 
 					 			<!--<div class="searchsubmit-wrapper">-->
 					 				<div class="submit-main-button">
@@ -151,24 +160,40 @@
 
 					 		<div class="search-inputs-buttons-wrap">
 
-					 			{!$searchCategory}
+					 			{if $el->option('enableCategorySearch')}
+					 				{!$searchCategory}
+					 			{/if}
 
-								{!$searchLocation}
+					 			{if $el->option('enableLocationSearch')}
+									{!$searchLocation}
+								{/if}
 
-								{!$searchRadius}
+								{if $el->option('enableRadiusSearch')}
+									{!$searchRadius}
+								{/if}
 
 					 		</div>
 
 					 	{else}
 					 		<div class="search-inputs-wrap">
-								{!$searchKeyword}
+								{if $el->option('enableKeywordSearch')}
+									{!$searchKeyword}
+								{else}
+									<input type="hidden" name="s" value="">
+								{/if}
 
-								{!$searchCategory}
+								{if $el->option('enableCategorySearch')}
+									{!$searchCategory}
+								{/if}
 
-								{!$searchLocation}
+								{if $el->option('enableLocationSearch')}
+									{!$searchLocation}
+								{/if}
 							</div>
 
-							{!$searchRadius}
+							{if $el->option('enableRadiusSearch')}
+								{!$searchRadius}
+							{/if}
 
 						{/if}
 

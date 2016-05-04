@@ -88,14 +88,14 @@ body.woocommerce-page div.product .summary .cart .single_add_to_cart_button, .wo
 .woocommerce div.product .summary					{ text-align: center; }
 .woocommerce div.product .summary .cart .quantity 	{ float: none; margin-bottom: 20px; }
 .woocommerce div.product .summary .cart .single_add_to_cart_button  	{ margin-left: 0; }
-body.woocommerce div.product .woocommerce-tabs, 
-body.woocommerce-page div.product .woocommerce-tabs, 
-.woocommerce div.product .woocommerce-tabs 			{ text-align: center; }
+body.woocommerce div.product .woocommerce-tabs,
+body.woocommerce-page div.product .woocommerce-tabs,
+.woocommerce div.product .woocommerce-tabs 			{ /*text-align: center;*/ }
 
 
 body.woocommerce-cart .shop_table.cart tbody td.actions 	{ text-align: center; }
 
-body.woocommerce-cart .shop_table.cart tbody td.actions , 
+body.woocommerce-cart .shop_table.cart tbody td.actions ,
 .woocommerce .shop_table.cart tbody td.actions 	{
 	.coupon .input-text				{ margin: 0 0 20px 0; text-align:center}
 	.coupon							{ float: none; display: inline-block;}
@@ -104,7 +104,11 @@ body.woocommerce-cart .shop_table.cart tbody td.actions ,
 
 }
 
+/* fix single product */
 
+.comment-text .star-rating                  { float: none; display:inline-block}
+
+/* end fix single product *
 
 
 /* && END 640 */
@@ -153,7 +157,7 @@ body.woocommerce-page div.product .summary .cart .single_add_to_cart_button,
 
 
 
-body.woocommerce-cart, 
+body.woocommerce-cart,
 .woocommerce {
 		.shop_table.cart tbody td.actions .coupon .input-text { width: 100%; margin: 0 0 25px; max-width: none }
 	}

@@ -23,7 +23,7 @@
 			{var $clipAutoplay = intval($el->option('vimeoAutoplay'))}
 			{var $clipLoop = intval($el->option('vimeoLoop'))}
 
-			<iframe id="{!$htmlId}-vimeo-player" src="{videoEmbedUrl $el->option('vimeoLink')}&amp;autoplay={$clipAutoplay}&amp;loop={$clipLoop}" width="750" height="420"></iframe>
+			<iframe id="{!$htmlId}-vimeo-player" src="{videoEmbedUrl $el->option('vimeoLink')}&amp;autoplay={$clipAutoplay}&amp;loop={$clipLoop}" width="750" height="420" data-sound="{$el->option('vimeoVideoSound')}"></iframe>
 		{/if}
 	{else}
 		{if $el->option('youtubeLink')}
@@ -35,7 +35,7 @@
 			{var $clipPlaylist = $clipLoop == 1 ? '&amp;playlist='.$query['v'] : ''} {* hack from https://developers.google.com/youtube/player_parameters loop parameter *}
 
 			<!-- <iframe id="{!$htmlId}-youtube-player" src="//www.youtube.com/embed/{$clipId}?autoplay={$clipAutoplay}&amp;controls=0&amp;loop={$clipLoop}&amp;rel=0{$clipPlaylist}" width="750" height="420"></iframe> -->
-			<iframe id="{!$htmlId}-youtube-player" src="{videoEmbedUrl $el->option('youtubeLink')}&amp;autoplay={$clipAutoplay}&amp;controls=0&amp;loop={$clipLoop}&amp;rel=0{$clipPlaylist}" width="750" height="420"></iframe>
+			<iframe id="{!$htmlId}-youtube-player" src="{videoEmbedUrl $el->option('youtubeLink')}&amp;autoplay={$clipAutoplay}&amp;controls=0&amp;loop={$clipLoop}&amp;rel=0{$clipPlaylist}" width="750" height="420" data-sound="{$el->option('youtubeVideoSound')}"></iframe>
 		{/if}
 	{/if}
 

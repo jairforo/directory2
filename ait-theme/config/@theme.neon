@@ -111,6 +111,13 @@ general:
 			default: '#89cf34'
 			required: true
 
+		featuredColor:
+			label: Featured Items Color
+			type: color
+			default: '#ffcc00'
+			required: true
+			help: "Decorative Color for the Featured Items"
+
 		linesColor:
 			label: Lines
 			type: color
@@ -682,6 +689,11 @@ items:
 				ASC: ASC
 				DESC: DESC
 			help: "Select order of items listed on page"
+		sortingEnableMapPagination:
+			label: Header Map Pagination
+			type: on-off
+			default: off
+			help: "Enable pagination in Header Map. Works only on Search and Taxonomy pages"
 
 		- section(title: Featured Categories)
 		maxDisplayedCategories:

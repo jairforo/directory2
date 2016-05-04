@@ -146,8 +146,8 @@ get_category_link($this->id);}function
 id(){return$this->id;}}class
 WpLatteCommentEntity
 extends
-WpLatteBaseEntity{protected$id;protected$postId;protected$parent;protected$commenterId;protected$postAuthorId;protected$karma;protected$isApproved;protected$browser;protected$author;public$loopData;function
-__construct($comment,$postAuthorId){$this->postAuthorId=(int)$postAuthorId;$this->author=WpLatte::createEntity('CommentAuthor',$comment,$this->postAuthorId);$this->id=(int)$comment->comment_ID;$this->postId=(int)$comment->comment_post_ID;$this->parent=(int)$comment->comment_parent;$this->commenterId=(int)$comment->user_id;$this->karma=(int)$comment->comment_karma;$this->isApproved=(bool)$comment->comment_approved;$this->browser=$comment->comment_agent;}function
+WpLatteBaseEntity{protected$id;protected$postId;protected$parent;protected$commenterId;protected$postAuthorId;protected$karma;protected$isApproved;protected$browser;protected$author;protected$rawDate;public$loopData;function
+__construct($comment,$postAuthorId){$this->postAuthorId=(int)$postAuthorId;$this->author=WpLatte::createEntity('CommentAuthor',$comment,$this->postAuthorId);$this->id=(int)$comment->comment_ID;$this->postId=(int)$comment->comment_post_ID;$this->parent=(int)$comment->comment_parent;$this->commenterId=(int)$comment->user_id;$this->rawDate=$comment->comment_date;$this->karma=(int)$comment->comment_karma;$this->isApproved=(bool)$comment->comment_approved;$this->browser=$comment->comment_agent;}function
 text(){$comment=get_comment($this->id);return
 apply_filters('comment_text',get_comment_text(),$comment);}function
 isNormal(){switch($this->type){case'pingback':case'trackback':return
@@ -184,7 +184,8 @@ url(){return
 apply_filters('comment_url',get_comment_author_url());}}class
 WpLattePostEntity
 extends
-WpLatteBaseEntity{protected$id;protected$type;protected$postId;protected$parentId;protected$menuOrder=0;protected$isCpt=false;protected$author;protected$slug;protected$rawExcerpt;protected$rawDate;protected$rawTitle;function
+WpLatteBaseEntity{protected$id;protected$type;protected$postId;protected$parentId;protected$menuOrder=0;protected$isCpt=false;protected$author;protected$slug;protected$rawExcerpt;protected$rawDate;protected$rawTitle;protected
+static$isInAnyCategory=false;function
 __construct($post){$this->id=(int)$post->ID;$this->postId=$this->id;$this->type=$post->post_type;$this->slug=$post->post_name;$this->parentId=isset($post->post_parent)?(int)$post->post_parent:0;$this->menuOrder=isset($post->menu_order)?(int)$post->menu_order:0;$this->isCpt=WpLatteUtils::isCpt($post->post_type);$this->rawExcerpt=$post->post_excerpt;$this->rawDate=$post->post_date;$this->rawTitle=$post->post_title;$this->author=WpLatte::createEntity('PostAuthor',$post->post_author);}function
 parent(){if($parent=WpLatteObjectCache::load("parent-{$this->postId}-{$this->parentId}"))return$parent;$parent=new
 self(get_post($this->parentId));WpLatteObjectCache::save("parent-{$this->postId}-{$this->parentId}",$parent);return$parent;}function
@@ -221,7 +222,7 @@ categories($taxonomy='category'){$funcParams=func_get_args();if($return=WpLatteO
 and$taxonomy=='category'and
 count($registeredTaxonomies)==1){$taxonomy=array_pop($registeredTaxonomies);}elseif($this->isCpt
 and$this->type!=='product'and$taxonomy=='category'and
-count($registeredTaxonomies)>1){trigger_error('You must specify concrete taxonomy name in the '.__METHOD__.'($taxonomy)');}$terms=get_the_terms($this->postId,WpLatteUtils::addPrefix('taxonomy',$taxonomy));if(!$terms
+count($registeredTaxonomies)>1){if(!self::$isInAnyCategory){trigger_error('You must specify concrete taxonomy name in the '.__METHOD__.'($taxonomy)');}}$terms=get_the_terms($this->postId,WpLatteUtils::addPrefix('taxonomy',$taxonomy));if(!$terms
 or
 is_wp_error($terms))$terms=array();if(!$this->isCpt
 and$taxonomy=='category'){$terms=apply_filters('get_the_categories',array_values($terms));}$terms=array_filter((array)$terms);$return=array();foreach($terms
@@ -232,7 +233,7 @@ as$key=>$cat){if($cat->parentId==0){$result.=$prefix.$cat->slug.$suffix.$separat
 as$cat){$result.=$this->recursiveCategoriesSlugs($cat->id,"cat",$taxonomy,$separator,$prefix,$suffix);}$slugs=explode(" ",$result);$result=implode(" ",array_unique($slugs));return$result;}function
 categoriesSlugs($prefix='',$suffix='',$asString=true,$taxonomy='category'){$funcParams=func_get_args();if($return=WpLatteObjectCache::load("categories-slugs-{$this->postId}",$funcParams))return$return;$cats=$this->categories($taxonomy);$slugs=array();$prefix=$prefix!==''?"{$prefix}-":$prefix;$suffix=$suffix!==''?"-{$suffix}":$suffix;foreach($cats
 as$i=>$cat){$slugs[$i]=$prefix.$cat->slug.$suffix;}$return=$asString?implode(' ',$slugs):$slugs;$funcParams=func_get_args();WpLatteObjectCache::save("categories-slugs-{$this->postId}",$return,$funcParams);return$return;}function
-isInAnyCategory(){$cats=$this->categories();return!empty($cats);}function
+isInAnyCategory(){self::$isInAnyCategory=true;$cats=$this->categories();self::$isInAnyCategory=false;return!empty($cats);}function
 hasCategory($category=''){return
 has_term($category,'category',$this->postId);}function
 hasTaxonomy($taxonomy){return
@@ -255,7 +256,8 @@ get_post_format($this->postId);}function
 gallery(){return
 get_post_gallery($this->postId,true);}function
 hasImage(){return(bool)get_post_thumbnail_id($this->postId==0?null:$this->postId);}function
-imageUrl($size='full'){if($return=WpLatteObjectCache::load("image-url-{$size}-{$this->postId}"))return$return;$id=get_post_thumbnail_id($this->postId==0?null:$this->postId);$args=wp_get_attachment_image_src($id,$size);if($args!==false)$return=$args[0];else$return='';WpLatteObjectCache::save("image-url-{$size}-{$this->postId}",$return);return$return;}function
+imageUrl($size='full'){if($return=WpLatteObjectCache::load("image-url-{$size}-{$this->postId}"))return$return;$id=get_post_thumbnail_id($this->postId==0?null:$this->postId);if(in_the_loop()){update_post_thumbnail_cache();}$args=wp_get_attachment_image_src($id,$size);if($args!==false)$return=$args[0];else$return='';WpLatteObjectCache::save("image-url-{$size}-{$this->postId}",$return);return$return;}function
+imageAlt(){$image_id=get_post_thumbnail_id($this->postId==0?null:$this->postId);$image_alt=get_post_meta($image_id,'_wp_attachment_image_alt',true);return$image_alt!=""?$image_alt:$this->title();}function
 image($size='post-thumbnail'){return
 get_the_post_thumbnail($this->postId==0?null:$this->postId,$size);}function
 date($format='',$translate=false){if($translate==='translate'){$translate=true;}$post=get_post($this->postId);$the_date='';if(''==$format){$the_date.=mysql2date(get_option('date_format'),$post->post_date,$translate);}else{$the_date.=mysql2date($format,$post->post_date,$translate);}return

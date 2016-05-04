@@ -108,7 +108,7 @@
 			}
 			{if is_array($address) and isset($address['streetview'])}
 				{if $address['streetview']}
-			,streetviewpanorama:{
+			, streetviewpanorama:{
 				options:{
 					container: jQuery("#{!$htmlId}-container"),
 					opts:{

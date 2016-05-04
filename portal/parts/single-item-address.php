@@ -54,7 +54,7 @@
 		{/if}
 
 		{if !$meta->email && $settings->addressHideEmptyFields}{else}
-		<div class="address-row row-email">
+		<div n:class="address-row, row-email, !$meta->showEmail ? hide-email">
 			<div class="address-name"><h5>{__ 'Email'}:</h5></div>
 			<div class="address-data"><p>{if $meta->email && $meta->showEmail}<a href="mailto:{$meta->email}" target="_top" itemprop="email">{$meta->email}</a>{else}-{/if}</p></div>
 		</div>

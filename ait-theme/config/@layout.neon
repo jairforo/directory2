@@ -58,10 +58,11 @@ general:
 			default: ""
 
 		headerHeight:
-			label: Header Image
+			label: Header Height
 			type: number
 			default: "450"
 			unit: px
+			help: "Fixed height of header image section in pixels, leave empty to use height of image and resize image in responsive design"
 
 		#headerImageAlign:
 		#	label: Header Image Align

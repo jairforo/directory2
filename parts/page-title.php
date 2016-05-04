@@ -29,6 +29,8 @@
 		{var $eventOptions = get_option('ait_events_pro_options', array())}
 	{/if}
 
+	{var $itemExpired = ""}
+
 
 {* ********************************************************* *}
 {* for 404, SEARCH and WOOCOMMERCE                           *}
@@ -44,7 +46,7 @@
 	{* TITLE ********** *} {if $wp->isSearch}
 								{if isset($_REQUEST['a']) && $_REQUEST['a'] != ""}
 									{var $sString = array()}
-									{if isset($_REQUEST['s']) && $_REQUEST['s'] != ""}{? array_push($sString, $_REQUEST['s'])}{/if}
+									{if isset($_REQUEST['s']) && $_REQUEST['s'] != ""}{? array_push($sString, htmlspecialchars($_REQUEST['s']) )}{/if}
 									{if isset($_REQUEST['category']) && $_REQUEST['category'] != ""}
 										{var $dCategory = get_term($_REQUEST['category'], 'ait-items')}
 										{if isset($dCategory)}{? array_push($sString, $dCategory->name)}{/if}
@@ -111,6 +113,11 @@
 																{var $intFrom = $meta->validFrom}
 																{var $intTo = $meta->validTo}
 																{var $dateInterval = 'yes'}
+						   {/if}
+	{* VALIDITY ******* *} {if $wp->isSingular(job-offer)}									
+								{if strtotime($meta->validTo) <= intval(date("U"))}
+									{capture $itemExpired}<span class="expired">{__ 'Expired: '}</span>{/capture}
+								{/if}
 						   {/if}
 
 	{* AUTHOR ********* *} {if $wp->isAttachment} 				{var $titleAuthor = 'yes'} {/if}
@@ -350,7 +357,7 @@
 
 					{/if}
 
-					<h1>{!$titleName}</h1>
+					<h1>{!$itemExpired}{!$titleName}</h1>
 					{if $subtitle}<span class="subtitle">{$subtitle}</span>{/if}
 
 					{if $dateInterval == 'yes' or $titleAuthor == 'yes' or $titleCategory == 'yes' or $titleComments == 'yes' or $titleSubDesc}

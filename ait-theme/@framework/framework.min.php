@@ -71,7 +71,11 @@ AitUtils::nonce("delete-cache-image")?>'});
 		</script>
 	<?php
 }function
-aitExtractVideoIdFromVideoUrl($videoUrl){$videoId='';if(preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i',$videoUrl,$match)){if(isset($match[1])){$videoId=$match[1];}}elseif(preg_match("/https?:\/\/(?:www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/",$videoUrl,$match)){if(isset($match[3])){$videoId=$match[3];}}return$videoId;}if(!function_exists('array_replace_recursive')){function
+aitExtractVideoIdFromVideoUrl($videoUrl){$videoId='';if(preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i',$videoUrl,$match)){if(isset($match[1])){$videoId=$match[1];}}elseif(preg_match("/https?:\/\/(?:www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/",$videoUrl,$match)){if(isset($match[3])){$videoId=$match[3];}}return$videoId;}if(!function_exists('d')){function
+d(){foreach(func_get_args()as$arg){echo"<xmp style='outline:1px solid red;background:ivory;'>";var_dump($arg);echo"</xmp>";}}}if(!function_exists('dd')){function
+dd(){foreach(func_get_args()as$arg){echo"<xmp style='outline:1px solid red;background:ivory;'>";var_dump($arg);echo"</xmp>";}die();}}if(!function_exists('p')){function
+p(){foreach(func_get_args()as$arg){echo"<xmp style='outline:1px solid red;background:ivory;'>";print_r($arg);echo"</xmp>";}}}if(!function_exists('pd')){function
+pd(){foreach(func_get_args()as$arg){echo"<xmp style='outline:1px solid red;background:ivory;'>";print_r($arg);echo"</xmp>";}die();}}if(!function_exists('array_replace_recursive')){function
 array_replace_recursive(){$arrays=func_get_args();$original=array_shift($arrays);foreach($arrays
 as$array){foreach($array
 as$key=>$value){if(is_array($value)and
@@ -144,23 +148,33 @@ function
 ajaxEmptyThemeCacheDir(){AitUtils::checkAjaxNonce('delete-cache-theme');AitUtils::delete(aitPaths()->dir->cache,'*');exit;}static
 function
 ajaxEmptyWPThumbCacheDir(){AitUtils::checkAjaxNonce('delete-cache-image');$u=WP_Thumb::uploadDir();$path=$u['basedir'].'/cache/images';AitUtils::delete($path,"*");exit;}}class
-AitAssetsManager{protected$builtinFrontendAssets=array();protected$assetsList=array();protected$ajaxActions=array();protected$params=array();protected$inlineStyleCallbacks=array();protected$lastEnqueuedCssHandler;function
+AitAssetsManager{protected$builtinFrontendAssets=array();protected$assetsList=array();protected$ajaxActions=array();protected$params=array();protected$inlineStyleCallbacks=array();protected$lastEnqueuedCssHandler;protected$lastEnqueuedLessHandler;function
 __construct($builtinFrontendAssets,$assetsFromFunctionsPhpFile){$this->builtinFrontendAssets=$builtinFrontendAssets;$this->assetsList[]=array('assets'=>$assetsFromFunctionsPhpFile,'params'=>array());}function
 addAssets($assets,$params=array()){$this->assetsList[]=array('assets'=>$assets,'params'=>$params);}function
 setAjaxActions($callbacks){$this->ajaxActions=$callbacks;}function
-enqueueFrontendAssets(){$builtinAssets=apply_filters('ait-theme-builtin-assets',$this->builtinFrontendAssets);$this->enqueueCss($builtinAssets['css']);$this->enqueueJs($builtinAssets['js']);$this->initGlobalJsVariables();if(is_singular()and
+enqueueFrontendAssets(){$builtinAssets=apply_filters('ait-theme-builtin-assets',$this->builtinFrontendAssets);$this->enqueueCss($builtinAssets['css']);$this->enqueueJs($builtinAssets['js']);$this->initGlobalFrontendJsVariables();if(is_singular()and
 comments_open()and
 get_option('thread_comments')){wp_enqueue_script('comment-reply');}$this->addGoogleFontsCss();$assetsList=apply_filters('ait-theme-assets',$this->assetsList);foreach($assetsList
-as$item){if(isset($item['assets']['css'])){$this->enqueueCss($item['assets']['css'],$item['params']);}if(isset($item['assets']['js'])){$this->enqueueJs($item['assets']['js'],$item['params']);}}$this->enqueueLess();if(file_exists(aitPaths()->dir->theme.'/custom.css')){wp_enqueue_style('ait-theme-custom-style',aitPaths()->url->theme.'/custom.css');}}function
+as$item){if(isset($item['assets']['css'])){$this->enqueueCss($item['assets']['css'],$item['params']);}if(isset($item['assets']['js'])){$this->enqueueJs($item['assets']['js'],$item['params']);}}$this->enqueueLessFiles();$this->addWpInlineStyles();if(file_exists(aitPaths()->dir->theme.'/custom.css')){wp_enqueue_style('ait-theme-custom-style',aitPaths()->url->theme.'/custom.css');}}function
+enqueueLessFiles(){$results=$this->compileLessFiles();foreach($results
+as$handler=>$result){$this->embedOrEnqueueCssGeneratedFromLess($handler,$result);}}function
 compileLessFiles(){$lessCompiler=new
-AitLessCompiler(aitPaths()->dir->cache,aitPaths()->url->cache);$lessFiles=array('ait-theme-main-style'=>array('inputFile'=>aitPath('css','/style.less'),'params'=>array(),'inlineCss'=>$this->getThemeMainInlineStylesContent()),'ait-theme-layout-style'=>array('inputFile'=>aitPath('css','/layout.less'),'params'=>array('oid'=>aitOptions()->getOid())),'ait-preloading-effects'=>array('inputFile'=>aitPath('css','/preloading.less'),'params'=>array()),'ait-typography-style'=>array('inputFile'=>aitPath('css','/typography.less'),'params'=>array('lang'=>AitLangs::getCurrentLocale()),'customCss'=>aitOptions()->get('theme')->customCss->css));$results=array();foreach($lessFiles
-as$handler=>$args){if($args['inputFile']){$results[]=array('handler'=>$handler,'args'=>$args,'output'=>$lessCompiler->compile($args));}}return$results;}function
-enqueueLess(){$results=$this->compileLessFiles();foreach($results
-as$result){if(!$result['output']['isEmpty']){if($result['output']['error']){$this->embedCssGeneratedFromLess($result['handler'],$result['args'],$result['output'],true);}else{$this->enqueueCssGeneratedFromLess($result['handler'],$result['args'],$result['output']);}}}}protected
+AitLessCompiler(aitPaths()->dir->cache,aitPaths()->url->cache);$lessFiles=apply_filters('ait-less-files',$this->getCoreLessFiles());$results=array();foreach($lessFiles
+as$handler=>$args){if($args['inputFile']){$results[$handler]=$lessCompiler->compileFile($args['inputFile'],$args['params']);}}return$results;}function
+getCoreLessFiles(){return
+array('ait-theme-main-style'=>array('inputFile'=>aitPath('css','/style.less'),'params'=>array()),'ait-theme-layout-style'=>array('inputFile'=>aitPath('css','/layout.less'),'params'=>array('oid'=>aitOptions()->getOid())),'ait-preloading-effects'=>array('inputFile'=>aitPath('css','/preloading.less'),'params'=>array()),'ait-typography-style'=>array('inputFile'=>aitPath('css','/typography.less'),'params'=>array('lang'=>AitLangs::getCurrentLocale())));}function
+getInlineCss(){return
+apply_filters('ait-inline-css',array(array('appendTo'=>'ait-theme-main-style','css'=>array($this,'getThemeMainInlineStylesContent'))));}function
+getCustomCss(){if(apply_filters('ait-enable-less-in-custom-css-field',false)){$css=function(){$lessCompiler=new
+AitLessCompiler(aitPaths()->dir->cache,aitPaths()->url->cache);return$lessCompiler->compileString(aitOptions()->get('theme')->customCss->css);};}else{$css=function(){return
+aitOptions()->get('theme')->customCss->css;};}return
+apply_filters('ait-custom-css',array(array('appendTo'=>'','css'=>$css)));}protected
 function
-enqueueCssGeneratedFromLess($handler,$args,$output){wp_enqueue_style($handler,$output['url'],array(),$output['version']);if(isset($args['inlineCss'])){wp_add_inline_style($handler,$args['inlineCss']);}if(isset($args['customCss'])){wp_add_inline_style($handler,$args['customCss']);}}protected
+embedOrEnqueueCssGeneratedFromLess($handler,$output){if($output['isEmpty'])return;if($output['error']){wp_add_inline_style($this->lastEnqueuedCssHandler,$output['embedCss']);if(AIT_DEV
+and!empty($output['errorMsg'])){error_log($output['errorMsg']);}}else{$this->lastEnqueuedLessHandler=$handler;wp_enqueue_style($handler,$output['url'],array(),$output['version']);}}protected
 function
-embedCssGeneratedFromLess($handler,$args,$output,$error=false){if($error){$output['embedCss']="\n\n/*  ==== LESS ERROR ==== */\nError in file '{$args['inputFile']}'\n".$output['embedCss'];trigger_error($output['embedCss'],E_USER_WARNING);}wp_add_inline_style($this->lastEnqueuedCssHandler,$output['embedCss']);if(isset($args['inlineCss'])){wp_add_inline_style($handler,$args['inlineCss']);}if(isset($args['customCss'])){wp_add_inline_style($handler,$args['customCss']);}}function
+addWpInlineStyles(){foreach($this->getInlineCss()as$inline){$css=call_user_func($inline['css']);if($inline['appendTo']){wp_add_inline_style($inline['appendTo'],$css);}else{wp_add_inline_style($this->lastEnqueuedLessHandler,$css);}}foreach($this->getCustomCss()as$inline){$output=call_user_func($inline['css']);$css=is_array($output)?$output['css']:$output;if((is_array($output)and$output['isEmpty'])or
+empty($css))continue;if($inline['appendTo']){wp_add_inline_style($inline['appendTo'],$css);}else{wp_add_inline_style($this->lastEnqueuedLessHandler,$css);}}}function
 enqueueAdminAssets(){foreach($this->assetsList
 as$item){if(isset($item['assets']['admin-css'])){$this->enqueueCss($item['assets']['admin-css'],$item['params']);}if(isset($item['assets']['admin-js'])){$this->enqueueJs($item['assets']['admin-js'],$item['params']);}}}function
 enqueueCss($styles,$params=array()){if(empty($styles)or!is_array($styles))return;$lastHandler='';foreach($styles
@@ -170,12 +184,12 @@ enqueueJs($scripts,$params=array()){if(empty($scripts)or!is_array($scripts))retu
 as$handler=>$js){if(is_bool($js)and$js===true){wp_enqueue_script($handler);}elseif(is_array($js)){$filename=$js['file'];if(isset($js['lang'])){$filename=str_replace('{lang}',AitLangs::getCurrentLanguageCode(),$filename);$filename=str_replace('{gmaps-lang}',AitLangs::getGmapsLang(),$filename);}if(AitUtils::isExtUrl($filename)or
 AitUtils::isAbsUrl($filename)){$url=$filename;}else{if(isset($params['paths']->url->js))$url=$params['paths']->url->js.$filename;else$url=aitUrl('js',$filename);}wp_register_script($handler,$url,isset($js['deps'])?$js['deps']:array(),isset($js['ver'])?$js['ver']:false,isset($js['in-footer'])?$js['in-footer']:true);if(isset($js['enqueue-only-if'])and$js['enqueue-only-if']){$fn=create_function('',"return {$js['enqueue-only-if']};");if(call_user_func($fn)){wp_enqueue_script($handler);}}elseif(!isset($js['enqueue'])or(isset($js['enqueue'])and$js['enqueue']==true)){wp_enqueue_script($handler);}if(isset($js['localize'])){if(isset($js['localize']['object-var'])){$var=$js['localize']['object-var'];unset($js['localize']['object-var']);}else{$var=AitUtils::dash2class($handler);}wp_localize_script($handler,$var,$js['localize']);}}}}protected
 function
-initGlobalJsVariables(){$settings=array('home'=>array('url'=>home_url()),'ajax'=>array('url'=>admin_url('admin-ajax.php'),'actions'=>array()),'paths'=>array('theme'=>aitPaths()->url->theme,'css'=>aitPaths()->url->css,'js'=>aitPaths()->url->js,'img'=>aitPaths()->url->img),'l10n'=>array('datetimes'=>array('dateFormat'=>AitUtils::phpDate2jsDate(get_option('date_format')),'startOfWeek'=>get_option('start_of_week'))));$settings['ajax']['actions']=$this->ajaxActions;wp_localize_script('jquery-core','AitSettings',apply_filters('ait-global-js-settings',$settings));}function
+initGlobalFrontendJsVariables(){$settings=array('home'=>array('url'=>home_url()),'ajax'=>array('url'=>admin_url('admin-ajax.php'),'actions'=>array()),'paths'=>array('theme'=>aitPaths()->url->theme,'css'=>aitPaths()->url->css,'js'=>aitPaths()->url->js,'img'=>aitPaths()->url->img),'l10n'=>array('datetimes'=>array('dateFormat'=>AitUtils::phpDate2jsDate(get_option('date_format')),'startOfWeek'=>get_option('start_of_week'))));$settings['ajax']['actions']=$this->ajaxActions;wp_localize_script('jquery-core','AitSettings',apply_filters('ait-global-js-settings',$settings));}function
 addInlineStyleCallback($callback){$this->inlineStyleCallbacks[]=$callback;}function
 getThemeMainInlineStylesContent(){$css='';$files=array();$oid=aitOptions()->getOid();$cacheKey='inline-styles-'.$oid;if($css=AitCache::load($cacheKey)){return$css;}else{foreach($this->inlineStyleCallbacks
 as$cb){$r=call_user_func($cb);$css.=$r['css'];$files=array_merge($files,$r['files']);}$files=array_unique($files);$tag=$oid==''?'global':$oid;AitCache::save($cacheKey,$css,array('files'=>$files,'tags'=>array($tag)));}return$css;}protected
 function
-addGoogleFontsCss(){$asset=array();$themeOptions=aitOptions()->getOptionsByType('theme');if(!isset($themeOptions['typography']))return;foreach($themeOptions['typography']as$optionKey=>$optionValue){$value=AitLangs::getCurrentLocaleText($optionValue,'');if(!$value)continue;list($fontType,$fontFamily)=array_pad(explode('@',$value),2,null);if(!$fontFamily||$fontType!='google')continue;$font=AitGoogleFonts::getByFontFamily($fontFamily);$urlArgs=array('family'=>$fontFamily.':'.implode(',',$font->variants),'subset'=>implode(',',$font->subsets));$fontUrl=add_query_arg($urlArgs,"//fonts.googleapis.com/css");$handler="google-font-".$optionKey;$asset['css'][$handler]['file']=esc_url_raw($fontUrl);$asset['css'][$handler]['ver']=null;$this->assetsList[]=array('assets'=>$asset,'params'=>array());}}}class
+addGoogleFontsCss(){$asset=array();$themeOptions=aitOptions()->getOptionsByType('theme');if(!isset($themeOptions['typography']))return;foreach($themeOptions['typography']as$optionKey=>$optionValue){$value=AitLangs::getCurrentLocaleText($optionValue,'');if(!$value)continue;list($fontType,$fontFamily)=array_pad(explode('@',$value),2,null);if(!$fontFamily||$fontType!='google')continue;$font=AitGoogleFonts::getByFontFamily($fontFamily);if($font!==false){$urlArgs=array('family'=>$fontFamily.':'.implode(',',$font->variants),'subset'=>implode(',',$font->subsets));$fontUrl=add_query_arg($urlArgs,"//fonts.googleapis.com/css");$handler="google-font-".$optionKey;$asset['css'][$handler]['file']=esc_url_raw($fontUrl);$asset['css'][$handler]['ver']=null;$this->assetsList[]=array('assets'=>$asset,'params'=>array());}}}}class
 AitCache{protected
 static$cache;function
 __construct(){throw
@@ -195,7 +209,7 @@ function
 clean($flags=array()){if((isset($flags['less'])and$flags['less'])or
 count($flags)==0){self::cleanLessCache();unset($flags['less']);}$f=array();if(empty($flags)){$f[NCache::ALL]=true;}if(isset($flags['tags'])){$f[NCache::TAGS]=$flags['tags'];}self::$cache->clean($f);}static
 function
-cleanLessCache(){AitUtils::delete(aitPaths()->dir->cache,'*.css');AitUtils::delete(aitPaths()->dir->cache,'.ht-*.less-cache');}static
+cleanLessCache(){AitUtils::delete(aitPaths()->dir->cache,'.ht-*.less-cache');}static
 function
 cleanImageCache(){$u=WP_Thumb::uploadDir();$path=$u['basedir'].'/cache/images';AitUtils::delete($path,"*");}static
 function
@@ -315,20 +329,25 @@ as$cpt){$this->cpts[$cpt]=false;}}else{$this->cpts=array();}if(!isset($c->templa
 option($key){if(isset($this->options[$key])){return$this->options[$key];}return
 false;}function
 common($part){return
-aitPath('elements',"/@common/{$part}.latte");}function
+aitPath('elements',"/@common/{$part}.latte");}protected
+function
+addClassesFromSelectInputTypes(&$classes){foreach($this->config['@options']as$i=>$sections){unset($sections['@section']);foreach($sections
+as$k=>$option){if($option['type']==='select'and
+isset($option['add-element-class'])and$option['add-element-class']===true
+and
+isset($this->options[$k])and!is_array($this->options[$k])){$classes[]='elm-selected-'.$this->options[$k];}}}}function
 getConfig($key=''){if(empty($key))return$this->config;if(isset($this->config[$key])){return$this->config[$key];}return
 false;}function
-getConfigOption($key){$result=null;foreach($this->config['@options']as$i=>$sections){unset($sections['@section']);foreach($sections
-as$k=>$option){if($k===$key){$result=$option;}}}return$result;}function
-getOptionObjectFromConfig($optionKey){foreach($this->config['@options']as$i=>$sections){unset($sections['@section']);foreach($sections
-as$key=>$option){if($key==$optionKey){return$option;}}}return
-false;}function
+getConfigOption($key){foreach($this->config['@options']as$i=>$sections){unset($sections['@section']);foreach($sections
+as$k=>$option){if($k===$key){return$option;}}}return
+null;}function
+getOptionObjectFromConfig($optionKey){return$this->getConfigOption($optionKey);}function
 getTitle(){return$this->title;}function
 getId(){return$this->id;}function
 getHtmlId(){return$this->internalId.'-'.$this->instanceNumber;}function
 getHtmlClass(){return$this->internalId;}function
-getHtmlClasses($asString=true){$classes=array();$classes[]='elm-main';$classes[]=$this->internalId.'-main';if($this->hasOption('@bg')){$bg=$this->option('@bg');if(isset($bg['color'])and!empty($bg['color']))$classes[]='elm-has-bg';}if($this->hasOption('customClass'))$classes[]=$this->option('customClass');if($this->hasOption('contentSize'))$confOption=$this->getConfigOption('contentSize');if(isset($confOption['target'])&&!empty($confOption['target'])){if($confOption['target']==$this->option('layout')){$classes[]=$this->option('contentSize');}}else{$classes[]=$this->option('contentSize');}$carouselEnabledOptions=$this->findOptionsContaining('EnableCarousel');foreach($carouselEnabledOptions
-as$key=>$value){if($value==true){$layout=substr($key,0,strpos($key,'EnableCarousel'));$layoutOptions=$this->findOptionsContaining("[$layout]");if(count($layoutOptions)==1&&reset($layoutOptions)==true){$classes[]='carousel-enabled';}}}return$asString?implode(' ',$classes):$classes;}function
+getHtmlClasses($asString=true){$classes=array();$classes[]='elm-main';$classes[]=$this->internalId.'-main';if($this->hasOption('@bg')){$bg=$this->option('@bg');if(isset($bg['color'])and!empty($bg['color'])){$classes[]='elm-has-bg';}}if($this->hasOption('customClass')){$classes[]=$this->option('customClass');}if($this->hasOption('contentSize')){$confOption=$this->getConfigOption('contentSize');if(isset($confOption['target'])&&!empty($confOption['target'])){if($confOption['target']==$this->option('layout')){$classes[]=$this->option('contentSize');}}else{$classes[]=$this->option('contentSize');}}$carouselEnabledOptions=$this->findOptionsContaining('EnableCarousel');foreach($carouselEnabledOptions
+as$key=>$value){if($value==true){$layout=substr($key,0,strpos($key,'EnableCarousel'));$layoutOptions=$this->findOptionsContaining("[$layout]");if(count($layoutOptions)==1&&reset($layoutOptions)==true){$classes[]='carousel-enabled';}}}$this->addClassesFromSelectInputTypes($classes);$classes=array_unique($classes);return$asString?implode(' ',$classes):$classes;}function
 getPaths(){if(isset($this->configuration['no-paths'])and$this->configuration['no-paths']){return'';}if(!$this->paths){$this->paths=new
 stdClass;$this->paths->url=(object)array('root'=>aitUrl('elements',"/{$this->id}"),'css'=>aitUrl('elements',"/{$this->id}/design/css"),'js'=>aitUrl('elements',"/{$this->id}/design/js"),'img'=>aitUrl('elements',"/{$this->id}/design/img"));$this->paths->dir=(object)array('root'=>aitPath('elements',"/{$this->id}"),'css'=>aitPath('elements',"/{$this->id}/design/css"),'js'=>aitPath('elements',"/{$this->id}/design/js"),'img'=>aitPath('elements',"/{$this->id}/design/img"));}return$this->paths;}function
 getOption(){if($this->optionsObject===null){$this->optionsObject=json_decode(json_encode($this->options));}return$this->optionsObject;}function
@@ -377,9 +396,11 @@ setCpt($cptId){$this->cpts[$cptId]=true;}function
 setPath($type,$kind,$path){$this->getPaths();if($this->paths){$this->paths->{$type}->{$kind}=$path;}}function
 setBetweenSidebars($value){$this->isBetweenSidebars=$value;}protected
 function
-generateCss(){if(!empty($this->generatedCss)){return$this->generatedCss;}else{$content=$this->getStyleLessFileContent();$css=array('files'=>array(),'css'=>'');if($content){$css['css']=$this->compileLess($content,$this->getStyleLessFile());$css['files']=array_keys($this->lessParser->allParsedFiles());}$this->generatedCss=$css;return$css;}}protected
+generateCss(){if(!empty($this->generatedCss)){return$this->generatedCss;}else{$content=$this->getStyleLessFileContent();$css=array('files'=>array(),'css'=>'');if($content){$css['css']=$this->compileLess($content,$this->getStyleLessFile());$css['files']=array_keys($this->lessParser->allParsedFiles());}$this->generatedCss=$css;return$css;}}function
+createLessCompiler(){return
+AitLessCompiler::create(array_map('dirname',aitGetPaths('elements',"/{$this->id}/design/css/{$this->styleLessName}",'path',true)),array_map('dirname',aitGetPaths('elements',"/{$this->id}/design/css/{$this->styleLessName}",'url',true)));}protected
 function
-compileLess($content,$file){$this->lessParser=AitLessCompiler::create(array_map('dirname',aitGetPaths('elements',"/{$this->id}/design/css/{$this->styleLessName}",'path',true)),array_map('dirname',aitGetPaths('elements',"/{$this->id}/design/css/{$this->styleLessName}",'url',true)));$vars=array();$vars['el']=$this->htmlId;foreach($this->getOptionsControlsGroup()->getSections()as$section){foreach($section->getOptionsControls()as$optionObject){if($optionObject->isLessVar()){$lessVar=$optionObject->getLessVar();if($lessVar){$vars+=$optionObject->getLessVar();}}}}$this->lessParser->resetVariables();$vars=apply_filters("ait-element-{$this->id}-less-variables",$vars,$this);$this->lessParser->setVariables($vars);$this->lessParser->allParsedFiles=array();$this->lessParser->addParsedFile($file);try{$css=$this->lessParser->compile($content);}catch(Exception$e){$css=sprintf("\n/* Error during parsing LESS file '%s'.\nMessage:\n %s */\n",$file,$e->getMessage());}return$css;}}class
+compileLess($content,$file){$this->lessParser=$this->createLessCompiler();$vars=array();$vars['el']=$this->htmlId;foreach($this->getOptionsControlsGroup()->getSections()as$section){foreach($section->getOptionsControls()as$optionObject){if($optionObject->isLessVar()){$lessVar=$optionObject->getLessVar();if($lessVar){$vars+=$optionObject->getLessVar();}}}}$this->lessParser->resetVariables();$vars=apply_filters("ait-element-{$this->id}-less-variables",$vars,$this);$this->lessParser->setVariables($vars);$this->lessParser->allParsedFiles=array();$this->lessParser->addParsedFile($file);try{$css=$this->lessParser->compile($content);}catch(Exception$e){$css=sprintf("\n/* Error during parsing LESS file '%s'.\nMessage:\n %s */\n",$file,$e->getMessage());}return$css;}}class
 AitElementsManager
 extends
 NObject{protected$prototypes=array();protected$assetsManager;protected$optionsControlsGroupFactory;function
@@ -418,7 +439,8 @@ getAll(){return
 self::loadFontsFromJson();}static
 function
 getByFontFamily($family){$fonts=self::loadFontsFromJson();foreach($fonts
-as$font){if($font->family==$family){return$font;}}}}class
+as$font){if($font->family==$family){return$font;}}return
+false;}}class
 AitLangs{protected
 static$defaultLang;protected
 static
@@ -427,12 +449,12 @@ _defaultLang(){if(!self::$defaultLang){self::$defaultLang=new
 AitDefaultLanguage();}return
 self::$defaultLang;}static
 function
-isEnabled(){$filtered=apply_filters('ait-langs-enabled',aitIsPluginActive('languages'));if($filtered===true
+isEnabled(){global$polylang;$filtered=apply_filters('ait-langs-enabled',aitIsPluginActive('languages'));if($filtered===true
 and!aitIsPluginActive('languages')){return
 false;}else{return$filtered;}}static
 function
 getDefaultLocale(){if(!self::isEnabled())return
-get_locale();if(function_exists('aitLangsGetDefaultLanguage')){$locale=aitLangsGetDefaultLanguage('locale');}else{$locale=pll_default_language('locale');}if(!$locale){return
+get_locale();$locale='';if(function_exists('aitLangsGetDefaultLanguage')){$locale=aitLangsGetDefaultLanguage('locale');}elseif(function_exists('pll_default_language')){$locale=pll_default_language('locale');}if(!$locale){return
 get_locale();}return$locale;}static
 function
 getCurrentLocale(){return
@@ -459,7 +481,7 @@ getLanguagesList(){global$polylang;if(self::isEnabled()and$polylang
 and($list=$polylang->model->get_languages_list())){return$list;}return
 array(self::_defaultLang());}static
 function
-getSwitcherLanguages(){if(!self::isEnabled())return
+getSwitcherLanguages(){global$polylang;if(!self::isEnabled()or!$polylang)return
 array();if(function_exists('aitLangsGetCurrentLanguage')){return
 pll_the_languages(array('raw'=>true,'new_structure'=>true));}else{$langs=pll_the_languages(array('raw'=>true,'show_flags'=>true));$langsObj=array();if(!empty($langs)){foreach($langs
 as$lang){$langsObj[]=(object)array('id'=>$lang['id'],'slug'=>$lang['slug'],'name'=>$lang['name'],'url'=>$lang['url'],'flag'=>$lang['flag'],'flagUrl'=>'','isCurrent'=>$lang['current_lang'],'hasTranslation'=>!$lang['no_translation'],'htmlClass'=>implode(' ',$lang['classes']));}}return$langsObj;}}static
@@ -489,7 +511,7 @@ isset($localesAndTexts->{$defaultLocale})){return$localesAndTexts->{$defaultLoca
 isset($localesAndTexts->{'en_US'})){return$localesAndTexts->{'en_US'};}elseif(is_string($localesAndTexts)and!empty($localesAndTexts)){return$localesAndTexts;}else{return$defaultText;}}static
 function
 getPostLang($postId){if(!self::isEnabled())return
-self::_defaultLang();global$polylang;if(isset($polylang)and($lang=$polylang->model->get_post_language($postId))){return$lang;}return
+self::_defaultLang();if(function_exists('PLL')){if($lang=PLL()->model->post->get_language($postId)){return$lang;}}else{global$polylang;if(isset($polylang)and($lang=$polylang->model->get_post_language($postId))){return$lang;}}return
 self::_defaultLang();}static
 function
 checkIfPostAndGetLang(){global$post;if($post){return
@@ -504,8 +526,9 @@ getGmapsLang(){$map=array('bg_BG'=>'bg','cs_CZ'=>'cs','de_DE'=>'de','en_US'=>'en
 AitLessCompiler{protected
 static$less;protected$cacheDir;protected$cacheUrl;protected$lessVariables=array();function
 __construct($cacheDir,$cacheUrl){$this->cacheDir=$cacheDir;$this->cacheUrl=$cacheUrl;}function
-compile($args){$less=self::create();$inputFileBasename=basename($args['inputFile'],'.less');$v="-".AIT_THEME_VERSION;$oid=isset($args['params']['oid'])?$args['params']['oid']:'';$lang=isset($args['params']['lang'])?"-{$args['params']['lang']}":'';$globalOptionsVariables=$this->getLessVariables();$variables=$this->getLessVariables($oid);if($globalOptionsVariables===$variables){$oid='';}$outputFile="/{$inputFileBasename}{$v}{$oid}{$lang}.css";$cacheFile=$this->cacheDir."/.ht-{$inputFileBasename}{$v}{$oid}{$lang}.less-cache";if(file_exists($cacheFile)){$cache=unserialize(file_get_contents($cacheFile));}else{$cache=$args['inputFile'];}if($lang){$variables['current-lang']=$args['params']['lang'];}$less->setVariables($variables);$result=array('error'=>false,'embedCss'=>'','url'=>'','version'=>'','isEmpty'=>false);try{$newCache=$less->cachedCompile($cache,AIT_DEV);if(empty($newCache['compiled'])){$result['isEmpty']=true;return$result;}if(!is_array($cache)or$newCache["updated"]>$cache["updated"]){@file_put_contents($cacheFile,serialize($newCache));$css='';if(AIT_DEV){$css="/*\n";foreach($variables
-as$var=>$value){$css.="@{$var}: {$value}\n";}$css.="*/\n\n";}$written=@file_put_contents($this->cacheDir.$outputFile,$css.$newCache['compiled']);if($written===false){$result['error']=true;$result['embedCss']=$newCache['compiled'];}else{$result['url']=$this->cacheUrl.$outputFile;$result['version']=$newCache["updated"];}}else{$result['url']=$this->cacheUrl.$outputFile;$result['version']=is_array($cache)?$cache['updated']:$newCache["updated"];}return$result;}catch(Exception$e){$result['error']=true;$result['embedCss']="\n\n\n\n\n\n\n".$e->getMessage()."\n\n\n\n\n\n\n";return$result;}}static
+compileFile($inputFile,$params){$less=self::create();$inputFileBasename=basename($inputFile,'.less');$v="-".AIT_THEME_VERSION;$oid=isset($params['oid'])?$params['oid']:'';$lang=isset($params['lang'])?"-{$params['lang']}":'';$globalOptionsVariables=$this->getLessVariables();$variables=$this->getLessVariables($oid);if($globalOptionsVariables===$variables){$oid='';}$outputFile="/{$inputFileBasename}{$v}{$oid}{$lang}.css";$cacheFile=$this->cacheDir."/.ht-{$inputFileBasename}{$v}{$oid}{$lang}.less-cache";if(file_exists($cacheFile)){$cache=unserialize(file_get_contents('safe://'.$cacheFile));}else{$cache=$inputFile;}if($lang){$variables['current-lang']=$params['lang'];}$less->setVariables($variables);$result=array('inputFile'=>$inputFile,'error'=>false,'errorMsg'=>'','embedCss'=>'','url'=>'','version'=>'','isEmpty'=>false);try{$newCache=$less->cachedCompile($cache,AIT_DEV);if(empty($newCache['compiled'])){$result['isEmpty']=true;return$result;}if(!is_array($cache)or$newCache["updated"]>$cache["updated"]){@file_put_contents('safe://'.$cacheFile,serialize($newCache));$css='';if(AIT_DEV){$css="/*\n";foreach($variables
+as$var=>$value){$css.="@{$var}: {$value}\n";}$css.="*/\n\n";}$written=@file_put_contents('safe://'.$this->cacheDir.$outputFile,$css.$newCache['compiled']);if($written===false){$result['error']=true;$result['embedCss']=$newCache['compiled'];}else{$result['url']=$this->cacheUrl.$outputFile;$result['version']=$newCache["updated"];}}else{$result['url']=$this->cacheUrl.$outputFile;$result['version']=is_array($cache)?$cache['updated']:$newCache["updated"];}return$result;}catch(Exception$e){$result['error']=true;$result['embedCss']="\n\n/*  ==== LESS ERROR ==== */\nError in file '{$inputFile}'\n\n\n\n\n\n\n".$e->getMessage()."\n\n\n\n\n\n\n";$result['errorMsg']=$e->getMessage();return$result;}}function
+compileString($string){$less=self::create();$less->setVariables($this->getLessVariables());$cacheFile=$this->cacheDir.sprintf("/custom-%s.css",md5($string));$result=array('error'=>false,'isEmpty'=>false,'css'=>'');if(!is_file($cacheFile)){try{$css=$less->compile($string,'custom-css');if(empty($css)){$result['isEmpty']=true;return$result;}$result['css']=$css;@file_put_contents('safe://'.$cacheFile,$css);return$result;}catch(Exception$e){$result['error']=true;$result['css']="\n\n/*  ==== LESS ERROR ==== */\n\n\n\n\n\n\n".$e->getMessage()."\n\n\n\n\n\n\n";return$result;}}else{$result['css']=file_get_contents('safe://'.$cacheFile);return$result;}}static
 function
 create($importDir=array(),$importUrl=array()){$hash=md5(implode('',$importDir).implode('',$importUrl));if(!isset(self::$less[$hash])){$less=new
 AitLess;$less->importDir=!$importDir?aitGetPaths('css','','path'):$importDir;$less->importUrl=!$importUrl?aitGetPaths('css','','url'):$importUrl;$less->registerFunction('design-url',array(__CLASS__,'lessFnDesignUrl'));$less->registerFunction('img-url',array(__CLASS__,'lessFnImgUrl'));$less->registerFunction('fonts-url',array(__CLASS__,'lessFnFontsUrl'));$less->registerFunction('assets-url',array(__CLASS__,'lessFnAssetsUrl'));$less->setPreserveComments(false);if(!AIT_DEV){$formatter=new
@@ -658,15 +681,19 @@ isset($post)&&$post->post_status!='trash';}else{$specialPages=$this->getSpecialC
 isset($specialPages[$oid]);}}function
 getFirstFoundLocalOptionsId(){$localOptionsRegister=$this->getLocalOptionsRegister();$specialCustomPages=$this->getSpecialCustomPages();if(isset($localOptionsRegister['special'])){foreach($localOptionsRegister['special']as$specialPage){if(isset($specialCustomPages[$specialPage]))return$specialPage;}}if(isset($localOptionsRegister['pages'])){foreach($localOptionsRegister['pages']as$page){if($this->pageForLocalOptionsIsAvailable($page))return$page;}}return
 NULL;}function
-resetAllOptions(){AitCache::clean();$old=get_option($this->getOptionKey('theme'),array());$defaults=$this->config->defaults;if(isset($old['administrator'])){$defaults['theme']['administrator']=$old['administrator'];}foreach(AitConfig::getMainConfigTypes()as$type){$key=$this->getOptionKey($type);update_option($key,$defaults[$type]);}}function
-resetThemeOptions(){AitCache::clean();$old=get_option($this->getOptionKey('theme'),array());$defaults=$this->config->getDefaults('theme');if(isset($old['administrator'])){$defaults['administrator']=$old['administrator'];}update_option($this->getOptionKey('theme'),$defaults);}function
-resetDefaultLayoutOptions(){AitCache::clean();update_option($this->getOptionKey('layout'),$this->config->getDefaults('layout'));$defaults=$this->config->extractDefaultsFromConfig($this->config->getRawConfig(),true);update_option($this->getOptionKey('elements'),$defaults['elements']);}function
-resetOptionsGroup($configType,$groupKey,$oid){AitCache::clean();$old=get_option($this->getOptionKey($configType,$oid),array());$defaults=$this->config->getDefaults();if($configType=='theme'or$configType=='layout'){if(isset($defaults[$configType][$groupKey])){$old[$groupKey]=$defaults[$configType][$groupKey];update_option($this->getOptionKey($configType,$oid),$old);}}elseif($configType=='elements'){$idx=array();foreach($old
+resetAllOptions(){$old=get_option($this->getOptionKey('theme'),array());$defaults=$this->config->defaults;if(isset($old['administrator'])){$defaults['theme']['administrator']=$old['administrator'];}foreach(AitConfig::getMainConfigTypes()as$type){$key=$this->getOptionKey($type);update_option($key,$defaults[$type]);}}function
+resetThemeOptions(){$old=get_option($this->getOptionKey('theme'),array());$defaults=$this->config->getDefaults('theme');if(isset($old['administrator'])){$defaults['administrator']=$old['administrator'];}update_option($this->getOptionKey('theme'),$defaults);}function
+resetDefaultLayoutOptions(){$defaults=$this->config->extractDefaultsFromConfig($this->config->getRawConfig(),true);update_option($this->getOptionKey('layout'),$defaults['layout']);update_option($this->getOptionKey('elements'),$defaults['elements']);}function
+resetOptionsGroup($configType,$groupKey,$oid){$old=get_option($this->getOptionKey($configType,$oid),array());$defaults=$this->config->extractDefaultsFromConfig($this->config->getRawConfig(),true);if($configType=='theme'or$configType=='layout'){if($groupKey
+and
+isset($defaults[$configType][$groupKey])){$old[$groupKey]=$defaults[$configType][$groupKey];}elseif(!$groupKey
+and
+isset($defaults[$configType])){$old=$defaults[$configType];}update_option($this->getOptionKey($configType,$oid),$old);}elseif($configType=='elements'){$idx=array();foreach($old
 as$i=>$el){$idx[key($el)]=$i;}foreach($defaults[$configType]as$i=>$el){foreach($el
 as$key=>$el){if($groupKey==$key
 and!empty($idx)and
 isset($old[$idx[$key]][$key])){$old[$idx[$key]][$key]=array_intersect_key($el,$old[$idx[$key]][$key]);update_option($this->getOptionKey($configType,$oid),$old);}}}}}function
-importGlobalOptions($configType,$groupKey,$oid){AitCache::clean();$globalOld=get_option($this->getOptionKey($configType),array());$localOld=get_option($this->getOptionKey($configType,$oid),array());if($configType=='layout'){}elseif($configType=='elements'){$idx=array();foreach($globalOld
+importGlobalOptions($configType,$groupKey,$oid){$globalOld=get_option($this->getOptionKey($configType),array());$localOld=get_option($this->getOptionKey($configType,$oid),array());if($configType=='layout'){}elseif($configType=='elements'){$idx=array();foreach($globalOld
 as$i=>$el){$idx[key($el)]=$i;}foreach($localOld
 as$i=>$el){foreach($el
 as$key=>$el){if($groupKey==$key
@@ -688,6 +715,8 @@ AitUtils::startsWith($oid,"_page_");}function
 getOid(){$key='';if(!did_action('template_redirect')){$key=$this->getRequestedOid('post');if(!$key){$key=$this->getRequestedOid('get');}return$key;}$pages=$this->getSpecialCustomPages();if(isset($pages['_wc_shop'])){$shop=$pages['_wc_shop'];$product=$pages['_wc_product'];unset($pages['_wc_shop']);unset($pages['_wc_product']);$splitIndex=array_search('_404',array_keys($pages))+1;$pages=array_merge(array_slice($pages,0,$splitIndex),array('_wc_product'=>$product),array('_wc_shop'=>$shop),array_slice($pages,$splitIndex));}$pages['_page']=array('with-id'=>true,'if'=>'is_page()');foreach($pages
 as$oid=>$values){$if=create_function('',"return {$values['if']};");if($if()){$key=$oid;$id=get_queried_object_id();if($id
 and$values['with-id']){$key="{$key}_{$id}";}break;}}return$key;}function
+isQueryForSpecialPage(){$pages=$this->getSpecialCustomPages();$oid=$this->getOid();return
+isset($pages[$oid]);}function
 getRequestedOid($requestMethod='post'){$oid='';if($requestMethod=='post'){$oid=isset($_POST['oid'])?$_POST['oid']:'';}elseif($requestMethod=='get'){$oid=isset($_GET['oid'])?$_GET['oid']:'';}return
 sanitize_key($oid);}function
 mergeConfigDefaultsAndOptions($defaultValues,$currentValues){if(is_array($defaultValues)and
@@ -725,7 +754,7 @@ as$sidebar){register_sidebar($sidebar);}}function
 initWidgets(){$config=AitConfig::loadRawConfig(aitPath('config','/widgets.neon'),'/widgets.neon');foreach($config
 as$widget){$widgetClass=AitUtils::id2class($widget,'Widget');if(class_exists($widgetClass))register_widget($widgetClass);else
 trigger_error("Widget class {$widgetClass} doesn't exist.",E_USER_WARNING);}}function
-widgetTitle($title,$instance=array(),$idBase=''){if(isset($instance['ait-dropdown-wc-cart-widget'])and$instance['ait-dropdown-wc-cart-widget'])return'';$hasTitle=(trim(str_replace('&nbsp;','',$title))!=='');if($hasTitle){$title=esc_html(convert_chars(wptexturize($title)));return"<h3>{$title}</h3>";}return'<!-- no widget title -->';}function
+widgetTitle($title,$instance=array(),$idBase=''){if(isset($instance['ait-dropdown-wc-cart-widget'])and$instance['ait-dropdown-wc-cart-widget'])return'';$hasTitle=(trim(str_replace('&nbsp;','',$title))!=='');if($hasTitle){$title=esc_html(convert_chars(wptexturize($title)));if($idBase==='rss'){return$title;}else{return"<h3>{$title}</h3>";}}return'<!-- no widget title -->';}function
 cacheWidgetOutput($instance,$widgetObject,$args){$timerStart=microtime(true);$key='widget-'.md5(serialize(array($instance,$args)));$cachedWidget=get_transient($key);$ttl=$this->cacheWidgetOutput;if(empty($cachedWidget)){ob_start();$widgetObject->widget($args,$instance);$cachedWidget=ob_get_clean();set_transient($key,$cachedWidget,$ttl);}printf("%s <!-- From widget cache in %s seconds -->",$cachedWidget,number_format(microtime(true)-$timerStart,5));return
 false;}}final
 class
@@ -1211,8 +1240,9 @@ function
 addAitTaxs($taxs){return
 get_taxonomies(array('ait-tax'=>true));}static
 function
-addLangToCustomWpQuery($query,$originalArgs){global$polylang;if(isset($query['post_type'])){$translatableCpts=get_post_types(array('ait-translatable-cpt'=>true));if(in_array($query['post_type'],$translatableCpts)and
-isset($polylang)and
+addLangToCustomWpQuery($query,$originalArgs){global$polylang;if(isset($polylang)and
+isset($query['post_type'])){$translatableCpts=get_post_types(array('ait-translatable-cpt'=>true));if(isset($query['tax_query'])and
+aitOptions()->isQueryForSpecialPage()){foreach($query['tax_query']as$i=>$taxquery){$newTermId=pll_get_term($taxquery['terms']);if($newTermId){$query['tax_query'][$i]['terms']=$newTermId;}}}if(in_array($query['post_type'],$translatableCpts)and
 in_array($query['post_type'],$polylang->options["post_types"])){$query['lang']=AitLangs::getCurrentLanguageCode();}}return$query;}}class
 AitWpLatteMacros
 extends
@@ -1284,11 +1314,12 @@ tinymceUnhideKitchensink($args){$args['wordpress_adv_hidden']=false;return$args;
 function
 enableSearchingInElements($where,$wp_query){if(!$wp_query->is_search()||basename($_SERVER["SCRIPT_NAME"])=="admin-ajax.php"){return$where;}$searchQuery=self::buildDefaultSearchSql($wp_query);$searchQuery.=self::buildPostElementsOptionsSearchSql($wp_query);if($searchQuery!=''){$where=preg_replace('#\(\(\(.*?\)\)\)#','(('.$searchQuery.'))',$where);}return$where;}static
 function
-joinPostsMetadataToEnableSearchingInElements($join){global$wpdb;$theme=esc_sql(AIT_CURRENT_THEME);$join.=" LEFT JOIN {$wpdb->options} ON {$wpdb->options}.option_name LIKE CONCAT('_ait_{$theme}_elements_opts_page_', {$wpdb->posts}.ID)";return$join;}static
+joinPostsMetadataToEnableSearchingInElements($join){global$wpdb;if(is_search()){$theme=esc_sql(AIT_CURRENT_THEME);$join.=" LEFT JOIN {$wpdb->options} ON {$wpdb->options}.option_name LIKE CONCAT('_ait_{$theme}_elements_opts_page_', {$wpdb->posts}.ID)";}return$join;}static
 function
-showOnlyDistinctPostSearchResults($query){if(strstr($query,'DISTINCT')===false){$query=str_replace('SELECT','SELECT DISTINCT',$query);}return$query;}static
+showOnlyDistinctPostSearchResults($query){if(is_search()and
+strstr($query,'DISTINCT')===false){$query=str_replace('SELECT','SELECT DISTINCT',$query);}return$query;}static
 function
-fixCommentFieldsInWp44($fields){if(isset($fields['comment'])){$comment_field=$fields['comment'];unset($fields['comment']);$fields['comment']=$comment_field;}return$fields;}private
+fixCommentFieldsInWp44($fields){if(isset($fields['comment'])){$commentField=$fields['comment'];unset($fields['comment']);$fields['comment']=$commentField;}return$fields;}private
 static
 function
 buildDefaultSearchSql($wp_query){global$wpdb;$not_exact=empty($wp_query->query_vars['exact']);$search_sql_query='';$seperator='';$terms=self::getSearchTerms($wp_query);$search_sql_query.='(';foreach($terms
@@ -1816,19 +1847,7 @@ AitCategoryDropdownWalker);if(!isset($this->config->args)){$args=$defaultArgs;}e
 		<div class="ait-opt ait-opt-<?php echo$this->id?>">
 
 			<?php if(!empty($html)):?>
-			<?php $lang=AitLangs::checkIfPostAndGetLang();?>
-			<div class="ait-opt-wrapper chosen-wrapper <?php echo
-AitLangs::htmlClass($lang?$lang->locale:'')?>">
-				<?php if(AitLangs::isEnabled()){if($lang){?>
-						<div class="flag"> <?php
-
-echo$lang->flag;?> </div> <?php
-}else{?>
-						<div class="flag"> <?php
-
-echo
-AitLangs::getDefaultLang()->flag;?> </div> <?php
-}}?>
+			<div class="ait-opt-wrapper chosen-wrapper">
 				<?php echo$html;?>
 			</div>
 			<?php else:?>
@@ -1973,9 +1992,9 @@ getRemoveAll(){return(isset($this->config->removeAll)and$this->config->removeAll
 setClonedOptionsControlsSections($clonedOptionsControlsSections){$this->clonedOptionsControlsSections=$clonedOptionsControlsSections;}function
 getClonedOptionsControlsSections(){return$this->clonedOptionsControlsSections;}protected
 function
-getClonedOptionsControlsSectionLabel(AitOptionsControlsSection$clonedOptionsControlsSection){$label='';foreach($clonedOptionsControlsSection->getOptionsControls()as$optionControl){if($optionControl
+getClonedOptionsControlsSectionLabel(AitOptionsControlsSection$clonedOptionsControlsSection){$label='';$lang=AitLangs::checkIfPostAndGetLang();$locale=$lang?$lang->locale:AitLangs::getDefaultLocale();foreach($clonedOptionsControlsSection->getOptionsControls()as$optionControl){if($optionControl
 instanceof
-AitTextOptionControl&&$optionControl->getLocalisedValue('',AitLangs::getDefaultLocale())){$label=$optionControl->getLocalisedValue('',AitLangs::getDefaultLocale());break;}else{if($optionControl
+AitTextOptionControl&&$optionControl->getLocalisedValue('',$locale)){$label=$optionControl->getLocalisedValue('',$locale);break;}else{if($optionControl
 instanceof
 AitStringOptionControl&&$optionControl->getValue()){$label=$optionControl->getValue();break;}}}return$label;}protected
 function
@@ -2582,7 +2601,7 @@ aitDataAttr('select-image',array('title'=>sprintf(__('Select Image for: %s','ait
 		<?php
 }static
 function
-prepareDefaultValue($optionControlDefinition){if(empty($optionControlDefinition['default']))return'';$default=$optionControlDefinition['default'];if(!AitUtils::startsWith($default,'/')){$default="/{$default}";}if(!AitUtils::isExtUrl($default)){if(AitUtils::contains($default,'/admin/assets/img/')){$default=aitPaths()->url->fw.$default;}else{$fullUrl=aitUrl('theme',$default);if($fullUrl!==false){$default=$fullUrl;}}}return$default;}function
+prepareDefaultValue($optionControlDefinition){if(empty($optionControlDefinition['default']))return'';$default=$optionControlDefinition['default'];if(!AitUtils::startsWith($default,'/')and!AitUtils::startsWith($default,'http')){$default="/{$default}";}if(!AitUtils::isExtUrl($default)){if(AitUtils::contains($default,'/admin/assets/img/')){$default=aitPaths()->url->fw.$default;}else{$fullUrl=aitUrl('theme',$default);if($fullUrl!==false){$default=$fullUrl;}}}return$default;}function
 updateLessVar(){parent::updateLessVar();$lessVarBaseName=key($this->lessVar);$lessVar=$this->lessVar;$lessVarValue=$lessVar[$lessVarBaseName];if(empty($lessVarValue)){$lessVar[$lessVarBaseName]='~""';}else{$lessVar[$lessVarBaseName]="url('".$lessVarValue."')";}$this->lessVar=$lessVar;}}class
 AitInfoOptionControl
 extends
@@ -2861,6 +2880,7 @@ control(){$d=(object)$this->config->default;?>
 								</div>
 							</div>
 
+							<div class="ait-opt-maps-item ait-opt-maps-message" style="display: none"><?php _e("Couldn't find location. Try different address",'ait-admin')?></div>
 						</div>
 
 						<div class="ait-opt-tools-cell2">
@@ -3341,25 +3361,7 @@ control(){$val=$this->getValue();$sidebars=aitManager('sidebars')->getSidebars()
 		</div>
 
 		<div class="ait-opt ait-opt-<?php echo$this->id?>">
-			<?php $lang=AitLangs::checkIfPostAndGetLang();?>
-			<div class="ait-opt-wrapper chosen-wrapper <?php echo
-AitLangs::htmlClass($lang?$lang->locale:'')?>">
-				<?php if(AitLangs::isEnabled()){if($lang){?>
-						<div class="flag">
-							<?php
-
-echo$lang->flag;?>
-						</div>
-						<?php
-}else{?>
-						<div class="flag">
-							<?php
-
-echo
-AitLangs::getDefaultLang()->flag;?>
-						</div>
-						<?php
-}}?>
+			<div class="ait-opt-wrapper chosen-wrapper">
 				<select data-placeholder="<?php _e('Choose&hellip;','ait-admin')?>" name="<?php echo$this->getNameAttr('sidebar');?>" id="<?php echo$this->getIdAttr('sidebar');?>" class="chosen">
 					<option value="none" <?php selected($val['sidebar'],'none')?>><?php echo
 esc_html(_x('None','sidebar','ait-admin'))?></option>

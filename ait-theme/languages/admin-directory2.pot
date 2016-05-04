@@ -1,37 +1,37 @@
-# Copyright (C) 2015 AitThemes.club
+# Copyright (C) 2016 AitThemes.club
 # This file is distributed under the GNU General Public License.
 msgid ""
 msgstr ""
 "Project-Id-Version: Directory+ Admin\n"
 "Report-Msgid-Bugs-To: http://support.ait-themes.com/support/category/wp-directory2\n"
-"POT-Creation-Date: 2015-12-14 12:20:19+00:00\n"
+"POT-Creation-Date: 2016-04-18 10:06:49+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: ait-theme/@framework/AitAdminBar.php:33
+#: ait-theme/@framework/AitAdminBar.php:35
 #: ait-theme/@framework/admin/AitAdmin.php:104
 msgid "Theme Admin"
 msgstr ""
 
-#: ait-theme/@framework/AitAdminBar.php:91
+#: ait-theme/@framework/AitAdminBar.php:94
 msgid "Dev mode: "
 msgstr ""
 
-#: ait-theme/@framework/AitAdminBar.php:113
-#: ait-theme/@framework/functions.php:281
+#: ait-theme/@framework/AitAdminBar.php:116
+#: ait-theme/@framework/functions.php:279
 msgid "Empty theme cache"
 msgstr ""
 
-#: ait-theme/@framework/AitAdminBar.php:120
-#: ait-theme/@framework/functions.php:282
+#: ait-theme/@framework/AitAdminBar.php:123
+#: ait-theme/@framework/functions.php:280
 msgid "Empty image (WPThumb) cache"
 msgstr ""
 
-#: ait-theme/@framework/AitAdminBar.php:213
+#: ait-theme/@framework/AitAdminBar.php:216
 #: ait-theme/@framework/admin/AitAdmin.php:475
 #: ait-theme/@framework/config/admin.php:22
 msgid "Page Builder"
@@ -45,43 +45,43 @@ msgstr ""
 msgid "Custom Meta Box"
 msgstr ""
 
-#: ait-theme/@framework/AitOptions.php:816
+#: ait-theme/@framework/AitOptions.php:808
 msgid "%s (blog)"
 msgstr ""
 
-#: ait-theme/@framework/AitOptions.php:816
+#: ait-theme/@framework/AitOptions.php:808
 msgid "Homepage (blog)"
 msgstr ""
 
-#: ait-theme/@framework/AitOptions.php:821
+#: ait-theme/@framework/AitOptions.php:813
 msgid "404 page"
 msgstr ""
 
-#: ait-theme/@framework/AitOptions.php:826
+#: ait-theme/@framework/AitOptions.php:818
 msgid "Search page"
 msgstr ""
 
-#: ait-theme/@framework/AitOptions.php:831
+#: ait-theme/@framework/AitOptions.php:823
 msgid "Archive pages"
 msgstr ""
 
-#: ait-theme/@framework/AitOptions.php:832
+#: ait-theme/@framework/AitOptions.php:824
 msgid "Category, Taxonomy, Tag, Author, Date"
 msgstr ""
 
-#: ait-theme/@framework/AitOptions.php:837
+#: ait-theme/@framework/AitOptions.php:829
 msgid "Attachment pages"
 msgstr ""
 
-#: ait-theme/@framework/AitOptions.php:842
+#: ait-theme/@framework/AitOptions.php:834
 msgid "Single post"
 msgstr ""
 
-#: ait-theme/@framework/AitOptions.php:865
+#: ait-theme/@framework/AitOptions.php:857
 msgid "Single - WooCommerce Product"
 msgstr ""
 
-#: ait-theme/@framework/AitOptions.php:873
+#: ait-theme/@framework/AitOptions.php:865
 msgid "%s - WooCommerce Shop Page"
 msgstr ""
 
@@ -186,23 +186,15 @@ msgstr ""
 msgid "Save and Open in Page Builder"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitAdminAjax.php:310
+#: ait-theme/@framework/admin/AitAdminAjax.php:317
 msgid "Something is wrong with import form"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitAdminAjax.php:341
+#: ait-theme/@framework/admin/AitAdminAjax.php:344
 msgid "File with demo content '%s' doesn't exists."
 msgstr ""
 
-#: ait-theme/@framework/admin/AitAdminAjax.php:388
-msgid "Demo images were successfully imported"
-msgstr ""
-
-#: ait-theme/@framework/admin/AitAdminAjax.php:390
-msgid "Demo images could not be imported."
-msgstr ""
-
-#: ait-theme/@framework/admin/AitAdminAjax.php:432
+#: ait-theme/@framework/admin/AitAdminAjax.php:426
 msgid "Something is wrong with export form"
 msgstr ""
 
@@ -214,108 +206,108 @@ msgstr ""
 msgid "Export could not be compressed via gzcompress function. Check your PHP settings."
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:123
+#: ait-theme/@framework/admin/AitBackup.php:73
 msgid "Directory '%s' can not be created."
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:344
-#: ait-theme/@framework/admin/AitBackup.php:931
+#: ait-theme/@framework/admin/AitBackup.php:290
+#: ait-theme/@framework/admin/AitBackup.php:856
 msgid "Import method '%s' does not exist. Something is wrong."
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:358
-#: ait-theme/@framework/admin/AitBackup.php:376
+#: ait-theme/@framework/admin/AitBackup.php:304
+#: ait-theme/@framework/admin/AitBackup.php:321
 msgid "Content of the backup file is corrupted, can not be uncompressed."
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:387
+#: ait-theme/@framework/admin/AitBackup.php:332
 msgid "Content from the file \"%s\" can not be read."
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:486
+#: ait-theme/@framework/admin/AitBackup.php:409
 msgid "Inserting of the WordPress option \"%s\" failed."
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:493
-#: ait-theme/@framework/admin/AitBackup.php:536
+#: ait-theme/@framework/admin/AitBackup.php:416
+#: ait-theme/@framework/admin/AitBackup.php:459
 #: ait-theme/@framework/upgrades/skeleton-upgrade-2.1.php:130
 msgid "All inserts of theme settings to the database failed."
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:529
+#: ait-theme/@framework/admin/AitBackup.php:452
 #: ait-theme/@framework/upgrades/skeleton-upgrade-2.1.php:123
 msgid "Inserting of the theme option \"%s\" failed."
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:659
+#: ait-theme/@framework/admin/AitBackup.php:582
 msgid "Content was partialy imported. Some errors occured. %s"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:789
+#: ait-theme/@framework/admin/AitBackup.php:714
 msgid "File from URL \"%s\" can not be fetched. Reason: %s"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:793
+#: ait-theme/@framework/admin/AitBackup.php:718
 msgid "Successfully downloaded and saved file from URL \"%s\""
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:799
+#: ait-theme/@framework/admin/AitBackup.php:724
 msgid "Dummy demo images were sucessfully downloaded"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:802
+#: ait-theme/@framework/admin/AitBackup.php:727
 msgid "All attachments were sucessfully downloaded"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:881
+#: ait-theme/@framework/admin/AitBackup.php:806
 msgid "Remote server did not respond"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:887
+#: ait-theme/@framework/admin/AitBackup.php:812
 msgid "Remote server returned error response %1$d %2$s"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:894
+#: ait-theme/@framework/admin/AitBackup.php:819
 msgid "Remote file have incorrect size"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:899
+#: ait-theme/@framework/admin/AitBackup.php:824
 msgid "Zero size file downloaded"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:912
+#: ait-theme/@framework/admin/AitBackup.php:837
 msgid "Content was successfully imported, yay!"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:913
+#: ait-theme/@framework/admin/AitBackup.php:838
 msgid "Content was imported partialy. Some data could not be imported. Here is the report: %s"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:914
+#: ait-theme/@framework/admin/AitBackup.php:839
 msgid "Content could not be imported. Reason(s): %s"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:917
+#: ait-theme/@framework/admin/AitBackup.php:842
 msgid "All theme settings were successfully imported, yay!"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:918
+#: ait-theme/@framework/admin/AitBackup.php:843
 msgid "All theme settings were imported partialy. Some data could not be imported. Here is the report: %s"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:919
+#: ait-theme/@framework/admin/AitBackup.php:844
 msgid "All theme settings could not be imported. Reason(s): %s"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:922
+#: ait-theme/@framework/admin/AitBackup.php:847
 msgid "WordPress settings (sidebars, widgets, etc..) were successfully imported, yay!"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:923
+#: ait-theme/@framework/admin/AitBackup.php:848
 msgid "WordPress settings were imported partialy. Some data could not be imported. Here is the report: %s"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitBackup.php:924
+#: ait-theme/@framework/admin/AitBackup.php:849
 msgid "WordPress settings (sidebars, widgets, etc..) could not be imported. Reason(s): %s"
 msgstr ""
 
@@ -372,11 +364,11 @@ msgstr ""
 msgid "Are you sure you want to reset options from this group to default values?"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitOptionsControlsRenderer.php:337
+#: ait-theme/@framework/admin/AitOptionsControlsRenderer.php:340
 msgid "Reset"
 msgstr ""
 
-#: ait-theme/@framework/admin/AitOptionsControlsRenderer.php:365
+#: ait-theme/@framework/admin/AitOptionsControlsRenderer.php:368
 msgid "No options"
 msgstr ""
 
@@ -901,6 +893,7 @@ msgid "Google Map"
 msgstr ""
 
 #: ait-theme/@framework/config/@elements.php:270
+#: ait-theme/config/@elements.neon
 msgctxt "name of element"
 msgid "Member"
 msgstr ""
@@ -1181,7 +1174,7 @@ msgstr ""
 #: ait-theme/@framework/form/options-controls/background.php:58
 #: ait-theme/@framework/form/options-controls/image.php:28
 #: ait-theme/@framework/menu/AitMenuBackendWalker.php:152
-#: ait-theme/widgets/AitBannerWidget.php:143
+#: ait-theme/widgets/AitBannerWidget.php:140
 msgid "Select Image"
 msgstr ""
 
@@ -1312,6 +1305,7 @@ msgid "Open/Collapse All Items"
 msgstr ""
 
 #: ait-theme/@framework/form/options-controls/clone.php:139
+#: ait-theme/@framework/form/options-controls/multimarker-map.php:56
 #: ait-theme/@framework/menu/AitMenuBackendWalker.php:221
 msgid "Remove"
 msgstr ""
@@ -1329,7 +1323,7 @@ msgstr ""
 #: ait-theme/@framework/form/options-controls/post-select.php:54
 #: ait-theme/@framework/form/options-controls/select-dynamic.php:35
 #: ait-theme/@framework/form/options-controls/select.php:28
-#: ait-theme/@framework/form/options-controls/sidebar.php:39
+#: ait-theme/@framework/form/options-controls/sidebar.php:19
 #: ait-theme/@framework/form/options-controls/user-select.php:56
 #: ait-theme/elements/revolution-slider/revslider-alias.optioncontrol.php:36
 msgid "Choose&hellip;"
@@ -1342,6 +1336,7 @@ msgstr ""
 #: ait-theme/config/@layout.neon ait-theme/config/@theme.neon
 #: ait-theme/includes/ait-toolkit-override.php:151
 #: ait-theme/includes/ait-toolkit-override.php:192
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "None"
 msgstr ""
 
@@ -1379,7 +1374,6 @@ msgstr ""
 #: ait-theme/config/cpts-metaboxes/event-pro-data.metabox.neon
 #: ait-theme/elements/header-map/header-map.options.neon
 #: ait-theme/config/metaboxes/post-gps.metabox.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Address"
 msgstr ""
 
@@ -1400,6 +1394,10 @@ msgstr ""
 msgid "Streetview"
 msgstr ""
 
+#: ait-theme/@framework/form/options-controls/map.php:97
+msgid "Couldn't find location. Try different address"
+msgstr ""
+
 #: ait-theme/@framework/form/options-controls/multimarker-map.php:40
 msgid "Clear map"
 msgstr ""
@@ -1412,12 +1410,12 @@ msgstr ""
 msgid "No items. Add some items to \"%s\""
 msgstr ""
 
-#: ait-theme/@framework/form/options-controls/sidebar.php:40
+#: ait-theme/@framework/form/options-controls/sidebar.php:20
 msgctxt "sidebar"
 msgid "None"
 msgstr ""
 
-#: ait-theme/@framework/functions.php:275
+#: ait-theme/@framework/functions.php:273
 msgid "Delete caches"
 msgstr ""
 
@@ -1489,8 +1487,11 @@ msgstr ""
 #: ait-theme/config/cpts-metaboxes/product-item-options.metabox.neon
 #: ait-theme/elements/background-slider/background-slider.options.neon
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
+#: ait-theme/elements/search-form/search-form.options.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Description"
 msgstr ""
 
@@ -1515,6 +1516,7 @@ msgstr ""
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
 #: ait-theme/elements/promotion/promotion.options.neon
 #: ait-theme/config/@layout.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Left"
 msgstr ""
 
@@ -1522,6 +1524,7 @@ msgstr ""
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
 #: ait-theme/elements/promotion/promotion.options.neon
 #: ait-theme/config/@layout.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Right"
 msgstr ""
 
@@ -1529,6 +1532,8 @@ msgstr ""
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
 #: ait-theme/config/@layout.neon
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Center"
 msgstr ""
 
@@ -1574,7 +1579,10 @@ msgstr ""
 #: ait-theme/elements/text/text.options.neon
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
+#: ait-theme/elements/search-form/search-form.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Custom Class"
 msgstr ""
 
@@ -1626,7 +1634,6 @@ msgstr ""
 
 #: ait-theme/config/@theme.neon
 #: ait-theme/config/cpts-metaboxes/event-pro-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "General"
 msgstr ""
 
@@ -1687,6 +1694,7 @@ msgid "Website Background"
 msgstr ""
 
 #: ait-theme/config/@theme.neon
+#: ait-theme/elements/page-title/page-title.options.neon
 msgid "Look of section background. Color, opacity and background image."
 msgstr ""
 
@@ -1720,6 +1728,7 @@ msgstr ""
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
 #: ait-theme/elements/promotion/promotion.options.neon
 #: ait-theme/elements/page-title/page-title.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Text"
 msgstr ""
 
@@ -1807,7 +1816,11 @@ msgstr ""
 #: ait-theme/elements/page-title/page-title.options.neon
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
+#: ait-theme/elements/search-form/search-form.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Background"
 msgstr ""
 
@@ -1872,7 +1885,7 @@ msgstr ""
 msgid "Decorative color of some elements and links with mouse cursor over"
 msgstr ""
 
-#: ait-theme/config/@theme.neon
+#: ait-theme/config/@theme.neon ait-theme/config/@layout.neon
 msgid "Footer Bar"
 msgstr ""
 
@@ -1963,7 +1976,6 @@ msgstr ""
 #: ait-theme/config/@theme.neon
 #: ait-theme/elements/contact-form/contact-form.options.neon
 #: ait-theme/elements/authors/authors.options.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 #: ait-theme/elements/taxonomy-list/taxonomy-list.options.neon
 msgid "Name"
 msgstr ""
@@ -1985,6 +1997,7 @@ msgstr ""
 #: ait-theme/elements/facebook/facebook.options.neon
 #: ait-theme/elements/image/image.options.neon
 #: ait-theme/elements/video/video.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Width"
 msgstr ""
 
@@ -2019,10 +2032,14 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/header-video/header-video.options.neon
-#: ait-theme/elements/header-map/header-map.options.neon
 #: ait-theme/elements/search-form/search-form.options.neon
+#: ait-theme/elements/header-map/header-map.options.neon
 #: ait-theme/elements/sidebar-map/sidebar-map.options.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Display"
 msgstr ""
 
@@ -2038,6 +2055,7 @@ msgstr ""
 #: ait-theme/elements/advertising-spaces/advertising-spaces.options.neon
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Open In New Window"
 msgstr ""
 
@@ -2045,6 +2063,7 @@ msgstr ""
 #: ait-theme/elements/advertising-spaces/advertising-spaces.options.neon
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Open links in new window or tab"
 msgstr ""
 
@@ -2063,7 +2082,7 @@ msgstr ""
 #: ait-theme/elements/seo/seo.options.neon
 #: ait-theme/widgets/AitPostsWidget.php:134
 #: ait-theme/widgets/AitItemsWidget.php:153
-#: ait-theme/widgets/AitLoginWidget.php:319
+#: ait-theme/widgets/AitLoginWidget.php:349
 #: ait-theme/widgets/AitNewestItemWidget.php:155
 #: ait-theme/config/cpts-metaboxes/portfolio-item.metabox.neon
 #: ait-theme/config/cpts-metaboxes/box-data.metabox.neon
@@ -2071,16 +2090,20 @@ msgstr ""
 #: ait-theme/widgets/AitPosts2Widget.php:140
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/config/metaboxes/user-profile.metabox.neon
-#: ait-theme/widgets/AitLoginWidget.php:233
+#: ait-theme/widgets/AitLoginWidget.php:296
 #: ait-theme/widgets/AitPosts2Widget.php:142
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
-#: ait-theme/widgets/AitLoginWidget.php:232
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
-#: ait-theme/widgets/AitLoginWidget.php:287
+#: ait-theme/widgets/AitLoginWidget.php:294
+#: ait-theme/config/cpts-metaboxes/member.metabox.php:30
+#: ait-theme/elements/search-form/search-form.options.neon
 #: ait-theme/widgets/AitNewestItemWidget.php:157
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
-#: ait-theme/widgets/AitLoginWidget.php:296
+#: ait-theme/widgets/AitLoginWidget.php:358
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
+#: ait-theme/widgets/AitLoginWidget.php:275
 msgid "Title"
 msgstr ""
 
@@ -2116,8 +2139,10 @@ msgstr ""
 #: ait-theme/config/cpts-metaboxes/member.metabox.neon
 #: ait-theme/config/metaboxes/user-profile.metabox.neon
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
+#: ait-theme/config/cpts-metaboxes/member.metabox.php:35
 #: ait-theme/elements/header-video/header-video.options.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Link"
 msgstr ""
 
@@ -2138,10 +2163,14 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/header-video/header-video.options.neon
-#: ait-theme/elements/header-map/header-map.options.neon
 #: ait-theme/elements/search-form/search-form.options.neon
+#: ait-theme/elements/header-map/header-map.options.neon
 #: ait-theme/elements/sidebar-map/sidebar-map.options.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Display or hide this element on page"
 msgstr ""
 
@@ -2151,19 +2180,26 @@ msgstr ""
 #: ait-theme/elements/text/text.options.neon
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
+#: ait-theme/elements/search-form/search-form.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Write your custom class for own element identification"
 msgstr ""
 
 #: ait-theme/elements/@common/common.neon
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Title text displayed with element"
 msgstr ""
 
 #: ait-theme/elements/@common/common.neon
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Description text displayed with element"
 msgstr ""
 
@@ -2171,6 +2207,7 @@ msgstr ""
 #: ait-theme/elements/revolution-slider/revolution-slider.options.neon
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Alignment"
 msgstr ""
 
@@ -2197,7 +2234,11 @@ msgstr ""
 #: ait-theme/elements/text/text.options.neon
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
+#: ait-theme/elements/search-form/search-form.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/page-title/page-title.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Element Background"
 msgstr ""
 
@@ -2208,7 +2249,10 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/header-video/header-video.options.neon
+#: ait-theme/elements/search-form/search-form.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Look of element background. Color, opacity and background image."
 msgstr ""
 
@@ -2219,6 +2263,8 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Spaces around Element"
 msgstr ""
 
@@ -2229,6 +2275,8 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Top Margin"
 msgstr ""
 
@@ -2239,6 +2287,8 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Space above element"
 msgstr ""
 
@@ -2250,6 +2300,8 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Top Padding"
 msgstr ""
 
@@ -2260,6 +2312,8 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Top space inside element"
 msgstr ""
 
@@ -2271,6 +2325,8 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Bottom Padding"
 msgstr ""
 
@@ -2281,6 +2337,8 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Bottom space inside element"
 msgstr ""
 
@@ -2291,6 +2349,8 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Bottom Margin"
 msgstr ""
 
@@ -2301,6 +2361,8 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Space below element"
 msgstr ""
 
@@ -2331,6 +2393,7 @@ msgstr ""
 #: ait-theme/elements/tours/tours.options.neon
 #: ait-theme/widgets/AitNewestItemWidget.php:161 ait-theme/config/@layout.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Category"
 msgstr ""
 
@@ -2358,6 +2421,7 @@ msgstr ""
 #: ait-theme/elements/tour-slider/tour-slider.options.neon
 #: ait-theme/elements/tours/tours.options.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Select category displayed on page"
 msgstr ""
 
@@ -2385,6 +2449,7 @@ msgstr ""
 #: ait-theme/elements/taxonomy-list/taxonomy-list.options.neon
 #: ait-theme/config/@layout.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Order By"
 msgstr ""
 
@@ -2412,6 +2477,7 @@ msgstr ""
 #: ait-theme/elements/taxonomy-list/taxonomy-list.options.neon
 #: ait-theme/config/@layout.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Select order of items listed on page"
 msgstr ""
 
@@ -2428,6 +2494,7 @@ msgstr ""
 #: ait-theme/elements/items/items.options.neon
 #: ait-theme/elements/facilities/facilities.options.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Creation Date"
 msgstr ""
 
@@ -2467,6 +2534,7 @@ msgstr ""
 #: ait-theme/elements/authors/authors.options.neon
 #: ait-theme/elements/tours/tours.options.neon ait-theme/config/@layout.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Random"
 msgstr ""
 
@@ -2495,6 +2563,7 @@ msgstr ""
 #: ait-theme/elements/taxonomy-list/taxonomy-list.options.neon
 #: ait-theme/config/@layout.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Order"
 msgstr ""
 
@@ -2523,6 +2592,7 @@ msgstr ""
 #: ait-theme/elements/taxonomy-list/taxonomy-list.options.neon
 #: ait-theme/config/@layout.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Ascending"
 msgstr ""
 
@@ -2551,6 +2621,7 @@ msgstr ""
 #: ait-theme/elements/taxonomy-list/taxonomy-list.options.neon
 #: ait-theme/config/@layout.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Descending"
 msgstr ""
 
@@ -2699,6 +2770,7 @@ msgstr ""
 #: ait-theme/config/cpts-metaboxes/event-pro-data.metabox.neon
 #: ait-theme/elements/background-slider/background-slider.options.neon
 #: ait-theme/config/metaboxes/post-gallery.metabox.neon
+#: ait-theme/config/@theme.neon
 msgid "Label"
 msgstr ""
 
@@ -2730,12 +2802,12 @@ msgstr ""
 #: ait-theme/elements/twitter/twitter.options.neon
 #: ait-theme/config/@theme.neon ait-theme/elements/posts/posts.options.neon
 #: ait-theme/config/@layout.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
 msgid "Date"
 msgstr ""
 
 #: ait-theme/elements/contact-form/contact-form.options.neon
 #: ait-theme/config/@theme.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Email"
 msgstr ""
 
@@ -2761,7 +2833,6 @@ msgstr ""
 
 #: ait-theme/elements/contact-form/contact-form.options.neon
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Value"
 msgstr ""
 
@@ -2785,6 +2856,7 @@ msgstr ""
 #: ait-theme/elements/rule/rule.options.neon
 #: ait-theme/elements/soundcloud/soundcloud.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/portfolio/portfolio.options.neon
 msgid "Size"
 msgstr ""
 
@@ -2915,7 +2987,8 @@ msgstr ""
 #: ait-theme/elements/tours/tours.options.neon
 #: ait-theme/elements/header-video/header-video.options.neon
 #: portal/functions/accounts.php:244 portal/functions/accounts.php:381
-#: portal/functions/accounts.php:243
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
+#: portal/functions/accounts.php:169
 msgid "Type"
 msgstr ""
 
@@ -2972,18 +3045,22 @@ msgid "Main color of counters"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Animation"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Select type of slider animation"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Slide Horizontal"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Fade"
 msgstr ""
 
@@ -2991,11 +3068,13 @@ msgstr ""
 #: ait-theme/elements/soundcloud/soundcloud.options.neon
 #: ait-theme/elements/tour-slider/tour-slider.options.neon
 #: ait-theme/elements/header-video/header-video.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Autoplay"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
 #: ait-theme/elements/tour-slider/tour-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Enable or disable the autoplay feature"
 msgstr ""
 
@@ -3007,6 +3086,7 @@ msgstr ""
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/rule/rule.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/portfolio/portfolio.options.neon
 msgid "Content Size"
 msgstr ""
 
@@ -3014,6 +3094,7 @@ msgstr ""
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/rule/rule.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/portfolio/portfolio.options.neon
 msgid "Fullwidth Size"
 msgstr ""
 
@@ -3028,7 +3109,9 @@ msgstr ""
 #: ait-theme/elements/job-offers/job-offers.options.neon
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/tours/tours.options.neon
+#: ait-theme/elements/events-pro/events-pro.options.neon
 #: ait-theme/elements/taxonomy-list/taxonomy-list.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Image Format"
 msgstr ""
 
@@ -3049,6 +3132,7 @@ msgstr ""
 #: ait-theme/config/cpts-metaboxes/portfolio-item.metabox.neon
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/tours/tours.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "1:1"
 msgstr ""
 
@@ -3065,6 +3149,8 @@ msgstr ""
 #: ait-theme/elements/tours/tours.options.neon
 #: ait-theme/elements/header-video/header-video.options.neon
 #: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/job-offers/job-offers.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "4:3"
 msgstr ""
 
@@ -3081,6 +3167,8 @@ msgstr ""
 #: ait-theme/elements/tours/tours.options.neon
 #: ait-theme/elements/header-video/header-video.options.neon
 #: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/job-offers/job-offers.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "16:9"
 msgstr ""
 
@@ -3096,6 +3184,8 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/tours/tours.options.neon
 #: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/job-offers/job-offers.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "2:1"
 msgstr ""
 
@@ -3112,48 +3202,59 @@ msgid "5:1"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Navigation"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Select type of slider navigation"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Bullets"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Thumbnails"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Description Animation"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Select type of animation for description"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Rotate"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Move"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Zoom"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Slides"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "URL of link for image in slide, use valid URL format with http://"
 msgstr ""
 
@@ -3167,31 +3268,38 @@ msgstr ""
 #: ait-theme/config/cpts-metaboxes/member.metabox.neon
 #: ait-theme/config/metaboxes/post-background.metabox.neon
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/toggle-options.metabox.neon
+#: ait-theme/config/cpts-metaboxes/toggle-options.metabox.php:11
 #: ait-theme/elements/taxonomy-list/taxonomy-list.options.neon
+#: ait-theme/config/metaboxes/post-gallery.metabox.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Image"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "URL of image displayed in slide, use valid URL format with http://"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Title displayed in description box"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Text displayed in description box"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
 #: ait-theme/elements/portfolio/portfolio.options.neon
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
+#: ait-theme/elements/member/member.options.neon
 msgid "Button Text"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Text for button displayed in description box"
 msgstr ""
 
@@ -3207,92 +3315,114 @@ msgstr ""
 #: ait-theme/elements/items/items.options.neon
 #: ait-theme/elements/authors/authors.options.neon
 #: ait-theme/elements/tours/tours.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Text Alignment"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Select text alignment in description box"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Position of Description"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Select position of description box"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Top Fullsize"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Top-Left"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Top-Center"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Top Right"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Center Left"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Center Center"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Center Right"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Bottom-Left"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Bottom-Center"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Bottom Right"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Bottom Fullsize"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Description Width"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Width of description box"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Slider Layout"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Slider Border"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Color of border around slider"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
 #: ait-theme/elements/tour-slider/tour-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Autoplay Pause"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
 #: ait-theme/elements/tour-slider/tour-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "The amount of time (in sec) between each auto transition"
 msgstr ""
 
@@ -3313,76 +3443,94 @@ msgid "Inside of Slider"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Thumbnail Border"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Color of border around the thumbnails"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Slider Descriptions Layout"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Width of description box for all slides"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Vertical Offset"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Top and bottom offset of description boxes"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Horizontal Offset"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Right and left offset of description boxes"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Background of description boxes"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Color of title in description boxes"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Title Size"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Font size of title in description boxes"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Color of text in description boxes"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
 #: ait-theme/elements/price-table/price-table.options.neon
 #: ait-theme/elements/promotion/promotion.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Button Color"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Color of button in description boxes"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Color of text on button in description boxes"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Button Opacity"
 msgstr ""
 
 #: ait-theme/elements/easy-slider/easy-slider.options.neon
+#: ait-theme/elements/header-slider/header-slider.options.neon
 msgid "Opacity of button in description boxes"
 msgstr ""
 
@@ -3406,6 +3554,7 @@ msgstr ""
 #: ait-theme/elements/tours/tours.options.neon
 #: ait-theme/widgets/AitNewestItemWidget.php:185 ait-theme/config/@layout.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Count"
 msgstr ""
 
@@ -3422,6 +3571,7 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/tours/tours.options.neon ait-theme/config/@layout.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Number of items listed on page"
 msgstr ""
 
@@ -3441,7 +3591,7 @@ msgstr ""
 #: ait-theme/elements/products/products.options.neon
 #: ait-theme/elements/authors/authors.options.neon
 #: ait-theme/elements/taxonomy-list/taxonomy-list.options.neon
-#: ait-theme/widgets/AitNewestItemWidget.php:178
+#: ait-theme/widgets/AitNewestItemWidget.php:178 ait-theme/config/@layout.neon
 msgid "Layout"
 msgstr ""
 
@@ -3719,6 +3869,8 @@ msgstr ""
 #: ait-theme/elements/job-offers/job-offers.options.neon
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/tours/tours.options.neon
+#: ait-theme/elements/events-pro/events-pro.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Select format for images in carousel"
 msgstr ""
 
@@ -3910,6 +4062,7 @@ msgstr ""
 #: ait-theme/elements/items/items.options.neon
 #: ait-theme/elements/facilities/facilities.options.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Alphabetically"
 msgstr ""
 
@@ -4283,9 +4436,9 @@ msgstr ""
 #: ait-theme/elements/lists/lists.options.neon
 #: ait-theme/config/cpts-metaboxes/facility-data.metabox.neon
 #: ait-theme/config/@theme.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/member.metabox.neon
+#: ait-theme/config/cpts-metaboxes/member.metabox.php:55
 #: ait-theme/elements/taxonomy-list/taxonomy-list.options.neon
+#: ait-theme/config/cpts-metaboxes/member.metabox.neon
 msgid "Icon"
 msgstr ""
 
@@ -4474,7 +4627,6 @@ msgstr ""
 #: ait-theme/config/cpts-metaboxes/facility-data.metabox.neon
 #: ait-theme/elements/facilities/facilities.options.neon
 #: ait-theme/config/@theme.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 #: ait-theme/elements/services/services.options.neon
 msgid "Icon Color"
 msgstr ""
@@ -4519,7 +4671,6 @@ msgstr ""
 #: ait-theme/elements/member/member.options.neon
 #: ait-theme/elements/members/members.options.neon
 #: ait-theme/elements/author/author.options.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Open links in new window"
 msgstr ""
 
@@ -4565,37 +4716,30 @@ msgid "Color of border around player"
 msgstr ""
 
 #: ait-theme/elements/opening-hours/opening-hours.options.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Monday"
 msgstr ""
 
 #: ait-theme/elements/opening-hours/opening-hours.options.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Tuesday"
 msgstr ""
 
 #: ait-theme/elements/opening-hours/opening-hours.options.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Wednesday"
 msgstr ""
 
 #: ait-theme/elements/opening-hours/opening-hours.options.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Thursday"
 msgstr ""
 
 #: ait-theme/elements/opening-hours/opening-hours.options.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Friday"
 msgstr ""
 
 #: ait-theme/elements/opening-hours/opening-hours.options.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Saturday"
 msgstr ""
 
 #: ait-theme/elements/opening-hours/opening-hours.options.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Sunday"
 msgstr ""
 
@@ -4608,7 +4752,6 @@ msgid "Display or hide empty days in table"
 msgstr ""
 
 #: ait-theme/elements/opening-hours/opening-hours.options.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Note"
 msgstr ""
 
@@ -4680,6 +4823,7 @@ msgid "Display Portfolio item description"
 msgstr ""
 
 #: ait-theme/elements/portfolio/portfolio.options.neon
+#: ait-theme/elements/posts/posts.options.neon
 msgid "Image Height"
 msgstr ""
 
@@ -4693,6 +4837,10 @@ msgstr ""
 
 #: ait-theme/elements/portfolio/portfolio.options.neon
 msgid "Offset of Portfolio images"
+msgstr ""
+
+#: ait-theme/elements/posts/posts.options.neon
+msgid "Comment Count"
 msgstr ""
 
 #: ait-theme/elements/price-table/price-table.options.neon
@@ -4901,6 +5049,7 @@ msgstr ""
 #: ait-theme/elements/sitemap/sitemap.options.neon
 #: ait-theme/config/@theme.neon ait-theme/elements/posts/posts.options.neon
 #: ait-theme/elements/author/author.options.neon
+#: ait-theme/config/cpts-metaboxes/testimonial-options.metabox.neon
 msgid "Author"
 msgstr ""
 
@@ -4947,6 +5096,7 @@ msgid "Vertical Tabs"
 msgstr ""
 
 #: ait-theme/elements/twitter/AitTwitterElement.php:8
+#: ait-theme/config/@theme.neon
 msgid "Twitter"
 msgstr ""
 
@@ -5029,18 +5179,21 @@ msgstr ""
 #: ait-theme/elements/video/video.options.neon
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
 #: ait-theme/elements/header-video/header-video.options.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
 msgid "Select video source"
 msgstr ""
 
 #: ait-theme/elements/video/video.options.neon
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
 #: ait-theme/elements/header-video/header-video.options.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
 msgid "YouTube"
 msgstr ""
 
 #: ait-theme/elements/video/video.options.neon
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
 #: ait-theme/elements/header-video/header-video.options.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
 msgid "Vimeo"
 msgstr ""
 
@@ -5072,7 +5225,7 @@ msgstr ""
 #: ait-theme/widgets/AitSocialWidget.php:71
 #: ait-theme/widgets/AitSubmenuWidget.php:66
 #: ait-theme/widgets/AitSocial2Widget.php:81
-#: ait-theme/widgets/AitBannerWidget.php:147
+#: ait-theme/widgets/AitBannerWidget.php:144
 #: ait-theme/includes/entry-views/inc/widget-entry-views.php:180
 #: ait-theme/widgets/AitBlogAuthors2Widget.php:114
 #: ait-theme/widgets/AitBlogAuthors2Widget.php:108
@@ -5538,14 +5691,21 @@ msgstr ""
 #: ait-theme/elements/@common/common.neon
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
+#: ait-theme/elements/search-form/search-form.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/page-title/page-title.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Titles Color"
 msgstr ""
 
 #: ait-theme/elements/@common/common.neon
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
+#: ait-theme/elements/search-form/search-form.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Custom color of titles"
 msgstr ""
 
@@ -5554,7 +5714,10 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/posts/posts.options.neon
+#: ait-theme/elements/search-form/search-form.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Text Color"
 msgstr ""
 
@@ -5562,7 +5725,10 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/posts/posts.options.neon
+#: ait-theme/elements/search-form/search-form.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Custom color of text"
 msgstr ""
 
@@ -5570,7 +5736,11 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/posts/posts.options.neon
+#: ait-theme/elements/search-form/search-form.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/page-title/page-title.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Links Color"
 msgstr ""
 
@@ -5578,7 +5748,10 @@ msgstr ""
 #: ait-theme/elements/portfolio/portfolio.options.neon
 #: ait-theme/elements/google-map/google-map.options.neon
 #: ait-theme/elements/posts/posts.options.neon
+#: ait-theme/elements/search-form/search-form.options.neon
 #: ait-theme/elements/header-map/header-map.options.neon
+#: ait-theme/elements/member/member.options.neon
+#: ait-theme/elements/services/services.options.neon
 msgid "Custom color of links"
 msgstr ""
 
@@ -5645,13 +5818,11 @@ msgstr ""
 
 #: ait-theme/config/@layout.neon
 #: ait-theme/config/cpts-metaboxes/event-pro-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Image Options"
 msgstr ""
 
 #: ait-theme/config/@layout.neon
 #: ait-theme/config/cpts-metaboxes/event-pro-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Header Image"
 msgstr ""
 
@@ -5668,8 +5839,8 @@ msgid "Display Header Resources"
 msgstr ""
 
 #: ait-theme/config/@theme.neon
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
 #: ait-theme/elements/promotion/promotion.options.neon
+#: ait-theme/elements/member/member.options.neon
 msgid "Button Link"
 msgstr ""
 
@@ -6047,7 +6218,6 @@ msgstr ""
 #: ait-theme/config/@theme.neon
 #: ait-theme/config/cpts-metaboxes/event-pro-data.metabox.neon
 #: ait-theme/config/cpts-metaboxes/product-item-options.metabox.neon
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
 msgid "Price"
 msgstr ""
 
@@ -6062,7 +6232,6 @@ msgstr ""
 #: ait-theme/config/@theme.neon
 #: ait-theme/config/cpts-metaboxes/event-pro-data.metabox.neon
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 #: ait-theme/elements/sidebar-map/sidebar-map.options.neon
 msgid "Map"
 msgstr ""
@@ -6076,27 +6245,22 @@ msgid "Content (Media)"
 msgstr ""
 
 #: ait-theme/config/@theme.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Telephone"
 msgstr ""
 
 #: ait-theme/config/@theme.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Web"
 msgstr ""
 
 #: ait-theme/config/@theme.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Opening Hours"
 msgstr ""
 
 #: ait-theme/config/@theme.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Gallery"
 msgstr ""
 
 #: ait-theme/config/@theme.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Features"
 msgstr ""
 
@@ -6143,17 +6307,14 @@ msgstr ""
 
 #: ait-theme/config/cpts-metaboxes/event-pro-data.metabox.neon
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Select type of header on page"
 msgstr ""
 
 #: ait-theme/config/cpts-metaboxes/event-pro-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "No header"
 msgstr ""
 
 #: ait-theme/config/cpts-metaboxes/event-pro-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
 msgid "Image displayed in header"
 msgstr ""
 
@@ -6224,11 +6385,14 @@ msgstr ""
 #: ait-theme/elements/events-pro/events-pro.options.neon
 #: ait-theme/elements/items/items.options.neon
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Location"
 msgstr ""
 
 #: ait-theme/elements/events-pro/events-pro.options.neon
 #: ait-theme/elements/items/items.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Select location displayed on page"
 msgstr ""
 
@@ -6251,6 +6415,7 @@ msgstr ""
 #: ait-theme/elements/posts/posts.options.neon
 #: ait-theme/widgets/AitNewestItemWidget.php:163
 #: ait-theme/elements/items/items.options.neon
+#: ait-theme/elements/taxonomy-menu/taxonomy-menu.options.neon
 msgid "Categories"
 msgstr ""
 
@@ -6325,15 +6490,22 @@ msgstr ""
 
 #: ait-theme/elements/items/items.options.neon
 #: ait-theme/elements/static-sidebar/static-sidebar.options.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Top Rated"
 msgstr ""
 
 #: ait-theme/elements/items/items.options.neon ait-theme/config/@layout.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Display only \"Featured Items\""
 msgstr ""
 
 #: ait-theme/elements/items/items.options.neon ait-theme/config/@layout.neon
+#: ait-theme/elements/footer-items/footer-items.options.neon
 msgid "Show only featured items of the selected category"
+msgstr ""
+
+#: ait-theme/elements/page-title/page-title.options.neon
+msgid "Search"
 msgstr ""
 
 #: ait-theme/elements/search-form/search-form.options.neon
@@ -6421,6 +6593,7 @@ msgstr ""
 #: ait-theme/widgets/AitNewestItemWidget.php:167
 #: ait-theme/widgets/AitNewestItemWidget.php:169
 #: ait-theme/elements/taxonomy-list/taxonomy-list.options.neon
+#: ait-theme/elements/taxonomy-menu/taxonomy-menu.options.neon
 msgid "Locations"
 msgstr ""
 
@@ -6434,46 +6607,53 @@ msgstr ""
 msgid "Theme &rarr; Login"
 msgstr ""
 
-#: ait-theme/widgets/AitLoginWidget.php:323
-#: ait-theme/widgets/AitLoginWidget.php:291
-#: ait-theme/widgets/AitLoginWidget.php:300
+#: ait-theme/widgets/AitLoginWidget.php:353
+#: ait-theme/widgets/AitLoginWidget.php:362
+#: ait-theme/widgets/AitLoginWidget.php:279
 msgid "Opened Tab"
 msgstr ""
 
-#: ait-theme/widgets/AitLoginWidget.php:330
-#: ait-theme/widgets/AitLoginWidget.php:237
-#: ait-theme/widgets/AitLoginWidget.php:236
+#: ait-theme/widgets/AitLoginWidget.php:360
+#: ait-theme/widgets/AitLoginWidget.php:300
 #: ait-theme/widgets/AitLoginWidget.php:298 ait-theme/config/@theme.neon
-#: ait-theme/widgets/AitLoginWidget.php:307
+#: ait-theme/widgets/AitLoginWidget.php:369
+#: ait-theme/widgets/AitLoginWidget.php:286
 msgid "Login Description"
 msgstr ""
 
-#: ait-theme/widgets/AitLoginWidget.php:334
-#: ait-theme/widgets/AitLoginWidget.php:241
-#: ait-theme/widgets/AitLoginWidget.php:240
+#: ait-theme/widgets/AitLoginWidget.php:364
+#: ait-theme/widgets/AitLoginWidget.php:304
 #: ait-theme/widgets/AitLoginWidget.php:302
-#: ait-theme/widgets/AitLoginWidget.php:311
+#: ait-theme/widgets/AitLoginWidget.php:373
+#: ait-theme/widgets/AitLoginWidget.php:290
 msgid "Logout Description"
 msgstr ""
 
-#: ait-theme/widgets/AitLoginWidget.php:338
-#: ait-theme/widgets/AitLoginWidget.php:245
-#: ait-theme/widgets/AitLoginWidget.php:244
+#: ait-theme/widgets/AitLoginWidget.php:368
+#: ait-theme/widgets/AitLoginWidget.php:308
 #: ait-theme/widgets/AitLoginWidget.php:306 ait-theme/config/@theme.neon
-#: ait-theme/widgets/AitLoginWidget.php:315
+#: ait-theme/widgets/AitLoginWidget.php:377
+#: ait-theme/widgets/AitLoginWidget.php:294
 msgid "Register Description"
 msgstr ""
 
-#: ait-theme/widgets/AitLoginWidget.php:344
-#: ait-theme/widgets/AitLoginWidget.php:312
-#: ait-theme/widgets/AitLoginWidget.php:321
+#: ait-theme/widgets/AitLoginWidget.php:374
+#: ait-theme/widgets/AitLoginWidget.php:383
+#: ait-theme/widgets/AitLoginWidget.php:300
 msgid "Terms and Conditions acceptation required "
 msgstr ""
 
-#: ait-theme/widgets/AitLoginWidget.php:347
-#: ait-theme/widgets/AitLoginWidget.php:315
-#: ait-theme/widgets/AitLoginWidget.php:324
+#: ait-theme/widgets/AitLoginWidget.php:377
+#: ait-theme/widgets/AitLoginWidget.php:386
+#: ait-theme/widgets/AitLoginWidget.php:303
 msgid "Terms and Conditions label"
+msgstr ""
+
+#: ait-theme/widgets/AitLoginWidget.php:383
+#: ait-theme/widgets/AitLoginWidget.php:314
+#: ait-theme/widgets/AitLoginWidget.php:312
+#: ait-theme/widgets/AitLoginWidget.php:392
+msgid "Use captcha "
 msgstr ""
 
 #: ait-theme/widgets/AitNewestItemWidget.php:15
@@ -6491,95 +6671,93 @@ msgid "CityGuide: Account Disabled"
 msgstr ""
 
 #: portal/functions/accounts.php:238 portal/functions/accounts.php:240
-#: portal/functions/accounts.php:377 portal/functions/accounts.php:239
+#: portal/functions/accounts.php:377 portal/functions/accounts.php:165
 msgid "Account"
 msgstr ""
 
 #: portal/functions/accounts.php:247 portal/functions/accounts.php:249
-#: portal/functions/accounts.php:386 portal/functions/accounts.php:248
+#: portal/functions/accounts.php:386 portal/functions/accounts.php:174
 msgid "Expiration in days"
 msgstr ""
 
 #: portal/functions/accounts.php:253 portal/functions/accounts.php:327
 #: portal/functions/accounts.php:255 portal/functions/accounts.php:329
-#: portal/functions/accounts.php:392 portal/functions/accounts.php:254
-#: portal/functions/accounts.php:328
+#: portal/functions/accounts.php:392 portal/functions/accounts.php:180
+#: portal/functions/accounts.php:254
 msgid "Payment type"
 msgstr ""
 
 #: portal/functions/accounts.php:271 portal/functions/accounts.php:273
-#: portal/functions/accounts.php:409 portal/functions/accounts.php:272
+#: portal/functions/accounts.php:409 portal/functions/accounts.php:198
 msgid "Renew Account"
 msgstr ""
 
 #: portal/functions/accounts.php:308 portal/functions/accounts.php:343
 #: portal/functions/accounts.php:310 portal/functions/accounts.php:345
-#: portal/functions/accounts.php:309 portal/functions/accounts.php:344
+#: portal/functions/accounts.php:235 portal/functions/accounts.php:270
 msgid "Upgrade Account"
 msgstr ""
 
 #: portal/functions/accounts.php:313 portal/functions/accounts.php:315
-#: portal/functions/accounts.php:314
+#: portal/functions/accounts.php:240
 msgid "Account type"
 msgstr ""
 
-#: portal/functions/accounts.php:419 portal/functions/accounts.php:479
-#: portal/functions/accounts.php:420
+#: portal/functions/accounts.php:423 portal/functions/accounts.php:483
 msgid "Post <a href='%s'>#%d</a> was updated and awaiting your moderation."
 msgstr ""
 
-#: portal/functions/accounts.php:425 portal/functions/accounts.php:485
-#: portal/functions/accounts.php:426
+#: portal/functions/accounts.php:429 portal/functions/accounts.php:489
 msgid "Post ready for review"
 msgstr ""
 
-#: portal/functions/portal.php:164 portal/functions/portal.php:157
+#: portal/functions/portal.php:177 portal/functions/portal.php:173
 #: portal/functions/portal.php:155
 msgid ""
-"Username: %s \r\n"
-"User ID: %d \r\n"
-"E-mail: %s \r\n"
-"Package: %s \r\n"
-"Price: %s \r\n"
+"Username: %s \n"
+"User ID: %d \n"
+"E-mail: %s \n"
+"Package: %s \n"
+"Price: %s \n"
 msgstr ""
 
-#: portal/functions/portal.php:165 portal/functions/portal.php:158
+#: portal/functions/portal.php:178 portal/functions/portal.php:174
 #: portal/functions/portal.php:156
 msgid "User payment information"
 msgstr ""
 
-#: portal/functions/portal.php:256 portal/functions/portal.php:249
+#: portal/functions/portal.php:269 portal/functions/portal.php:265
 #: portal/functions/portal.php:247
 msgid "User %s with ID #%d (%s) is requesting account renew via Bank Transfer"
 msgstr ""
 
-#: portal/functions/portal.php:257 portal/functions/portal.php:250
+#: portal/functions/portal.php:270 portal/functions/portal.php:266
 #: portal/functions/portal.php:248
 msgid "Account renew request"
 msgstr ""
 
-#: portal/functions/portal.php:340 portal/functions/portal.php:333
+#: portal/functions/portal.php:353 portal/functions/portal.php:349
 #: portal/functions/portal.php:331
 msgid "User %s with ID #%d (%s) is requesting account upgrade to (%s) via Bank Transfer"
 msgstr ""
 
-#: portal/functions/portal.php:341 portal/functions/portal.php:334
+#: portal/functions/portal.php:354 portal/functions/portal.php:350
 #: portal/functions/portal.php:332
 msgid "Account upgrade request"
 msgstr ""
 
-#: portal/functions/portal.php:399 portal/functions/portal.php:392
-#: portal/functions/portal.php:390
+#: portal/functions/portal.php:412 portal/functions/portal.php:408
+#: portal/functions/portal.php:390 portal/functions/portal.php:260
 msgid "Maximum items for the current package exceeded"
 msgstr ""
 
-#: portal/functions/portal.php:403 portal/functions/portal.php:396
+#: portal/functions/portal.php:416 portal/functions/portal.php:412
 #: portal/functions/portal.php:394
 msgid "Maximum events for the current package exceeded"
 msgstr ""
 
-#: portal/functions/portal.php:409 portal/functions/portal.php:402
-#: portal/functions/portal.php:400
+#: portal/functions/portal.php:422 portal/functions/portal.php:418
+#: portal/functions/portal.php:400 portal/functions/portal.php:266
 msgid "Rating was approved"
 msgstr ""
 
@@ -6716,6 +6894,7 @@ msgstr ""
 #: ait-theme/config/cpts-metaboxes/member.metabox.neon
 #: ait-theme/widgets/AitSocial2Widget.php:88
 #: ait-theme/config/metaboxes/user-profile.metabox.neon
+#: ait-theme/config/cpts-metaboxes/box-data.metabox.php:12
 msgid "Icon Font"
 msgstr ""
 
@@ -6725,8 +6904,8 @@ msgid "Class of icon from FontAwesome - disable Icon Image"
 msgstr ""
 
 #: ait-theme/config/cpts-metaboxes/box-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
+#: ait-theme/config/cpts-metaboxes/item-data.metabox.php:6
+#: ait-theme/config/cpts-metaboxes/table-data.metabox.php:13
 msgid "Subtitle"
 msgstr ""
 
@@ -6745,6 +6924,7 @@ msgstr ""
 
 #: ait-theme/config/cpts-metaboxes/box-data.metabox.neon
 #: ait-theme/config/cpts-metaboxes/member.metabox.neon
+#: ait-theme/config/cpts-metaboxes/box-data.metabox.php:15
 msgid "Class of icon from FontAwesome"
 msgstr ""
 
@@ -6801,6 +6981,7 @@ msgid "Link title text"
 msgstr ""
 
 #: ait-theme/config/cpts-metaboxes/box-data.metabox.neon
+#: ait-theme/config/@theme.neon
 msgid "Link, use valid URL format with http://"
 msgstr ""
 
@@ -6937,7 +7118,6 @@ msgid "Menu cols"
 msgstr ""
 
 #: ait-theme/config/@theme.neon
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
 msgid "Featured"
 msgstr ""
 
@@ -7085,19 +7265,19 @@ msgstr ""
 msgid "Short description of slide"
 msgstr ""
 
-#: ait-theme/widgets/AitBannerWidget.php:30
+#: ait-theme/widgets/AitBannerWidget.php:27
 msgid "Display banner for current page"
 msgstr ""
 
-#: ait-theme/widgets/AitBannerWidget.php:31
+#: ait-theme/widgets/AitBannerWidget.php:28
 msgid "Theme &rarr; Banner"
 msgstr ""
 
-#: ait-theme/widgets/AitBannerWidget.php:152
+#: ait-theme/widgets/AitBannerWidget.php:149
 msgid "Link:"
 msgstr ""
 
-#: ait-theme/widgets/AitBannerWidget.php:159
+#: ait-theme/widgets/AitBannerWidget.php:156
 msgid "Open in new window?"
 msgstr ""
 
@@ -7106,15 +7286,16 @@ msgctxt "name of element"
 msgid "Authors"
 msgstr ""
 
-#: ait-theme/config/@theme-configuration.php:168
+#: ait-theme/config/@theme-configuration.php:169
 msgid "Post Geolocation"
 msgstr ""
 
-#: ait-theme/config/@theme-configuration.php:176
+#: ait-theme/config/@theme-configuration.php:177
 msgid "Post Background"
 msgstr ""
 
-#: ait-theme/config/@theme-configuration.php:183
+#: ait-theme/config/@theme-configuration.php:184
+#: ait-theme/config/@theme-configuration.php:162
 msgid "Post Gallery"
 msgstr ""
 
@@ -7250,6 +7431,10 @@ msgid "Item Background"
 msgstr ""
 
 #: ait-theme/elements/authors/authors.options.neon
+#: ait-theme/elements/job-offers/job-offers.options.neon
+#: ait-theme/elements/members/members.options.neon
+#: ait-theme/elements/posts/posts.options.neon
+#: ait-theme/elements/testimonials/testimonials.options.neon
 msgid "Enable or disable item background"
 msgstr ""
 
@@ -7526,22 +7711,27 @@ msgid "Tour Header"
 msgstr ""
 
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
 msgid "Checkpoints"
 msgstr ""
 
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
 msgid "Checkpoint Icon"
 msgstr ""
 
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
 msgid "Align"
 msgstr ""
 
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
 msgid "Set alignment for icons (\"center\" for round symetric icons and \"bottom\" for pins or flags)"
 msgstr ""
 
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
 msgid "Bottom"
 msgstr ""
 
@@ -7586,20 +7776,24 @@ msgid "Add custom additional information"
 msgstr ""
 
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
 msgid "Galleries"
 msgstr ""
 
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
 msgid "Video Gallery"
 msgstr ""
 
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
 #: ait-theme/elements/video/video.options.neon
 #: ait-theme/elements/header-video/header-video.options.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
 msgid "URL of video displayed on page, use valid URL format with http://"
 msgstr ""
 
 #: ait-theme/config/cpts-metaboxes/tour-data.metabox.neon
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
 msgid "Picture Gallery"
 msgstr ""
 
@@ -7629,8 +7823,26 @@ msgctxt "name of element"
 msgid "Header Video"
 msgstr ""
 
+#: ait-theme/config/@layout.neon
+#: ait-theme/config/cpts-metaboxes/item-data.metabox.php:41
+#: ait-theme/elements/page-title/page-title.options.neon
+msgid "Header Height"
+msgstr ""
+
+#: ait-theme/config/@layout.neon
+msgid "Fixed height of header image section in pixels, leave empty to use height of image and resize image in responsive design"
+msgstr ""
+
 #: ait-theme/config/@theme.neon
 msgid "Second Decoration"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Featured Items Color"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Decorative Color for the Featured Items"
 msgstr ""
 
 #: ait-theme/config/@theme.neon
@@ -7665,192 +7877,51 @@ msgstr ""
 msgid "Little text size in px"
 msgstr ""
 
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Item Featured"
+#: ait-theme/config/@theme.neon
+msgid "Header Map Pagination"
 msgstr ""
 
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Item Header"
+#: ait-theme/config/@theme.neon
+msgid "Enable pagination in Header Map. Works only on Search and Taxonomy pages"
 msgstr ""
 
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Header Height"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Specify address and position of item"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Telephone number related to item"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Additional telephone numbers"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Additional telephone numbers related to item"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Number"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Email address related to item"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Show Email"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Display or hide email address on page"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Contact owner button"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Create contact form on page"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Web address, use valid URL format with http://"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Web Link Label"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Text displayed instead of full web address"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Show"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Display or hide Opening Hours section"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Social"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Display or hide Social Icons section"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Select predefined social icon, Image will be ignored"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Display or hide Gallery section"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Display or hide Features section"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Icon image displayed with feature"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Feature main text"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Feature descriptive text"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Custom Fields"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/item-data.metabox.neon
-msgid "Do not use system reserved names (post_id, rating_count, rating_max, rating_mean, rating_mean_rounded), they will be ignored"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/member.metabox.neon
+#: ait-theme/config/cpts-metaboxes/member.metabox.php:18
 msgid "Short Description"
 msgstr ""
 
-#: ait-theme/config/cpts-metaboxes/member.metabox.neon
+#: ait-theme/config/cpts-metaboxes/member.metabox.php:20
 msgid "Short information about member - used in Members Element or short description in Member Element"
 msgstr ""
 
+#: ait-theme/config/cpts-metaboxes/member.metabox.php:24
 #: ait-theme/config/cpts-metaboxes/member.metabox.neon
 msgid "Contact Data"
 msgstr ""
 
+#: ait-theme/config/cpts-metaboxes/member.metabox.php:27
 #: ait-theme/config/cpts-metaboxes/member.metabox.neon
 msgid "Add new Contact Data by click on \"+ Add New Item\" link, or remove existing Contact Data by click on red cross. Click on \"Remove All Items\" link to remove all existing Contact Data."
 msgstr ""
 
+#: ait-theme/config/cpts-metaboxes/member.metabox.php:32
 #: ait-theme/config/cpts-metaboxes/member.metabox.neon
 msgid "Text of contact"
 msgstr ""
 
-#: ait-theme/config/cpts-metaboxes/member.metabox.neon
-msgid "Contact link, use valid URL format with http://"
+#: ait-theme/config/cpts-metaboxes/member.metabox.php:37
+msgid "Contact link, use valid URL format with 'http://"
 msgstr ""
 
+#: ait-theme/config/cpts-metaboxes/member.metabox.php:58
 #: ait-theme/config/cpts-metaboxes/member.metabox.neon
 msgid "Social icon"
 msgstr ""
 
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
-msgid "Text displayed as title in header of table"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
+#: ait-theme/config/cpts-metaboxes/table-data.metabox.php:16
 msgid "Text displayed as subtitle in header of table"
 msgstr ""
 
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
-msgid "Text displayed below title in header of table"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
-msgid "Text displayed as price in header of table"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
-msgid "Table Rows"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
-msgid "Add new Row by click on \"+ Add New Item\" link, or remove existing Row by click on red cross. Click on \"Remove All Items\" link to remove all existing Rows."
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
-msgid "Row Text"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
-msgid "Text displayed in row"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
-msgid "Title of button in footer of table"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
-#: ait-theme/elements/promotion/promotion.options.neon
-msgid "Link used for button, use valid URL format with http://"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/table-data.metabox.neon
-msgid "Highlight table as featured"
-msgstr ""
-
-#: ait-theme/config/cpts-metaboxes/toggle-options.metabox.neon
+#: ait-theme/config/cpts-metaboxes/toggle-options.metabox.php:5
 msgid "Tab icon"
 msgstr ""
 
@@ -7866,10 +7937,12 @@ msgstr ""
 #: ait-theme/elements/member/member.options.neon
 #: ait-theme/elements/members/members.options.neon
 #: ait-theme/elements/posts/posts.options.neon
+#: ait-theme/elements/job-offers/job-offers.options.neon
 msgid "No image"
 msgstr ""
 
 #: ait-theme/elements/events/events.options.neon
+#: ait-theme/elements/events-pro/events-pro.options.neon
 #: ait-theme/elements/items/items.options.neon
 #: ait-theme/elements/members/members.options.neon
 #: ait-theme/elements/posts/posts.options.neon
@@ -7877,6 +7950,7 @@ msgid "Small thumbnail"
 msgstr ""
 
 #: ait-theme/elements/events/events.options.neon
+#: ait-theme/elements/events-pro/events-pro.options.neon
 #: ait-theme/elements/items/items.options.neon
 #: ait-theme/elements/members/members.options.neon
 #: ait-theme/elements/posts/posts.options.neon
@@ -7884,6 +7958,7 @@ msgid "Medium thumbnail"
 msgstr ""
 
 #: ait-theme/elements/events/events.options.neon
+#: ait-theme/elements/events-pro/events-pro.options.neon
 #: ait-theme/elements/items/items.options.neon
 #: ait-theme/elements/members/members.options.neon
 #: ait-theme/elements/posts/posts.options.neon
@@ -7937,6 +8012,10 @@ msgstr ""
 
 #: ait-theme/elements/header-video/header-video.options.neon
 msgid "Enable or Disable video loop playback"
+msgstr ""
+
+#: ait-theme/elements/header-video/header-video.options.neon
+msgid "Video Sound"
 msgstr ""
 
 #: ait-theme/elements/header-video/header-video.options.neon
@@ -8193,6 +8272,11 @@ msgid "Button Settings"
 msgstr ""
 
 #: ait-theme/elements/promotion/promotion.options.neon
+#: ait-theme/elements/member/member.options.neon
+msgid "Link used for button, use valid URL format with http://"
+msgstr ""
+
+#: ait-theme/elements/promotion/promotion.options.neon
 msgid "Title text displayed in button"
 msgstr ""
 
@@ -8221,6 +8305,10 @@ msgid "Search Buttons"
 msgstr ""
 
 #: ait-theme/elements/search-form/search-form.options.neon
+msgid "Enable or disable option for search form types: Search Form and Search Buttons"
+msgstr ""
+
+#: ait-theme/elements/search-form/search-form.options.neon
 msgid "Buttons Color"
 msgstr ""
 
@@ -8234,6 +8322,14 @@ msgstr ""
 
 #: ait-theme/elements/search-form/search-form.options.neon
 msgid "Background color when search box is collapsed under header in responsive version"
+msgstr ""
+
+#: ait-theme/elements/search-form/search-form.options.neon
+msgid "Title text displayed with element (Only in Search Buttons Form type)"
+msgstr ""
+
+#: ait-theme/elements/search-form/search-form.options.neon
+msgid "Description text displayed with element (Only in Search Buttons Form type)"
 msgstr ""
 
 #: ait-theme/elements/services/services.options.neon
@@ -8407,6 +8503,10 @@ msgid "Terms & Conditions"
 msgstr ""
 
 #: ait-theme/config/@theme.neon
+msgid "Use Captcha"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
 msgid "Sorting"
 msgstr ""
 
@@ -8545,4 +8645,442 @@ msgstr ""
 
 #: portal/functions/accounts.php:30
 msgid "EventGuide: Account Disabled"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Icon Menu"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Display Icon Menu on website"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Icon Menu Width"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Reserved space for Icon Menu in header"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Visible Items"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Number of visible items in Icon Menu"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Add new item to Icon menu by click on \"+ Add New Item\" link, or remove existing item by clicking on red cross. Click on \"Remove All Items\" link to remove all existing items."
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Icon title"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Decoration Color"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Decoration color of item"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+#: ait-theme/config/cpts-metaboxes/box-data.metabox.neon
+msgid "Icon image"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Icon link, use valid URL format with http://"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Alternative Text"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Alternative text when the breadcrumb is disabled"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/box-data.metabox.neon
+msgid "URL of icon image displayed in service box"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/member.metabox.neon
+msgid "Personal icon"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/member.metabox.neon
+msgid "Icon will be displayed for each member in Box layout type"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/member.metabox.neon
+#: ait-theme/config/@theme.neon
+msgid "Font Awesome Icon"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/member.metabox.neon
+msgid "Link or email"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/member.metabox.neon
+msgid "Contact link or email address (if URL is used, please use valid URL format with http://)"
+msgstr ""
+
+#: ait-theme/config/metaboxes/post-gallery.metabox.neon
+msgid "Blog post gallery"
+msgstr ""
+
+#: ait-theme/elements/job-offers/job-offers.options.neon
+#: ait-theme/elements/members/members.options.neon
+#: ait-theme/elements/posts/posts.options.neon
+#: ait-theme/elements/testimonials/testimonials.options.neon
+msgid "Enable Item Backround"
+msgstr ""
+
+#: ait-theme/elements/portfolio/portfolio.options.neon
+msgid "Select size of Portfolio"
+msgstr ""
+
+#: ait-theme/elements/portfolio/portfolio.options.neon
+msgid "Enable filter"
+msgstr ""
+
+#: ait-theme/elements/posts/posts.options.neon
+msgid "Height of image"
+msgstr ""
+
+#: ait-theme/elements/products/products.options.neon
+msgid "Display Category Name"
+msgstr ""
+
+#: ait-theme/elements/products/products.options.neon
+msgid "Show or Hide Category name and description"
+msgstr ""
+
+#: ait-theme/elements/services/services.options.neon
+msgid "Layout settings"
+msgstr ""
+
+#: ait-theme/config/@elements.neon
+msgctxt "name of element"
+msgid "Header Slider"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Main Website Background"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Top Website Background"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Top Website Background Height"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Height of top background section."
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Secondary Theme Color"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Secondary theme color"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Titles in Sidebar"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Sidebar Title Font Text Color"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Header Items"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Main Icon"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Main Text"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Share Icons"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Facebook"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Google+"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Obituary"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Posts per page"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Default Image of Person"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Image used if Obituary post don't have selected Obituary Image"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Obituary Detail"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Gallery Section Text"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Icons Descriptive Text"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Google Map"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Decorative Website Font"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/member.metabox.neon
+msgid "Contact link, use valid URL format with http://"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/member.metabox.neon
+msgid "Funeral Services"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/member.metabox.neon
+msgid "Service Title"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/member.metabox.neon
+msgid "Title of service"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/member.metabox.neon
+msgid "Service Description"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/member.metabox.neon
+msgid "Descriptive text of service"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/member.metabox.neon
+msgid "Services"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
+msgid "First name"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
+msgid "Last name"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
+msgid "Born date"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
+msgid "Death date"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
+msgid "Motto title"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
+msgid "Motto text"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
+msgid "Video label"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/obituary-data.metabox.neon
+msgid "Preview image"
+msgstr ""
+
+#: ait-theme/config/cpts-metaboxes/testimonial-options.metabox.neon
+msgid "Text displayed as author name"
+msgstr ""
+
+#: ait-theme/elements/header-slider/header-slider.options.neon
+msgid "Show Obituary Section"
+msgstr ""
+
+#: ait-theme/elements/header-slider/header-slider.options.neon
+msgid "Slider Height"
+msgstr ""
+
+#: ait-theme/elements/member/member.options.neon
+msgid "Text displayed as button title"
+msgstr ""
+
+#: ait-theme/elements/members/members.options.neon
+#: ait-theme/elements/posts/posts.options.neon
+msgid "Title Crop"
+msgstr ""
+
+#: ait-theme/elements/members/members.options.neon
+#: ait-theme/elements/posts/posts.options.neon
+msgid "Enable or disable cropping of title to 1 line"
+msgstr ""
+
+#: ait-theme/elements/members/members.options.neon
+#: ait-theme/elements/posts/posts.options.neon
+msgid "Arrow Position"
+msgstr ""
+
+#: ait-theme/elements/members/members.options.neon
+#: ait-theme/elements/posts/posts.options.neon
+msgid "Select arrows position when the carousel is enabled. Affected on fullwidth elements only"
+msgstr ""
+
+#: ait-theme/elements/members/members.options.neon
+#: ait-theme/elements/posts/posts.options.neon
+msgid "On Bottom"
+msgstr ""
+
+#: ait-theme/elements/members/members.options.neon
+#: ait-theme/elements/posts/posts.options.neon
+msgid "On Sides"
+msgstr ""
+
+#: ait-theme/elements/page-title/page-title.options.neon
+msgid "Optional Height of Page Title"
+msgstr ""
+
+#: ait-theme/elements/page-title/page-title.options.neon
+msgid "Color of titles"
+msgstr ""
+
+#: ait-theme/elements/page-title/page-title.options.neon
+msgid "Color of standard text"
+msgstr ""
+
+#: ait-theme/elements/portfolio/portfolio.options.neon
+msgid "Enable or disable item title and description"
+msgstr ""
+
+#: ait-theme/elements/portfolio/portfolio.options.neon
+msgid "Enable or disable item filtering"
+msgstr ""
+
+#: ait-theme/elements/services/services.options.neon
+msgid "Arrows"
+msgstr ""
+
+#: ait-theme/elements/services/services.options.neon
+msgid "Enable or disable arrows on thumbnail"
+msgstr ""
+
+#: ait-theme/config/@elements.neon
+msgctxt "name of element"
+msgid "Taxonomy Menu"
+msgstr ""
+
+#: ait-theme/config/@elements.neon
+msgctxt "name of element"
+msgid "Footer Items"
+msgstr ""
+
+#: ait-theme/config/@layout.neon
+msgid "Type of website layout"
+msgstr ""
+
+#: ait-theme/config/@layout.neon
+msgid "Fullwidth"
+msgstr ""
+
+#: ait-theme/config/@layout.neon
+msgid "Half"
+msgstr ""
+
+#: ait-theme/config/@layout.neon
+msgid "Display footer bar (copyright)"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Menu Item Hover"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Item background color on hover"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Taxonomy Menu Colors and Backgrounds"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Tax Menu Background"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Tax Menu Items"
+msgstr ""
+
+#: ait-theme/config/@theme.neon
+msgid "Text displayed in email sent via contact form"
+msgstr ""
+
+#: ait-theme/elements/header-map/header-map.options.neon
+msgid "Height Type"
+msgstr ""
+
+#: ait-theme/elements/header-map/header-map.options.neon
+msgid "Type of map height"
+msgstr ""
+
+#: ait-theme/elements/header-map/header-map.options.neon
+msgid "Fullscreen Height"
+msgstr ""
+
+#: ait-theme/elements/header-map/header-map.options.neon
+msgid "Custom Height"
+msgstr ""
+
+#: ait-theme/elements/items/items.options.neon
+msgid "Striped Background"
+msgstr ""
+
+#: ait-theme/elements/items/items.options.neon
+msgid "Enable or disable striped background of one column list items"
+msgstr ""
+
+#: ait-theme/elements/items/items.options.neon
+msgid "Striped Background Color"
+msgstr ""
+
+#: ait-theme/elements/page-title/page-title.options.neon
+msgid "Custom Styles"
+msgstr ""
+
+#: ait-theme/elements/taxonomy-menu/taxonomy-menu.options.neon
+msgid "Taxonomy"
+msgstr ""
+
+#: ait-theme/elements/taxonomy-menu/taxonomy-menu.options.neon
+msgid "Choose taxonomy do display in the menu"
 msgstr ""

@@ -175,11 +175,17 @@ return array(
 				'deps' => array('jquery'),
 				'enqueue-only-if' => '!is_admin() and aitIsPluginActive("woocommerce")',
 			),
+			'marker-clusterer' => array(
+				'file'      => aitUrl('assets', '/marker-clusterer/markerclusterer-plus.js'),
+				'deps'      => array('googlemaps-api', 'ait'),
+				'ver'       => '2.1.1',
+			),
 			/* AIT CUSTOM SCRIPTS */
 			'ait-script' => array(
 				'file' => '/script.js',
 				'deps' => array('jquery', 'ait-mobile-script', 'ait-menu-script', 'ait-portfolio-script', 'ait-custom-script')
 			),
+			'modernizr' => true,
 		),
 	),
 

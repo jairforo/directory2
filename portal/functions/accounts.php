@@ -460,30 +460,35 @@ add_action('save_post', 'checkFeaturedItem', 12, 3);*/
 
 function reviewUpdatedPost($post_id, $post, $update){
 	if($update){
-		$user = wp_get_current_user();
-		if(isCityguideUser($user->roles)){
-			$packages = new ThemePackages();
-			$user_package = getCityguideUserPackage($user);
-			if($user_package != false){
-				$package = $packages->getPackageBySlug($user_package);
-				$options = $package->getOptions();
-				if($options['adminApproveEdit'] == true){
-					// set post status pending and send email
-					remove_action('save_post', 'reviewUpdatedPost', 13, 3);
+		if($post->post_status == "trash"){
+			// post is going to be trashed, no action needed
+		} else {
+			// post is updating
+			$user = wp_get_current_user();
+			if(isCityguideUser($user->roles)){
+				$packages = new ThemePackages();
+				$user_package = getCityguideUserPackage($user);
+				if($user_package != false){
+					$package = $packages->getPackageBySlug($user_package);
+					$options = $package->getOptions();
+					if($options['adminApproveEdit'] == true){
+						// set post status pending and send email
+						remove_action('save_post', 'reviewUpdatedPost', 13, 3);
 
-					wp_update_post( array("ID" => $post_id, 'post_status' => 'pending'));
+						wp_update_post( array("ID" => $post_id, 'post_status' => 'pending'));
 
-					add_action('save_post', 'reviewUpdatedPost', 13, 3);
+						add_action('save_post', 'reviewUpdatedPost', 13, 3);
 
-					$message = "Post <a href='".get_permalink($post_id)."'>#".$post_id."</a> was updated and awaiting your moderation.";
-					$message = sprintf(__("Post <a href='%s'>#%d</a> was updated and awaiting your moderation.",'ait-admin'), get_permalink($post_id), $post_id);
+						$message = "Post <a href='".get_permalink($post_id)."'>#".$post_id."</a> was updated and awaiting your moderation.";
+						$message = sprintf(__("Post <a href='%s'>#%d</a> was updated and awaiting your moderation.",'ait-admin'), get_permalink($post_id), $post_id);
 
-					$headers = array(
-						'Content-Type: text/html; charset=UTF-8',
-					);
+						$headers = array(
+							'Content-Type: text/html; charset=UTF-8',
+						);
 
-					wp_mail( get_bloginfo('admin_email'), __('Post ready for review', 'ait-admin'), $message, $headers);
+						wp_mail( get_bloginfo('admin_email'), __('Post ready for review', 'ait-admin'), $message, $headers);
 
+					}
 				}
 			}
 		}

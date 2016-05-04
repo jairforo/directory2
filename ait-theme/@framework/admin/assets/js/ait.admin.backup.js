@@ -1,9 +1,5 @@
 
-
-ait.admin.Backup = ait.admin.Backup || {};
-
-
-(function($, $window, $document, undefined){
+(function($, undefined){
 
 	"use strict";
 
@@ -11,7 +7,7 @@ ait.admin.Backup = ait.admin.Backup || {};
 
 
 
-	var Backup = function($context)
+	function Backup($context)
 	{
 		this.$context = $context;
 		this.$actionContainer = this.$context.find('.ait-backup-action');
@@ -214,8 +210,13 @@ ait.admin.Backup = ait.admin.Backup || {};
 				$indicator.removeClass('action-working action-done action-error');
 			});
 
-
-			var reportTemplate = _.template(reportTpl, {imports: responseData.imports, attachments: responseData.attachments}, tplSettings);
+			var reportTemplate;
+			if(_.VERSION == "1.6.0"){
+				reportTemplate = _.template(reportTpl, {imports: responseData.imports, attachments: responseData.attachments}, tplSettings);
+			}else{
+				var __tmpl = _.template(reportTpl, tplSettings); // returns function
+				reportTemplate = __tmpl({imports: responseData.imports, attachments: responseData.attachments});
+			}
 			$report.html(reportTemplate);
 
 		}else if(status == 'error'){
@@ -279,4 +280,4 @@ ait.admin.Backup = ait.admin.Backup || {};
 
 
 
-})(jQuery, jQuery(window), jQuery(document));
+})(jQuery);

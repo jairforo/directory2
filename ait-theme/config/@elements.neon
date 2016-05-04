@@ -41,6 +41,7 @@ header-map:
 		columnable: false
 		assets:
 			js:
+				marker-clusterer: true
 				modernizr: true
 
 header-video:

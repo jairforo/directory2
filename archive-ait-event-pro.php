@@ -37,14 +37,14 @@
 										</div>
 									</div>
 
-									{var $nextDates = aitGetNextDate($meta->dates)}
-									{var $date_timestamp = strtotime($nextDates['dateFrom'])}
-									{var $day = date('d', $date_timestamp)}
-									{var $month = date('M', $date_timestamp)}
-									{var $year = date('Y', $date_timestamp)}
-									{var $moreDates = count(aitGetRecurringDates($post)) - 1}
+								{var $nextDates = aitGetNextDate($meta->dates)}
+								{var $date_timestamp = strtotime($nextDates['dateFrom'])}
+								{var $day = date_i18n('d', $date_timestamp)}
+								{var $month = date_i18n('M', $date_timestamp)}
+								{var $year = date_i18n('Y', $date_timestamp)}
+								{var $moreDates = count(aitGetRecurringDates($post)) - 1}
 
-									<div class="entry-date">
+								<div class="entry-date">
 										<div class="day">{$day}</div>
 										<span class="month">{$month}</span>
 										<span class="year">{$year}</span>

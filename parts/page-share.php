@@ -43,7 +43,7 @@
 		{var $shareTitle 			= get_the_author_meta( 'display_name', $qobj->ID )}
 		{var $shareDescription		= get_the_author_meta( 'description', $qobj->ID )}
 	{/if}
-{elseif $wp->isCategory}
+{elseif $wp->isCategory or $wp->isTax('items') or $wp->isTax('locations')}
 	{var $qobj = get_queried_object()}
 	{if $qobj and isset($qobj->term_id)}
 		{var $shareUrl 				= get_category_link(intval($qobj->term_id))}
@@ -114,9 +114,9 @@ PREPARE FOR SHARE *}
 		</ul>
 
 		<div class="share-text">
-			<span class="title">{__ 'Share'}</span>
-			<span class="subtitle">{__ 'this page'}</span>
+			{!__ '<span class="title">Share</span> <span class="subtitle">this page</span>'}
 		</div>
+
 
 	</div>
 </div>

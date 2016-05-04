@@ -146,5 +146,3 @@
 			{/if}
 		</div>
 	</div>
-	{? remove_filter('posts_join', 'aitPostsJoin')}
-	{? remove_filter('posts_orderby', 'aitPostsOrderby')}

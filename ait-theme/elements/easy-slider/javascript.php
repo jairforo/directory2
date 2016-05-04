@@ -51,7 +51,9 @@ jQuery(window).load(function(){
 				{/if}
 				jQuery(selector).find('ul.easy-slider').delay(500).animate({'opacity':1}, 500, function(){
 					jQuery(selector).find('.loading').fadeOut('fast');
-					jQuery.waypoints('refresh');
+					if(typeof jQuery.waypoints !== "undefined"){
+						jQuery.waypoints('refresh');
+					}
 				});
 			},
 			onSlideBefore: function($slideElement, oldIndex, newIndex){

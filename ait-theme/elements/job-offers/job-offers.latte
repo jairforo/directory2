@@ -167,4 +167,16 @@
 
 </div>
 
+{if $enableCarousel}
+	<div class="carousel-standard-arrows">
+		<div class="carousel-arrow-left standard-arrow standard-arrow-left" style="cursor: pointer;">&lt;</div>
+		<div class="carousel-arrow-right standard-arrow standard-arrow-right" style="cursor: pointer;">&gt;</div>
+	</div>
+	<div class="carousel-bottom-arrows">
+		<div class="carousel-nav-text">{__ 'Navigation'}</div>
+		<div class="carousel-arrow-left bottom-arrow bottom-arrow-left" style="cursor: pointer;">&lt;</div>
+		<div class="carousel-arrow-right bottom-arrow bottom-arrow-right" style="cursor: pointer;">&gt;</div>
+	</div>
+{/if}
+
 {includePart "ait-theme/elements/job-offers/javascript", enableCarousel => $enableCarousel}

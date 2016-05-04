@@ -81,10 +81,20 @@
 					{* CONTACT OWNER SECTION *}
 					{includePart portal/parts/single-item-contact-owner}
 					{* CONTACT OWNER SECTION *}
-					<div class="ait-get-directions-button">
-					</div>
+					
+					{* GET DIRECTIONS SECTION *}
+					{if defined('AIT_GET_DIRECTIONS_ENABLED')}
+						{includePart portal/parts/get-directions-button}
+					{/if}
+					{* GET DIRECTIONS SECTION *}
 				</div>
 			</div>
+
+			{* ITEM EXTENSION *}
+			{if defined('AIT_EXTENSION_ENABLED')}
+				{includePart portal/parts/item-extension}
+			{/if}
+			{* ITEM EXTENSION *}
 
 			{* CLAIM LISTING SECTION *}
 			{if defined('AIT_CLAIM_LISTING_ENABLED')}
@@ -92,15 +102,15 @@
 			{/if}
 			{* CLAIM LISTING SECTION *}
 
-			<input type="hidden" id="item_address" value="{$meta->map['address']}"/>
-			<input type="hidden" id="item_lat" value="{$meta->map['latitude']}"/>
-			<input type="hidden" id="item_lng" value="{$meta->map['longitude']}"/>
-			<div id="mapcontainer" class="getDirGoogleMap"></div>
-			<div id="map-directions" class="getDirDirections"></div>
-
 			{* MAP SECTION *}
 			{includePart portal/parts/single-item-map}
 			{* MAP SECTION *}
+
+			{* GET DIRECTIONS SECTION *}
+			{if defined('AIT_GET_DIRECTIONS_ENABLED')}
+				{includePart portal/parts/get-directions-container}
+			{/if}
+			{* GET DIRECTIONS SECTION *}
 
 			{* SOCIAL SECTION *}
 			{includePart portal/parts/single-item-social}
@@ -119,7 +129,7 @@
 			{* REVIEWS SECTION *}
 
 			{* UPCOMING EVENTS SECTION *}
-			{if (defined('AIT_EVENTS_PRO_ENABLED'))}
+			{if (defined('AIT_EVENTS_PRO_ENABLED')) && aitItemRelatedEvents($post->id)->found_posts}
 				{includePart portal/parts/single-item-events, itemId => $post->id}
 			{/if}
 			{* UPCOMING EVENTS SECTION *}

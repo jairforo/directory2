@@ -49,6 +49,13 @@ youtubeLoop:
 	less: false
 	basic: true
 
+youtubeVideoSound:
+	label: Video Sound
+	type: on-off
+	default: off
+	less: false
+	basic: true
+
 - section(id: type-vimeo, title: '')
 
 vimeoLink:
@@ -79,6 +86,13 @@ vimeoLoop:
 	type: on-off
 	default: on
 	help: "Enable or Disable video loop playback"
+	less: false
+	basic: true
+
+vimeoVideoSound:
+	label: Video Sound
+	type: on-off
+	default: off
 	less: false
 	basic: true
 

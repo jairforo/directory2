@@ -15,10 +15,6 @@
 		{var $relatedItemMeta = $meta->item ? get_post_meta($meta->item, _ait-item_item-data, true) : ""}
 		{var $relatedItem = get_post($meta->item) }
 
-		{var $wouldGalleryDisplay = false}
-		{if $post->hasImage}
-			{var $wouldGalleryDisplay = true}
-		{/if}
 		{* SETTINGS AND DATA *}
 
 
@@ -27,19 +23,6 @@
 
 		{* CONTENT SECTION *}
 		<div class="entry-content">
-			{if $wouldGalleryDisplay == false}
-			<div class="column-grid column-grid-1">
-				<div class="column column-span-1 column-narrow column-first column-last">
-					<div class="entry-content-wrap" itemprop="description">
-						{if $post->hasContent}
-							{!$post->content}
-						{else}
-							{!$post->excerpt}
-						{/if}
-					</div>
-				</div>
-			</div>
-			{else}
 			<div class="column-grid column-grid-3">
 				<div class="column column-span-1 column-narrow column-first">
 				{* GALLERY SECTION *}
@@ -74,7 +57,6 @@
 
 				</div>
 			</div>
-			{/if}
 		</div>
 		{* CONTENT SECTION *}
 
